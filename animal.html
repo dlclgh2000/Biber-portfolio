@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Biber portfolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&amp;subset=korean" rel="stylesheet">
+</head>
+
+<body>
+    <header class="sticky">
+        <div class="navbar navbar-dark h100">
+            <div class="container d-flex justify-content-between max-m-in">
+                <a href="index.html" class="col-black"><img id="logoimg" src="./logo.svg"></a>
+                <span style="cursor:pointer" onclick="location.href='./index.html'" >
+                    <img id="hamimg" src="./arr.svg"></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="subpage">
+            <div class="subpage-title">
+            동물 일러스트 디자인<br>
+            </div>
+            <span class="date-role">
+                <span class="bold">DATE</span><br>
+                2016.9
+            </span>
+            <span class="date-role date-role-right">
+                <span class="bold">ROLE</span><br>
+                ALL
+            </span>
+            <div class="subpage-matter">
+                유아용 앱에 들어갈 목적으로 제작한 동물 일러스트 디자인입니다.<br>
+                동물들을 원형 안에 자연스럽고 심플하게 표현하는데 집중했습니다.
+            </div>
+        </div>
+        <div>
+            <img class="img1920" src="./animal1.png">
+        </div>
+        <div class="subpage">
+            <div class="bold font16">
+                통일감 있는 저채도 색채
+            </div>
+            <div class="subpage-matter">
+                각각 동물들의 특색에 맞은 색을 입혀주되<br>
+                전체가 이질감 들지 않고 통일감 있도록했습니다.
+            </div>
+        </div>
+        <div>
+            <img class="img1920" src="./animal2.png">
+            <img class="img1920" src="./animal3.png">
+            <img class="img1920" src="./animal4.png">
+        </div>
+    </main>
+    <footer class="text-muted">
+        COPYRIGHT © 2019 CHIHO LEE
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery || document.write('<script src="../../../../assets/vendor/jquery.min.js"><\/script>')
+
+    </script>
+    <script src="./popper.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script src="./holder.min.js"></script>
+    <script>
+        Holder.addTheme('thumb', {
+            bg: '#55595c',
+            fg: '#eceeef',
+            text: 'Thumbnail'
+        });
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        $(function() {
+            $("a[name=nav]").on("click", function() {
+                closeNav();
+            });
+        });
+
+    </script>
+</body>
+
+</html>

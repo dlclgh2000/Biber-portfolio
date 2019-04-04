@@ -1,0 +1,299 @@
+body {
+  min-height: 75rem; /* Can be removed; just added for demo purposes */
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.07em;
+  line-height: 2.2em;
+}
+header{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./front.png");
+  background-size:auto;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+header.sticky {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100px;
+  background-image: none;
+  background-color: #fff;
+  top: 0;
+}
+.dex3 {
+    top: 0;
+    position: absolute;
+    z-index: 3;
+}
+.dex2 {
+    background-color: #fff;
+    z-index: 2;
+    position: relative;
+}
+.navbar {
+  margin-bottom: 0;
+}
+h1 {
+    font-size: 16pt;
+    color: #2CCBC1;
+}
+.max-m-in{
+    margin: 2rem;
+    max-width: inherit;
+}
+.explain {
+    position: relative;
+    height: 800px;
+    width: 100vw;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 200px;
+}
+
+.title {
+    font-weight: 700;
+    text-align: center;
+    font-size: 80px;
+    color: #3CB7FF;
+}
+.matter{
+    text-align: center;
+    font-size: 16pt;
+    color: #333;
+    padding-top: 40px;
+}
+.back{
+    margin-top: 80px;
+    padding-left: 28%;
+    padding-top: 80px;
+    padding-right: 28%;
+    padding-bottom: 80px;
+    background-color: #eee;
+}
+.matter2{
+    font-size: 16pt;
+    color: #333;
+   // padding-top: 40px;
+  //  margin-top: 40px;
+   // padding: .5rem 1rem;
+}
+.left{
+    width: 240px;
+    display: inline-block;
+    font-size: 12pt;
+    line-height: 16pt;
+}
+.right{
+    margin-left: 80px;
+    display: inline-block;
+    font-size: 12pt;
+    line-height: 16pt;
+}
+.subpage{
+    margin-top: 160px;
+    padding-left: 28%;
+    padding-right: 28%;
+}
+.subpage-title{
+    font-size: 28pt;
+    font-weight: 600;
+    line-height: 40pt;
+}
+.date-role-right{
+    margin-left: 80px;
+}
+.date-role{
+    margin-top: 40px;
+    display: inline-block;
+    font-size: 16pt;
+    line-height: 36pt;
+}
+.subpage-matter{
+    margin-top: 40px;
+    font-size: 12pt;
+    line-height: 20pt;
+}
+.btn-view{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: #3CB7FF;
+    border: 0;
+}
+.font16{
+    font-size: 16pt;
+}
+.bold{
+    font-weight: 600;
+}
+.img1920{
+    display: block;
+    margin: 40px auto;
+    vertical-align: top;
+    max-width: 100%;
+    height: auto;
+}
+.sub_matter{
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12pt;
+    color: #999;
+}
+.md-text-title-separator {
+    width: 1px;
+    border-top: 80px solid rgb(60, 183, 255);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+    margin-bottom: 20px;
+}
+.sub_title{
+    text-align: center;
+    font-size: 80px;
+    color: #3CB7FF;
+    width: 100vw;
+    font-weight: 700;
+}
+.text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-top: 44%;
+  text-align: center;
+  font-size: 16pt;
+  color: white;
+  opacity: 0;
+  cursor: pointer
+}
+.text:hover{
+  opacity: 1.0;
+  background-color: rgba(60, 183, 255,0.9);
+}
+.mj_t_12{
+  margin-top: 12vh;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+.album {
+  min-height: 50rem; /* Can be removed; just added for demo purposes */
+  padding-bottom: 3rem;
+}
+.card {
+  float: left;
+  width: 50%;
+  padding: 0;
+  border: 0;
+  background-color: #EDF1F5; 
+}
+.card:hover {
+    background-color: black;
+}
+
+.cardimg {
+  width: 100%;
+  height: auto;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+.h100{
+    height: 100px;
+}
+.col-black{
+    color: #000;
+}
+.bol-black{
+    border-color: #000;
+}
+.title30{
+    padding-right: 30px;
+}
+@media screen and (max-width:599px) {
+.card {
+  float: left;
+  width: 100%;
+  padding: .75rem;
+  border: 0;
+  background-color: #EDF1F5; 
+  }
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+    box-shadow: 
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 40px;
+  line-height: 16vh;
+  color: #999;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+  font-weight: 700
+}
+
+.sidenav a:hover {
+  color: #3CB7FF;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.text-muted {
+    margin-top: 120px;
+    transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 12px;
+    font-size: 12px;
+    letter-spacing: 0;
+    position: static;
+    bottom: 0;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
