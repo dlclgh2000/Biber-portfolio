@@ -1,0 +1,264 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fff;
+}
+
+.foot {
+    border-top: 1px solid #333;
+    font-size: 14px;
+    line-height: 1.33337;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    background-color: #222;
+    color: #1d1d1f;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.mouse {
+    width: 25px;
+    height: 45px;
+    border: 2px solid #fff;
+    border-radius: 60px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 1;
+    animation: wheel 2s infinite;
+    -webkit-animation: wheel 2s infinite;
+}
+
+.badge-box {
+    transform: rotate(90deg) translateX(100%);
+    transform-origin: right top;
+}
+
+.badge-design {
+    padding: 8px 16px 10px 16px;
+    display: inline;
+    border-radius: 100rem;
+    background: #0270E3;
+    color: #fff;
+}
+
+.container {
+    max-width: 1320px;
+}
+
+.bg-nt {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/nt3.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-now {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/now3.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-mg {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/mg4.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-pang {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/admin3.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-inje {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/inje3.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-animal {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/animal1.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-gm-home {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/gm-home1.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-gm-admin {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/gm-admin.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-gm-app {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/gm-app.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-cloudgram {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/cloudgram.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.bg-at {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url("../img/at.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+}
+
+.btn2 {
+    font-weight: 400;
+    font-size: 16px;
+    padding: 8px 16px;
+    background-color: #3CB7FF;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+}
+
+.btn2:hover {
+    background-color: #097dc0;
+}
+
+.btn-back {
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    color: #3CB7FF;
+}
+
+.banner-img {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.banner-img:hover img {
+    transform: scale(1.2);
+    transition: 1s;
+}
+
+.banner-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    opacity: 0;
+    color: #fff;
+    background: rgba(37, 138, 253, 0.9);
+    transition: opacity 0.25s ease;
+    text-align: center;
+}
+
+.banner-img:hover .banner-caption {
+    opacity: 1;
+}
+
+.btn-down {
+    width: 240px;
+    text-align: center;
+    background-color: #3CB7FF;
+    color: #fff;
+    line-height: 48px;
+    font-weight: 800;
+    border-radius: 8px;
+    margin-top: 24px;
+}
+
+
+@keyframes wheel {
+    to {
+        opacity: 0;
+        top: 40px;
+    }
+}
+
+@-webkit-keyframes wheel {
+    to {
+        opacity: 0;
+        top: 40px;
+    }
+}
+
+.portfolio-mt {
+    margin-top: 40px;
+}
+
+.portfolio-name-r {
+    writing-mode: vertical-rl;
+    display: none;
+}
+
+.portfolio-name-l {
+    writing-mode: vertical-rl;
+    display: block;
+}
+
+
+
+@media (min-width: 768px) {
+    .portfolio-mt {
+        margin-top: 0;
+    }
+
+    .portfolio-name-r {
+        writing-mode: vertical-rl;
+        display: block;
+    }
+
+    .portfolio-name-l {
+        writing-mode: vertical-rl;
+        display: none;
+    }
+
+    .btn-down {
+        float: right;
+        margin-top: 0;
+    }
+}
