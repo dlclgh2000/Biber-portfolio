@@ -240,6 +240,15 @@ body {
     display: block;
 }
 
+.main-text {
+    max-width: 600px;
+    line-height: 28px;
+}
+
+.main-text br{
+    display: none;
+}
+
 
 
 @media (min-width: 768px) {
@@ -260,5 +269,11 @@ body {
     .btn-down {
         float: right;
         margin-top: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-text br{
+        display: block;
     }
 }
