@@ -22,266 +22,573 @@
     <link href="css/main.css" rel="stylesheet" />
     <link href="css/menu.css" rel="stylesheet" />
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>
 
 <body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container" style="max-width: 100%; padding-left: 24px; padding-right: 24px;">
-            <a class="navbar-brand" href="index.html">BIBER</a>
-            <a class="btn-back" href="index.html"><i class="fas fa-arrow-left"></i></a>
-        </div>
-    </nav>
-    <!-- Masthead-->
-    <header class="masthead bg-gm-app">
-        <div class="container px-4 px-lg-5 h-100">
-            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end">
-                    <h1 class="font-weight-bold" style="color: #3CB7FF;">지쉐어몰</h1>
-                </div>
-                <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 mb-5">앱 디자인/기획</p>
-                    <div style="display:flex; justify-content: center;">
-                        <div class="mouse"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div style="display: flex;">
+        <!-- Navigation-->
+        <div class="side-list scroll">
+            <header class="side-header">
+                <a href="index.html" class="main-logo" style="margin-bottom: 20px; display: block;">
+                    BIEBER<br>
+                    PORTFOLIO
+                </a>
+                <a href="detail-about.html" class="main-btn">
+                    About Me
+                </a>
+            </header>
+            <nav>
+                <div class="desktop-only">
+                    <a href="detail-gambyul.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gambyul.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Gambyul Market
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    대상과 그린앤그레이 협업으로 진행한 식품 편집샵 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-cellook.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cellook.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cellook
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    여성 패션 아이템을 한곳에 모은 버티컬 커머스 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-tennis.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-tennis.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Tennis Yum Yum
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    처음이라도 걱정하지 마! 테니스 구장 예약, 매칭, 커뮤니티 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-cellook-intro.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cellook-intro.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cellook Intro
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    셀룩의 서비스 소개 및 입점 신청 안내 사이트
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-gng.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gng.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Green&Grey
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    그린앤그레이의 커머스 플랫폼 제작 서비스 소개와 기업 소개 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <a href="detail-cellook-video.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Mothion Graphic
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cellook-video.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cellook Intro Video
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    여성 버티컬 커머스 플랫폼 셀룩의 마케팅을 위한 서비스 소개 영상
+                                </div>
+                            </span>
+                        </div>
+                    </a>
 
-    <div style="padding-top: 60px; padding-bottom: 60px;">
-        <div class="container">
-            <!-- 인사말 -->
-            <div style="padding-left: 8px; padding-right: 8px; margin-top: 40px;">
-                <p
-                    style="font-size: 36px; font-weight: 300; letter-spacing: -1.2px; line-height: 58px; word-break: keep-all;">
-                    지쉐어몰
-                    앱 디자인/기획
+                    <a href="detail-gm-app.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gsharemall.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Gsharemall
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    이메일 인증으로 신원이 보장된 직장인을 위한 중고거래 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-cloudgram.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cloudgram.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cloudgram
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    메가존 자회사 클라우드그램의 서비스, 제품 소개 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-gm-admin.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gm-admin.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Gsharemall Admin
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    지쉐어몰 내 회사 장터를 관리할 수 있는 장터 관리자용 어드민
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-mg.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-makersgames.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Makers Games
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    모바일 게임 Project R 제작 중인 메이커스 게임즈 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-pang.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-pangpang.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Pangpang
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    트래픽 확인, 사용자 할당 기능을 가진 웹 호스팅 서비스 팡팡 어드민
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-inje.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-inje.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Inje University
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    인제대학교 교육대학원 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-animal.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Illustration
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-animal.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Animal Illustration
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    아동용 동물 사진첩 앱 제작을 위한 원형 동물 일러스트
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-now.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                TV Channel
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-now.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Home Shopping Now
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    17개의 모든 홈쇼핑의 라이브와 편성표, 프로모션을 한눈에
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-nt.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                TV Payment Module
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-shoppingnt.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Shopping&T
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    리모컨 조작에 특화된 쇼핑앤티 간편결제 모듈
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                <div class="mobile-only">
+
+                </div>
+            </nav>
+        </div>
+        <!-- Contents-->
+        <div class="contents-place">
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm1.png" class="main-block-img">
+            </div>
+            <div class="project-intro">
+                <p class="project-intro-title">
+                    지쉐어몰 디자인 / 기획
                 </p>
-                <div style="display: flex; margin-top: 40px;">
-                    <div>
-                        <h1 style="font-size: 16px; color: #95AAB6; font-weight: 600;">DATE</h1>
-                        <p style="font-size: 16px; color: #95AAB6;">2021.8</p>
+                <p class="project-intro-text">
+                    직장인을 위한 중고거래 플랫폼으로 회사 이메일로 회원가입할 수 있으며 유저들은 자동으로 같은 회사끼리 그룹핑됩니다. 기본적인 커머스 플랫폼의 UX를 닮아 사용자가 익숙함을 느끼며 어렵지 않게 앱을 사용할 수 있습니다.
+                </p>
+                <div class="project-info" style="max-width: 640px;">
+                    <div style="display: flex;">
+                        <div style="flex: 1;">
+                            <div style="display: block; padding-right: 20px;">
+                                <div
+                                    style="border-bottom: 1px solid #EAEBED; line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Date
+                                </div>
+                                <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    2021. 8
+                                </div>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: block; padding-right: 20px;">
+                                <div
+                                    style="border-bottom: 1px solid #EAEBED; line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Role
+                                </div>
+                                <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Product Design
+                                </div>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: block; padding-right: 20px;">
+                                <div
+                                    style="border-bottom: 1px solid #EAEBED; line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Type
+                                </div>
+                                <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Application
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="margin-left: 40px;">
-                        <h1 style="font-size: 16px; color: #95AAB6; font-weight: 600;">ROLE</h1>
-                        <p style="font-size: 16px; color: #95AAB6;">UI/UX 디자인, 앱 기획</p>
-                    </div>
-                </div>
-                <div style="margin-top: 20px;">
-                    <button class="btn2"
-                        onclick="location.href='https://play.google.com/store/apps/details?id=com.gsharemall.client.android'">
-                        VIEW ANDROID
-                    </button>
-                    <button class="btn2"
-                        onclick="location.href='https://apps.apple.com/kr/app/%EC%A7%80%EC%89%90%EC%96%B4%EB%AA%B0-%EC%B0%A9%ED%95%9C-%EB%82%98%EB%88%94-%EC%A4%91%EA%B3%A0%EC%9E%A5%ED%84%B0/id1499939473'">
-                        VIEW iOS
-                    </button>
-                </div>
-                <div style="margin-top: 40px;" class="main-text">
-                    직장인을 위한 중고거래 플랫폼으로 회사 이메일로 회원가입할 수<br>
-                    있으며 유저들은 자동으로 같은 회사끼리 그룹핑됩니다.<br>
-                    기본적인 커머스 플랫폼의 UX를 닮아 사용자가 익숙함을 느끼며<br>
-                    어렵지 않게 앱을 사용할 수 있고 디자인 컨셉은  가벼운 톤의 컬러를<br>
-                    사용해 지쉐어몰이 추구하는 20~30대 여성을 겨냥합니다.
-                </div>
-                <div style="height: 400px;"></div>
-            </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #19364A; padding: 120px 0px;">
-            <div class="container">
-                <div style="text-align: center;">
-                    <img src="./img/gm-1.png" style="width: 100%; max-width: 900px; margin-top: -400px;">
+
                 </div>
             </div>
-            <div class="container" style=" padding-left: 16px; padding-right: 16px;">
-                <h1 style="margin-top: 40px; font-size: 24px; font-weight: 600; color: #fff;">
-                    FONT & COLORS
-                </h1>
-                <div class="row" style="margin-top: 40px;">
-                    <div class="col-sm-6" style="margin-bottom: 20px;">
-                        <img src="./img/gm-s-1.png" style="width: 100%;">
-                    </div>
-                    <div class="col-sm-6" style="margin-bottom: 20px;">
-                        <img src="./img/gm-s-2.png" style="width: 100%;">
-                    </div>
-                </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm2.png" class="main-block-img">
             </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #eee; padding: 120px 0px;">
-            <div class="container" style=" padding-left: 16px; padding-right: 16px;">
-                <h1 style="font-size: 24px; font-weight: 600;">
-                    와이어프레임
-                </h1>
-                <div style="margin-top: 40px;" class="main-text">
-                    최소 모바일 해상도를 고려해 Width 360px<br>
-                    기준으로 제작되었습니다.
-                </div>
+
+            <div class="project-intro">
+                <p class="project-intro-title">
+                    Wireframe
+                </p>
+                <p class="project-intro-text">
+                    최소 모바일 해상도를 고려해 Width 360px 기준으로 제작되었습니다.
+                </p>
             </div>
-            <div class="container" style="max-width: 1600px; padding-left: 0px; padding-right: 0;">
-                <img src="./img/img-gm1.png" style="width: 100%;">
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm3.png" class="main-block-img">
             </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #dddddd; padding: 120px 0px;">
-            <div class="container" style=" padding-left: 16px; padding-right: 16px;">
-                <h1 style="font-size: 24px; font-weight: 600;">
-                    카테고리 아이콘
-                </h1>
-                <div style="margin-top: 40px;" class="main-text">
-                    의류, 가전기기, 유아용품 등을 포함한 총 14개의 카테고리를 가지고<br>
-                    있으며 각각 카테고리를 대표할 수 있는 이미지를 선정했습니다.<br>
-                    일정하게 굵은 라인과 밝은 컬러를 활용한 아이콘 디자인으로 젊고<br>트랜디한 앱 디자인의 느낌을 살렸습니다.
-                </div>
+
+            <div class="project-intro">
+                <p class="project-intro-title">
+                    Color
+                </p>
+                <p class="project-intro-text">
+                    메인 컬러와 서브 컬러, 그레이스케일 컬러를 사용했습니다.
+                </p>
             </div>
-            <div class="container" style="max-width: 1600px; padding-left: 0px; padding-right: 0;">
-                <img src="./img/img-gm2.png" style="width: 100%;">
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm4.png" class="main-block-img">
             </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #fff; padding: 120px 0px;">
-            <div class="container" style=" padding-left: 16px; padding-right: 16px;">
-                <h1 style="font-size: 24px; font-weight: 600;">
+
+            <div class="project-intro">
+                <p class="project-intro-title">
+                    Icon
+                </p>
+                <p class="project-intro-text">
+                    의류, 가전기기, 유아용품 등을 포함한 총 14개의 카테고리를 가지고 있으며 각각 카테고리를 대표할 수 있는 이미지를 선정했습니다. 일정하게 굵은 라인과 밝은 컬러를 활용한 아이콘 디자인으로 젊고 트랜디한 앱 디자인의 느낌을 살렸습니다.
+                </p>
+            </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm5.png" class="main-block-img">
+            </div>
+
+            <div class="project-intro">
+                <p class="project-intro-title">
                     회원가입
-                </h1>
-                <div style="margin-top: 40px;" class="main-text">
-                    회원가입은 회사 이메일로 가입합니다.<br>
-                    도메인 주소로 각 회사끼리 그룹핑되며 계열사가 존재하는<br>
-                    회사일 경우 자신의 회사명을 선택해 회사에 참여합니다.
-                </div>
+                </p>
+                <p class="project-intro-text">
+                    회원가입은 회사 이메일로 가입합니다. 도메인 주소로 각 회사끼리 그룹핑되며 계열사가 존재하는 회사일 경우 자신의 회사명을 선택해 회사에 참여합니다.
+                </p>
             </div>
-            <div class="container" style="max-width: 1600px; padding-left: 0px; padding-right: 0;">
-                <img src="./img/img-gm3.png" style="width: 100%;">
+            <div class="main-block" style="margin-bottom: 8px;">
+                <img src="img/detail-gm6.png" class="main-block-img">
             </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #19364A; padding: 120px 0px;">
-            <div class="container" style="padding-left: 16px; padding-right: 16px;">
-                <div class="row">
-                    <div class="col-md-6" style="align-self: center;">
-                        <h1 style="font-size: 24px; font-weight: 600; color: #fff;">
-                            채팅에서 이루어지는 거래
-                        </h1>
-                        <div style="margin-top: 40px; color: #fff;" class="main-text">
-                            상대방과의 채팅에서 거래를 시작하고 완료할 수 있습니다.<br>
-                            거래에 들어가면 상품은 거래중 상태가 되며, 다른 사용자는 새로운 채팅을<br>
-                            신청할 수 없게 됩니다. 이는 단순히 채팅 기능만 제공하는 것이 아닌<br>
-                            처음 사용자도 쉽게 이용할 수 있도록 거래 프로세스를 유도합니다.
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="img/gm-4.png" style="width: 100%;">
-                    </div>
-                </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm7.png" class="main-block-img">
             </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #fff; padding: 120px 0px;">
-            <div class="container" style=" padding-left: 16px; padding-right: 16px;">
-                <h1 style="font-size: 24px; font-weight: 600;">
+
+            <div class="project-intro">
+                <p class="project-intro-title">
                     상품등록
-                </h1>
-                <div style="margin-top: 40px;" class="main-text">
-                    상품등록 시 사진, 상품명, 가격 외에도 기부금, 거래지 등 입력해야<br>
-                    할 정보가 많으므로 디폴트 값을 설정해둠으로서 유저에게 선택사항으로<br>
-                    맡기어 상품등록에 대한 부담과 시간소요를 최소화했습니다.
-                </div>
+                </p>
+                <p class="project-intro-text">
+                    상품등록 시 사진, 상품명, 가격 외에도 기부금, 거래지 등 입력해야 할 정보가 많으므로 디폴트 값을 설정해둠으로서 유저에게 선택사항으로 맡기어 상품등록에 대한 부담과 시간소요를 최소화했습니다.
+                </p>
             </div>
-            <div class="container" style="max-width: 1600px; padding-left: 0px; padding-right: 0;">
-                <img src="./img/img-gm5.png" style="width: 100%;">
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm8.png" class="main-block-img">
             </div>
-        </div>
-        <div class="container" style="max-width: 1600px; background-color: #eee; padding: 120px 0px;">
-            <div class="container" style=" padding-left: 16px; padding-right: 16px;">
-                <h1 style="font-size: 24px; font-weight: 600;">
+
+            <div class="project-intro">
+                <p class="project-intro-title">
                     그룹장터
-                </h1>
-                <div style="margin-top: 40px;" class="main-text">
-                    자동으로 그룹핑이 된 회사 직원들이 별도의 그룹을 생성할 수 있습니다.<br>
-                    그룹을 생성한 유저는 그룹장터지기가 되며 회사내 직원들을 초대하거나<br>
-                    참여신청을 수락해 그룹원을 늘릴 수 있습니다.
-                </div>
+                </p>
+                <p class="project-intro-text">
+                    자동으로 그룹핑이 된 회사 직원들이 별도의 그룹을 생성할 수 있습니다. 그룹을 생성한 유저는 그룹장터지기가 되며 회사내 직원들을 초대하거나 참여신청을 수락해 그룹원을 늘릴 수 있습니다.
+                </p>
             </div>
-            <div class="container" style="max-width: 1600px; padding-left: 0px; padding-right: 0;">
-                <img src="./img/img-gm6.png" style="width: 100%;">
+            <div class="main-block" style="margin-bottom: 8px;">
+                <img src="img/detail-gm9.png" class="main-block-img">
+            </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-gm10.png" class="main-block-img">
+            </div>
+
+            <!-- Footer-->
+            <div class="footer-copyright">
+                Copyright 2024 Chiho Lee all rights reserved.
             </div>
         </div>
-        <div class="container" style="max-width: 1600px; padding: 0px;">
-            <img src="img/img-gm4.png" style="width: 100%;">
-        </div>
+
     </div>
+    <!-- Masthead-->
 
 
 
-    <!-- <div style="margin-top: 40px;">
-        <img src="img/gm-app2.png" style="width: 100%;">
-    </div>
-    <h1 style="margin-top: 120px; font-size: 24px; font-weight: 600;">
-        학습이 필요없는 직관적인 UI/UX
-    </h1>
-    <div style="margin-top: 40px;">
-        타 중고거래 앱 대비 많은 기능과 복잡한 구조를 가지고 있습니다.<br>
-        유저층 연령이 높은 중고거래 앱 특성상 UI를 단순하게 표현할 필요가 있었기에<br>
-        표면적으로 단순하고 편리하고 익숙한 디자인으로 설계 되었습니다.
-    </div>
-    <div style="margin-top: 40px;">
-        <img src="img/gm-app3.png" style="width: 100%;">
-    </div> -->
+    <!-- Portfolio-->
+
     <!-- contact -->
-    <div id="contact" style="margin-top: 60px; background-color: #222; padding-top: 60px; padding-bottom: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div style="padding-right: 8px; padding-left: 8px;">
-                        <h1 style="font-size: 16px; color: #3CB7FF; font-weight: 800;">CONTACT</h1>
-                        <p
-                            style="font-size: 20px; font-weight: 300; letter-spacing: -1.2px; line-height: 36px; color: #aaa;">
-                            <span style="color: #3CB7FF;">함께</span> 일하기 바랍니다.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="padding-right: 8px; padding-left: 8px;">
-                        <div>
-                            <span
-                                style="width: 68px; display: inline-block; font-weight: 800; color: #aaa; font-size: 14px;">
-                                E-MAIL
-                            </span>
-                            <span style="display: inline-block; color: #aaa; font-size: 14px;">
-                                dlclgh2000@naver.com
-                            </span>
-                        </div>
-                        <div style="margin-top: 6px;">
-                            <span
-                                style="width: 68px; display: inline-block; font-weight: 800; color: #aaa; font-size: 14px;">
-                                PHONE
-                            </span>
-                            <span style="display: inline-block; color: #aaa; font-size: 14px; margin-bottom: 20px;">
-                                010-2646-5941
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="padding-right: 8px; padding-left: 8px;">
-                        <button class="btn2" onclick="location.href='2021_chiho.pdf'" download>
-                            DOWNLOAD PORTFOLIO
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div>
 
-    <!-- Footer-->
-    <footer class="foot">
-        <div class="container px-4 pt-2 pb-2">
-            <p class="text-muted" style="text-align: left;">
-                COPYRIGHT © 2021 CHIHO LEE
-            </p>
-        </div>
-    </footer>
+
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SimpleLightbox plugin JS-->

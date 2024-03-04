@@ -22,131 +22,507 @@
     <link href="css/main.css" rel="stylesheet" />
     <link href="css/menu.css" rel="stylesheet" />
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>
 
 <body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container" style="max-width: 100%; padding-left: 24px; padding-right: 24px;">
-            <a class="navbar-brand" href="index.html">BIBER</a>
-            <a class="btn-back" href="index.html"><i class="fas fa-arrow-left"></i></a>
-        </div>
-    </nav>
-    <!-- Masthead-->
-    <header class="masthead bg-pang">
-        <div class="container px-4 px-lg-5 h-100">
-            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end">
-                    <h1 class="font-weight-bold" style="color: #3CB7FF;">PANGx2</h1>
-                </div>
-                <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 mb-5">어드민 페이지 디자인</p>
-                    <div style="display:flex; justify-content: center;">
-                        <div class="mouse"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div style="display: flex;">
+        <!-- Navigation-->
+        <div class="side-list scroll">
+            <header class="side-header">
+                <a href="index.html" class="main-logo" style="margin-bottom: 20px; display: block;">
+                    BIEBER<br>
+                    PORTFOLIO
+                </a>
+                <a href="detail-about.html" class="main-btn">
+                    About Me
+                </a>
+            </header>
+            <nav>
+                <div class="desktop-only">
+                    <a href="detail-gambyul.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gambyul.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Gambyul Market
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    대상과 그린앤그레이 협업으로 진행한 식품 편집샵 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-cellook.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cellook.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cellook
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    여성 패션 아이템을 한곳에 모은 버티컬 커머스 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-tennis.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-tennis.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Tennis Yum Yum
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    처음이라도 걱정하지 마! 테니스 구장 예약, 매칭, 커뮤니티 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-cellook-intro.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cellook-intro.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cellook Intro
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    셀룩의 서비스 소개 및 입점 신청 안내 사이트
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    <a href="detail-gng.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gng.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Green&Grey
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    그린앤그레이의 커머스 플랫폼 제작 서비스 소개와 기업 소개 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                    
+                    <a href="detail-cellook-video.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Mothion Graphic
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cellook-video.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cellook Intro Video
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    여성 버티컬 커머스 플랫폼 셀룩의 마케팅을 위한 서비스 소개 영상
+                                </div>
+                            </span>
+                        </div>
+                    </a>
 
-    <div style="padding-top: 60px; padding-bottom: 60px;">
-        <div class="container">
-            <!-- 인사말 -->
-            <div style="padding-left: 8px; padding-right: 8px; margin-top: 40px;">
-                <p
-                    style="font-size: 36px; font-weight: 300; letter-spacing: -1.2px; line-height: 58px; word-break: keep-all;">
-                    팡팡 웹 호스팅 솔루션<br>
-                    어드민 페이지 디자인
+                    <a href="detail-gm-app.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Application
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gsharemall.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Gsharemall
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    이메일 인증으로 신원이 보장된 직장인을 위한 중고거래 플랫폼
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-cloudgram.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-cloudgram.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Cloudgram
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    메가존 자회사 클라우드그램의 서비스, 제품 소개 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-gm-admin.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-gm-admin.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Gsharemall Admin
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    지쉐어몰 내 회사 장터를 관리할 수 있는 장터 관리자용 어드민
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-mg.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-makersgames.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Makers Games
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    모바일 게임 Project R 제작 중인 메이커스 게임즈 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-pang.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-pangpang.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Pangpang
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    트래픽 확인, 사용자 할당 기능을 가진 웹 호스팅 서비스 팡팡 어드민
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-inje.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Website
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-inje.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Inje University
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    인제대학교 교육대학원 홈페이지
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-animal.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                Illustration
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-animal.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Animal Illustration
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    아동용 동물 사진첩 앱 제작을 위한 원형 동물 일러스트
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-now.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                TV Channel
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-now.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Home Shopping Now
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    17개의 모든 홈쇼핑의 라이브와 편성표, 프로모션을 한눈에
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="detail-nt.html" class="list-block" style="margin-bottom: 8px;">
+                        <header style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span style="color: #7F8A98; font-weight: 700; font-size: 14px; line-height: 24px;">
+                                TV Payment Module
+                            </span>
+                            <span>
+                                <img src="img/chevron-right.png" width="24px;">
+                            </span>
+                        </header>
+                        <div style="display: flex;">
+                            <span style="margin-right: 16px;">
+                                <img src="img/thumbnail-shoppingnt.png" width="84px;">
+                            </span>
+                            <span>
+                                <div
+                                    style="margin-top: 4px; color: #3B4259; font-size: 18px; font-weight: 700; line-height: 28px;">
+                                    Shopping&T
+                                </div>
+                                <div
+                                    style="margin-top: 4px; color: #7F8A98; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: -0.28px;">
+                                    리모컨 조작에 특화된 쇼핑앤티 간편결제 모듈
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                <div class="mobile-only">
+
+                </div>
+            </nav>
+        </div>
+        <!-- Contents-->
+        <div class="contents-place">
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-pang1.png" class="main-block-img">
+            </div>
+            <div class="project-intro">
+                <p class="project-intro-title">
+                    팡팡 웹 호스팅 솔루션 어드민 페이지 디자인
                 </p>
-                <div style="display: flex; margin-top: 40px;">
-                    <div>
-                        <h1 style="font-size: 16px; color: #95AAB6; font-weight: 600;">DATE</h1>
-                        <p style="font-size: 16px; color: #95AAB6;">2018.11</p>
+                <p class="project-intro-text">
+                    팡팡 웹호스팅 사용자 어드민페이지이며, 수많은 계정들을 관리해야하는 페이지기 때문에 복잡하지않은 구조를 잡기위해 노력했습니다.
+                </p>
+                <div class="project-info" style="max-width: 640px;">
+                    <div style="display: flex;">
+                        <div style="flex: 1;">
+                            <div style="display: block; padding-right: 20px;">
+                                <div
+                                    style="border-bottom: 1px solid #EAEBED; line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Date
+                                </div>
+                                <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    2018. 11
+                                </div>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: block; padding-right: 20px;">
+                                <div
+                                    style="border-bottom: 1px solid #EAEBED; line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Role
+                                </div>
+                                <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    UI/UX Design
+                                </div>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: block; padding-right: 20px;">
+                                <div
+                                    style="border-bottom: 1px solid #EAEBED; line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Type
+                                </div>
+                                <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
+                                    Website
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="margin-left: 40px;">
-                        <h1 style="font-size: 16px; color: #95AAB6; font-weight: 600;">ROLE</h1>
-                        <p style="font-size: 16px; color: #95AAB6;">UI/UX 디자인</p>
-                    </div>
+
                 </div>
-                <div style="margin-top: 40px;">
-                    팡팡 웹호스팅 사용자 어드민페이지이며, 수많은 계정들을<br>
-                    관리해야하는 페이지기 때문에 복잡하지않은 구조를 잡기위해 노력했습니다.
-                </div>
-                <div style="margin-top: 40px;">
-                    <img src="img/admin1.png" style="width: 100%;">
-                </div>
-                <h1 style="margin-top: 120px; font-size: 24px; font-weight: 600;">
+            </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-pang2.png" class="main-block-img">
+            </div>
+
+            <div class="project-intro">
+                <p class="project-intro-title">
                     편리하고 가시성 높은 UI 디자인
-                </h1>
-                <div style="margin-top: 40px;">
-                    폴더 개념을 추가해 분류와 관리에 용이하며<br>
-                    사용자가 반복적인 작업을 할때를 고려하여 UI 동선에 많은 고민했습니다.
-                </div>
-                <div style="margin-top: 40px;">
-                    <img src="img/admin2.png" style="width: 100%;">
-                </div>
+                </p>
+                <p class="project-intro-text">
+                    폴더 개념을 추가해 분류와 관리에 용이하며 사용자가 반복적인 작업을 할때를 고려하여 UI 동선에 많은 고민했습니다.
+                </p>
+            </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-pang3.png" class="main-block-img">
+            </div>
+
+            <!-- Footer-->
+            <div class="footer-copyright">
+                Copyright 2024 Chiho Lee all rights reserved.
             </div>
         </div>
+
     </div>
+    <!-- Masthead-->
+
+
+
+    <!-- Portfolio-->
+
     <!-- contact -->
-    <div id="contact" style="margin-top: 60px; background-color: #222; padding-top: 60px; padding-bottom: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div style="padding-right: 8px; padding-left: 8px;">
-                        <h1 style="font-size: 16px; color: #3CB7FF; font-weight: 800;">CONTACT</h1>
-                        <p
-                            style="font-size: 20px; font-weight: 300; letter-spacing: -1.2px; line-height: 36px; color: #aaa;">
-                            <span style="color: #3CB7FF;">함께</span> 일하기 바랍니다.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="padding-right: 8px; padding-left: 8px;">
-                        <div>
-                            <span
-                                style="width: 68px; display: inline-block; font-weight: 800; color: #aaa; font-size: 14px;">
-                                E-MAIL
-                            </span>
-                            <span style="display: inline-block; color: #aaa; font-size: 14px;">
-                                dlclgh2000@naver.com
-                            </span>
-                        </div>
-                        <div style="margin-top: 6px;">
-                            <span
-                                style="width: 68px; display: inline-block; font-weight: 800; color: #aaa; font-size: 14px;">
-                                PHONE
-                            </span>
-                            <span style="display: inline-block; color: #aaa; font-size: 14px; margin-bottom: 20px;">
-                                010-2646-5941
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="padding-right: 8px; padding-left: 8px;">
-                        <button class="btn2" onclick="location.href='2021_chiho.pdf'" download>
-                            DOWNLOAD PORTFOLIO
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div>
 
-    <!-- Footer-->
-    <footer class="foot">
-        <div class="container px-4 pt-2 pb-2">
-            <p class="text-muted">
-                COPYRIGHT © 2021 CHIHO LEE
-            </p>
-        </div>
-    </footer>
+
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SimpleLightbox plugin JS-->
