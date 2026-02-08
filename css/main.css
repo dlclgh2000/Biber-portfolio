@@ -273,6 +273,16 @@ a:active {
     /* 파이어폭스 */
 }
 
+/* =========================================
+   Layout & Responsive Sidebar
+   ========================================= */
+
+/* 기본 레이아웃 (데스크탑) */
+.layout-wrapper {
+    display: flex;
+    width: 100%;
+}
+
 .side-list {
     flex: 0 0 360px;
     height: 100vh;
@@ -282,6 +292,13 @@ a:active {
     scrollbar-width: 0;
     top: 0;
     padding: 8px 0px 8px 8px;
+    background-color: #fff; /* 배경색 명시 */
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.side-list img {
+    border-radius: 20px;
 }
 
 .side-header {
@@ -291,19 +308,178 @@ a:active {
     text-align: center;
 }
 
+.contents-place {
+    display: block;
+    flex: 0 0 calc(100% - 360px);
+    max-width: calc(100% - 360px); /* flex basis와 함께 max-width 설정 */
+    padding: 8px 4px 8px 4px;
+    overflow: hidden;
+}
+
+/* 모바일 전용 요소 초기화 */
+.mobile-header {
+    display: none; /* 기본 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    z-index: 2000;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.mobile-logo {
+    color: #3B4259;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.mobile-logo:hover {
+    color: #1f2432;
+}
+
+/* 햄버거 메뉴 버튼 스타일 (CSS 애니메이션용) */
+.mobile-menu-btn {
+    border: none;
+    background: none;
+    width: 24px; /* 32px -> 24px 축소 */
+    height: 24px; /* 32px -> 24px 축소 */
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* 선 사이 간격 6px -> 5px 축소 */
+    z-index: 2100;
+}
+
+/* 햄버거 라인 공통 스타일 */
+.hamburger-line {
+    display: block;
+    width: 20px; /* 24px -> 20px 축소 (버튼 너비에 맞게) */
+    height: 2px;
+    background-color: #3B4259;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+}
+
+/* 활성화(X버튼) 상태 애니메이션 */
+/* 24px 크기에 맞춰 이동 거리(translateY) 조정 필요 */
+.mobile-menu-btn.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg); /* 8px -> 7px */
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg); /* -8px -> -7px */
+}
+
+/* 기존 i 태그 스타일 제거 (덮어쓰기 방지) */
+.mobile-menu-btn i {
+    display: none;
+}
+
+.mobile-menu-header {
+    display: none; /* 사이드바 내부 모바일 헤더 */
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.mobile-menu-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #3B4259;
+}
+
+.mobile-menu-close {
+    border: none;
+    background: none;
+    font-size: 24px;
+    color: #3B4259;
+    cursor: pointer;
+}
+
+/* Responsive Media Query (태블릿/모바일 - 992px 미만) */
+@media (max-width: 991px) {
+    .layout-wrapper {
+        display: block; /* Flex 해제 */
+        padding-top: 60px; /* 헤더 높이만큼 여백 */
+    }
+
+    /* 사이드바를 모바일 드로어로 변경 (위에서 아래로 펼쳐짐, 전체 화면) */
+    .side-list {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%; /* 너비 100%로 변경 */
+        height: 100%; /* 높이 100%로 변경 */
+        transform: translateY(-100%); /* 위쪽으로 숨김 */
+        box-shadow: none; /* 전체 화면이라 그림자 불필요 */
+        padding: 0;
+        padding-top: 80px; /* 헤더 높이(60px) + 여백 확보 */
+    }
+
+    .side-list.active {
+        transform: translateY(0); /* 아래로 내려옴 */
+    }
+
+    .side-header {
+        display: block; /* 모바일에서는 사이드바 상단 로고/버튼 숨김 (필요 시 유지 가능) */
+        padding-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .side-header .main-logo {
+        display: none;
+    }
+
+    /* 모바일 헤더 보이기 */
+    .mobile-header {
+        display: flex;
+    }
+
+    .mobile-menu-header {
+        display: flex;
+    }
+
+    /* 콘텐츠 영역 전체 너비 */
+    .contents-place {
+        flex: none;
+        max-width: 100%;
+        padding: 20px; /* 좌우 여백 확보 */
+    }
+    
+    /* 기존 side-list 내부 nav 패딩 조정 */
+    .side-list nav {
+        padding: 0 16px 20px 16px;
+    }
+}
+
+
+/* =========================================
+   Existing Styles
+   ========================================= */
+
 .list-block {
     background-color: #F6F6F8;
     width: 100%;
     display: block;
     padding: 20px;
     border-radius: 12px;
-}
-
-.contents-place {
-    display: block;
-    flex: 0 0 calc(100% - 360px);
-    padding: 8px 4px 8px 4px;
-    overflow: hidden;
 }
 
 .main-block {
