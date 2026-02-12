@@ -467,6 +467,12 @@ a:active {
     .side-list nav {
         padding: 0 16px 20px 16px;
     }
+    
+    /* 모바일 텍스트 패딩 제거 */
+    .project-intro {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
 }
 
 
