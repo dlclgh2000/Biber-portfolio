@@ -1,0 +1,188 @@
+{
+  "projects": [
+    {
+      "id": "podo-cs-automation",
+      "order": 0,
+      "title": "PODO CS 운영 자동화",
+      "subtitle": "급증하는 사용자를 위한 고객센터 자동화 시스템",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-podo-cs.png",
+      "link": "detail-podo-cs-automation.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-tutor",
+      "order": 1,
+      "title": "Podo Tutor Application",
+      "subtitle": "Podo 튜터 다시보지 않기 프로젝트",
+      "date": "Updates 19 January 2026",
+      "thumbnail": "img/thumbnail-cellook.png",
+      "link": "detail-podo-tutor.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-podolingo",
+      "order": 2,
+      "title": "Podo Podolingo Feature",
+      "subtitle": "AI 캐릭터와 함께하는 재미있는 표현 학습",
+      "date": "Updates 19 January 2026",
+      "thumbnail": "img/thumbnail-cellook.png",
+      "link": "detail-podo-podolingo.html",
+      "inSlider": false
+    },
+    {
+      "id": "tennis",
+      "order": 3,
+      "title": "Tennis Yum Yum Application",
+      "subtitle": "처음이라도 걱정하지마, 테니스 구장 예약, 매칭, 커뮤니티 플랫폼",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-tennis.png",
+      "link": "detail-tennis.html",
+      "inSlider": true,
+      "sliderImage": "img/detail-tennis1.png"
+    },
+    {
+      "id": "gambyul",
+      "order": 4,
+      "title": "Gambyul Market Application",
+      "subtitle": "대상과 그린앤그레이 협업으로 진행한 식품 편집샵 플랫폼",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-gambyul.png",
+      "link": "detail-gambyul.html",
+      "inSlider": true,
+      "sliderImage": "img/detail-gambyul1.png"
+    },
+    {
+      "id": "cellook",
+      "order": 5,
+      "title": "Cellook Application",
+      "subtitle": "모두가 셀럽이 되는곳, 여성 패션 아이템을 한곳에 모은 버티컬 커머스 플랫폼",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-cellook.png",
+      "link": "detail-cellook.html",
+      "inSlider": true,
+      "sliderImage": "img/detail-cellook1.png"
+    },
+    {
+      "id": "cellook-video",
+      "order": 6,
+      "title": "Cellok Intro Video",
+      "subtitle": "여성 버티컬 커머스 플랫폼 셀룩의 마케팅을 위한 서비스 소개 영상",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-cellook-video.png",
+      "link": "detail-cellook-video.html",
+      "inSlider": false
+    },
+    {
+      "id": "cellook-intro",
+      "order": 7,
+      "title": "Cellook Introduction Site",
+      "subtitle": "여성 버티컬 커머스 플랫폼 셀룩의 서비스 소개 및 입점 신청 사이트",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-cellook-intro.png",
+      "link": "detail-cellook-intro.html",
+      "inSlider": true,
+      "sliderImage": "img/detail-cellook-intro1.png"
+    },
+    {
+      "id": "gng",
+      "order": 8,
+      "title": "Green&grey",
+      "subtitle": "그린앤그레이의 커머스 플랫폼 제작 서비스 소개와 기업 소개 홈페이지 디자인 작업입니다.",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-gng.png",
+      "link": "detail-gng.html",
+      "inSlider": false
+    },
+    {
+      "id": "gm-admin",
+      "order": 9,
+      "title": "Gsharemall Admin",
+      "subtitle": "지쉐어몰 내 회사 장터를 관리할 수 있는 장터 관리자용 어드민",
+      "date": "Updates 14 February 2020",
+      "thumbnail": "img/thumb-gm-admin.png",
+      "link": "detail-gm-admin.html",
+      "inSlider": false
+    },
+    {
+      "id": "gsharemall",
+      "order": 10,
+      "title": "Gsharemall",
+      "subtitle": "이메일 인증으로 직장인을 위한 중고거래 플랫폼",
+      "date": "Updates 30 January 2024",
+      "thumbnail": "img/thumb-gm.png",
+      "link": "detail-gm-app.html",
+      "inSlider": false
+    },
+    {
+      "id": "cloudgram",
+      "order": 11,
+      "title": "Cloudgram",
+      "subtitle": "메가존 자회사 클라우드그램의 서비스, 제품 소개 홈페이지",
+      "date": "Updates 29 March 2021",
+      "thumbnail": "img/thumb-cloudgram.png",
+      "link": "detail-cloudgram.html",
+      "inSlider": false
+    },
+    {
+      "id": "makers-games",
+      "order": 12,
+      "title": "Makers Games",
+      "subtitle": "모바일 게임 Project R 제작 중인 메이커스 게임즈 홈페이지",
+      "date": "Updates 06 January 2019",
+      "thumbnail": "img/thumb-mg.png",
+      "link": "detail-mg.html",
+      "inSlider": false
+    },
+    {
+      "id": "pangpang",
+      "order": 13,
+      "title": "Pangpang",
+      "subtitle": "트래픽 확인, 사용자 할당 기능을 가진 웹 호스팅 서비스 팡팡 어드민",
+      "date": "Updates 14 February 2020",
+      "thumbnail": "img/thumb-pang.png",
+      "link": "detail-pang.html",
+      "inSlider": false
+    },
+    {
+      "id": "inje",
+      "order": 14,
+      "title": "Inje University",
+      "subtitle": "인제대학교 교육대학원 홈페이지",
+      "date": "Updates 28 January 2016",
+      "thumbnail": "img/thumb-inje.png",
+      "link": "detail-inje.html",
+      "inSlider": false
+    },
+    {
+      "id": "animal",
+      "order": 15,
+      "title": "Animal Illustration",
+      "subtitle": "아동용 동물 사진첩 앱 제작을 위한 원형 동물 일러스트",
+      "date": "Updates 14 September 2016",
+      "thumbnail": "img/thumb-animal.png",
+      "link": "detail-animal.html",
+      "inSlider": false
+    },
+    {
+      "id": "now",
+      "order": 16,
+      "title": "Home Shopping Now",
+      "subtitle": "17개의 모든 홈쇼핑의 라이브와 편성표, 프로모션을 한눈에",
+      "date": "Updates 11 January 2018",
+      "thumbnail": "img/thumb-now.png",
+      "link": "detail-now.html",
+      "inSlider": false
+    },
+    {
+      "id": "nt",
+      "order": 17,
+      "title": "Shopping&T",
+      "subtitle": "리모컨 조작에 특화된 쇼핑앤티 간편결제 모듈",
+      "date": "Updates 04 July 2017",
+      "thumbnail": "img/thumb-nt.png",
+      "link": "detail-nt.html",
+      "inSlider": false
+    }
+  ]
+}

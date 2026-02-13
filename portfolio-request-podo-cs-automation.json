@@ -1,0 +1,12 @@
+{
+  "projectId": "podo-cs-automation",
+  "title": "PODO CS 운영 자동화",
+  "subtitle": "급증하는 사용자를 위한 고객센터 자동화 시스템",
+  "figmaUrl": "https://www.figma.com/design/lUe40bCNAzMEmNapCgTXlm/-PODO--App-Update?node-id=17053-30200",
+  "description": "PODO는 AI 기반 영어 학습 플랫폼으로, 사용자가 급증하면서 기존 카카오톡 기반 CS 운영에 한계가 발생했습니다.\n\n문제 상황:\n- 기존에는 모든 고객 문의를 카카오톡으로 처리\n- 사용자 수 급증으로 운영팀이 감당하기 어려운 상황\n- 반복적인 문의(환불, 결제수단 변경, 홀딩 등)가 대부분\n- 운영팀 리소스 낭비 및 응답 시간 지연\n\n해결 방안:\n- 인앱 고객센터 구축\n- FAQ 시스템으로 자주 묻는 질문 셀프 해결\n- 자동 처리 가능한 문의 유형 자동화 (환불, 결제수단 변경, 홀딩 등)\n- 카테고리별 질문 분류로 정보 접근성 향상\n- 검색 기능으로 빠른 문제 해결\n\n주요 기능:\n1. 통합 검색 - 키워드로 빠르게 답변 찾기\n2. FAQ 시스템 - 자주 묻는 질문 즉시 확인\n3. 카테고리 분류 - 주제별 질문 정리\n4. 자동 처리 플로우 - 환불, 결제 변경, 홀딩 등 자동화\n5. 1:1 문의 - 복잡한 문의는 운영팀 연결\n\n성과:\n- 운영팀 문의 처리량 감소\n- 사용자 문제 해결 시간 단축\n- 고객 만족도 향상",
+  "thumbnail": "img/thumb-podo-cs.png",
+  "heroImage": "img/detail-podo-cs-hero.png",
+  "inSlider": true,
+  "sliderImage": "img/slider-podo-cs.png",
+  "date": "13 February 2026"
+}
