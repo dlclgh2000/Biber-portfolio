@@ -1,8 +1,18 @@
 {
   "projects": [
     {
-      "id": "podo-cs-automation",
+      "id": "podo-app",
       "order": 0,
+      "title": "Podo Application",
+      "subtitle": "압도적으로 저렴한 1:1 원어민 회화 플랫폼, 서비스 전체 설계",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-podo-app.png",
+      "link": "detail-podo-app.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-cs-automation",
+      "order": 1,
       "title": "PODO CS 운영 자동화",
       "subtitle": "급증하는 사용자를 위한 고객센터 자동화 시스템",
       "date": "Updates 13 February 2026",
@@ -11,8 +21,48 @@
       "inSlider": false
     },
     {
-      "id": "podo-tutor",
+      "id": "podo-purchase",
       "order": 1,
+      "title": "Podo 레슨 구매 플로우 개선",
+      "subtitle": "정규/체험 레슨 구매 동선 최적화와 전환율 개선",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-podo-purchase.png",
+      "link": "detail-podo-purchase.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-report",
+      "order": 2,
+      "title": "Podo AI Lesson Report",
+      "subtitle": "수업 데이터 기반 AI 분석 리포트와 맞춤형 복습 퀴즈",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-podo-report.png",
+      "link": "detail-podo-report.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-retention",
+      "order": 2,
+      "title": "Podo 수강권 연장 유도",
+      "subtitle": "학습 리캡과 차등 할인으로 리텐션 극대화",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-podo-retention.png",
+      "link": "detail-podo-retention.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-lemonboard",
+      "order": 2,
+      "title": "Podo Lemon Board",
+      "subtitle": "1:1 회화 수업을 위한 라이브 드로잉 툴",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-podo-lemonboard.png",
+      "link": "detail-podo-lemonboard.html",
+      "inSlider": false
+    },
+    {
+      "id": "podo-tutor",
+      "order": 2,
       "title": "Podo Tutor Application",
       "subtitle": "Podo 튜터 다시보지 않기 프로젝트",
       "date": "Updates 19 January 2026",
@@ -28,6 +78,16 @@
       "date": "Updates 19 January 2026",
       "thumbnail": "img/thumbnail-cellook.png",
       "link": "detail-podo-podolingo.html",
+      "inSlider": false
+    },
+    {
+      "id": "mylight",
+      "order": 2,
+      "title": "MyLight Application",
+      "subtitle": "0g의 가벼운학습지, 웹에서 앱으로",
+      "date": "Updates 13 February 2026",
+      "thumbnail": "img/thumb-mylight.png",
+      "link": "detail-mylight.html",
       "inSlider": false
     },
     {
