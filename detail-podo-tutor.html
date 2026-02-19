@@ -46,23 +46,52 @@
         <!-- Contents-->
         <div class="contents-place">
             <div class="main-block" style="margin-bottom: 60px;">
-                <!-- 메인 비주얼: Podo 서비스의 톤앤매너를 보여주는 이미지 배치 -->
-                <!-- <img src="img/detail-podo-main.png" class="main-block-img"> -->
-                <div style="width: 100%; height: 400px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                    Main Visual Area (Podo Service Identity)
-                </div>
+                <!-- 메인 오버뷰 이미지 -->
+                <img src="img/detail-podo-tutor1.png" class="main-block-img">
             </div>
             
             <div class="project-intro">
                 <p class="project-intro-title">
                     Podo - 튜터 다시 만나지 않기 (Tutor Exclusion)
                 </p>
-                <p class="project-intro-text">
+                <p class="project-intro-text" style="margin-bottom: 8px;">
                     포도스피킹의 장점은 '무제한 수강'이지만, 역설적으로 나와 맞지 않는 튜터를 계속 만날 수 있다는 두려움도 주었습니다.
                     <br><br>
                     이 프로젝트는 단순한 '차단 기능' 구현이 아니었습니다. 유저에게는 <strong>"싫은 경험은 내가 직접 끊어낼 수 있다"</strong>는 심리적 안전감을 주고,
                     운영팀에게는 엑셀로 블랙리스트를 수기 관리하던 비효율을 없애주는, <strong>안전하고 효율적인 학습 환경을 만드는 과정</strong>이었습니다.
                 </p>
+                <!-- 태그들-->
+                <div style="display: flex; gap: 12px; margin-top: 0px; margin-bottom: 28px; flex-wrap: wrap;">
+                    <!-- Tag 1: NPS 응답률 -->
+                    <div style="
+                        display: inline-flex;
+                        align-items: center;
+                        height: 32px;
+                        padding: 0 8px;
+                        background-color: #ffffff;
+                        border: 1px solid #EAEBED;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+                    ">
+                        <span style="font-size: 14px; color: #3B4259; font-weight: 700; margin-right: 8px;">NPS 응답률</span>
+                        <span style="font-size: 14px; color: #4f46e5; font-weight: 800;">+31%</span>
+                    </div>
+
+                    <!-- Tag 2: 튜터 관련 CS -->
+                    <div style="
+                        display: inline-flex;
+                        align-items: center;
+                        height: 32px;
+                        padding: 0 8px;
+                        background-color: #ffffff;
+                        border: 1px solid #EAEBED;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+                    ">
+                        <span style="font-size: 14px; color: #3B4259; font-weight: 700; margin-right: 8px;">튜터 관련 CS</span>
+                        <span style="font-size: 14px; color: #4f46e5; font-weight: 800;">-67%</span>
+                    </div>
+                </div>
                 <div class="project-info" style="max-width: 640px;">
                     <div style="display: flex;">
                         <div style="flex: 1;">
@@ -83,7 +112,7 @@
                                     Role
                                 </div>
                                 <div style="line-height: 36px; color: #3B4259; font-size: 16px; font-weight: 700;">
-                                    Product Design Lead
+                                    Product Design
                                 </div>
                             </div>
                         </div>
@@ -103,16 +132,12 @@
             </div>
 
             <div class="main-block" style="margin-bottom: 60px;">
-                <!-- Problem Definition 시각화 -->
-                <!-- <img src="img/detail-podo-problem.png" class="main-block-img"> -->
-                <div style="width: 100%; height: 300px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                    Data Visualization (18% of CS requests are for blocking tutors)
-                </div>
+                <img src="img/detail-podo-tutor2.png" class="main-block-img">
             </div>
 
             <div class="project-intro">
                 <p class="project-intro-title">
-                    The Challenge: "저 튜터 좀 안 만나게 해주세요"
+                    "저 튜터 좀 안 만나게 해주세요"
                 </p>
                 <p class="project-intro-text">
                     데이터를 열어보니, 고객센터 문의의 18%가 특정 튜터에 대한 불만이었습니다. 유저는 맞지 않는 튜터와 다시 매칭될지도 모른다는 불안감에 학습을 주저했고, 운영팀은 이를 수기로 엑셀에 기록하며 '인간 필터링'을 하느라 지쳐가고 있었습니다. 시스템으로 해결해야 할 시점이었습니다.
@@ -121,7 +146,7 @@
 
             <div class="project-intro">
                 <p class="project-intro-title">
-                    Strategy: 부정적 경험을 관리하는 루틴
+                    부정적 경험을 관리하는 루틴
                 </p>
                 <p class="project-intro-text">
                     무조건적인 차단보다는, 사용자가 납득할 수 있는 경험을 만드는 데 집중했습니다.
@@ -132,43 +157,30 @@
                 </p>
             </div>
 
-            <div style="display: flex; width: 100%; margin-bottom: 60px;">
-                <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
-                    <!-- Flow 1: Rating Screen -->
-                    <!-- <img src="img/detail-podo-flow1.png" style="width: 100%; border-radius: 12px;"> -->
-                    <div style="width: 100%; height: 600px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                        Flow: Star Rating -> Reason Selection
-                    </div>
-                </div>
-                <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
-                    <!-- Flow 2: Block Confirmation -->
-                    <!-- <video src="video/video-podo-block.mp4" style="width: 100%; border-radius: 12px;" loop muted autoplay></video> -->
-                    <div style="width: 100%; height: 600px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                        Flow: Block Confirmation Popup (Check Interaction)
-                    </div>
-                </div>
+            <div class="main-block" style="margin-bottom: 60px;">
+                <img src="img/detail-podo-tutor3.png" class="main-block-img">
             </div>
 
             <div class="project-intro">
                 <p class="project-intro-title">
-                    Contextual Blocking: "그때 그 기분"까지 케어하기
+                    지난 수업에서도 관리하기
                 </p>
                 <p class="project-intro-text">
                     불쾌함은 수업 직후에만 느끼는 게 아닙니다. 며칠 뒤 지난 수업 목록을 보다가 "아, 맞다. 이 사람 별로였지" 하고 떠오를 때가 있죠. 그래서 수업 직후뿐만 아니라, '지난 레슨 내역'의 튜터 프로필에서도 언제든 차단할 수 있도록 접근성을 열어두었습니다.
                 </p>
             </div>
-
-            <div class="main-block" style="margin-bottom: 60px;">
-                <!-- History & Profile Blocking UI -->
-                <!-- <img src="img/detail-podo-history.png" class="main-block-img"> -->
-                <div style="width: 100%; height: 400px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                    UI: Blocking from Lesson History & Profile
+            <div style="display: flex; width: 100%; margin-bottom: 60px;">
+                <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
+                    <img src="img/detail-podo-tutor4.png" class="main-block-img">
+                </div>
+                <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
+                    <img src="img/detail-podo-tutor5.png" class="main-block-img">
                 </div>
             </div>
 
             <div class="project-intro">
                 <p class="project-intro-title">
-                    Transparency: 내 블랙리스트 관리하기
+                    내 블랙리스트 관리하기
                 </p>
                 <p class="project-intro-text">
                     '차단 관리 페이지'를 신설하여 내가 누구를 막아뒀는지 투명하게 보여주었습니다. 슬롯(n/5)을 시각화하여 "이 기능은 무제한이 아니니 신중하게 써야 해"라는 메시지를 은연중에 전달했습니다.
@@ -177,7 +189,7 @@
 
             <div class="project-intro">
                 <p class="project-intro-title">
-                    Designer's Note: 기억은 하되, 마주치지는 않게
+                    기억은 하되, 마주치지는 않게
                 </p>
                 <p class="project-intro-text">
                     차단 관리 페이지를 설계할 때 가장 깊게 고민했던 건 <strong>'사용자가 차단 대상을 어떻게 식별하게 할 것인가'</strong>였습니다.
@@ -191,18 +203,13 @@
 
             <div style="display: flex; width: 100%; margin-bottom: 60px;">
                 <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
-                    <!-- Management Page UI -->
-                    <!-- <img src="img/detail-podo-manage.png" style="width: 100%; border-radius: 12px;"> -->
-                    <div style="width: 100%; height: 600px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                        UI: Block List Management Page (No Profile Photos, Dates Only)
-                    </div>
+                    <video src="video/video-podo-tutor1.mp4" style="width: 100%; border-radius: 12px;" loop muted playsinline
+                    autoplay></video>
+                    
                 </div>
                 <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
-                    <!-- Toast / Interaction -->
-                    <!-- <img src="img/detail-podo-toast.png" style="width: 100%; border-radius: 12px;"> -->
-                    <div style="width: 100%; height: 600px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                        UI: Toast Messages & Empty States
-                    </div>
+                    <video src="video/video-podo-tutor2.mp4" style="width: 100%; border-radius: 12px;" loop muted playsinline
+                    autoplay></video>
                 </div>
             </div>
 
@@ -211,21 +218,22 @@
                     Impact
                 </p>
                 <p class="project-intro-text">
-                    이 기능 덕분에 알림톡 대비 <strong>응답률이 30%까지 오를 것</strong>으로 기대하고 있습니다. 하지만 수치보다 중요한 건, 유저들이 "싫은 튜터는 피할 수 있다"는 안심감을 갖게 되었다는 점, 그리고 운영팀 동료들이 더 이상 엑셀과 씨름하지 않아도 된다는 점이었습니다.
+                    기능 도입 후 튜터 변경 요청 관련 <strong>CS 인입이 67% 감소</strong>했습니다. 유저가 직접 차단을 관리할 수 있게 되면서, 운영팀이 엑셀로 수기 처리하던 업무가 사라졌습니다. 또한 수업 후 발송하는 NPS 설문의 <strong>응답률이 31% 상승</strong>했는데, "싫은 튜터는 다시 안 만난다"는 안심감이 수업 경험 자체에 대한 긍정적 인식으로 이어진 것으로 분석됩니다.
                 </p>
             </div>
 
-            <div class="main-block" style="margin-bottom: 60px;">
-                <!-- Final Result / Impact Graph -->
-                <!-- <img src="img/detail-podo-impact.png" class="main-block-img"> -->
-                <div style="width: 100%; height: 300px; background-color: #F6F6F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa;">
-                    Impact Visualization (Graph: NPS Response Rate Increase)
+            <div style="display: flex; width: 100%; margin-bottom: 60px;">
+                <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
+                    <img src="img/detail-podo-tutor6.png" class="main-block-img">
+                </div>
+                <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
+                    <img src="img/detail-podo-tutor7.png" class="main-block-img">
                 </div>
             </div>
 
             <!-- Footer-->
             <div class="footer-copyright">
-                Copyright 2024 Chiho Lee all rights reserved.
+                Copyright 2026 Chiho Lee all rights reserved.
             </div>
         </div>
 
