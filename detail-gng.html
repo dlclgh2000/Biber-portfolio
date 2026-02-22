@@ -45,10 +45,10 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gng1.png" class="main-block-img">
             </div>
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     그린앤그레이 홈페이지 디자인 / 기획
                 </p>
@@ -94,12 +94,12 @@
 
                 </div>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <video src="video/video-gng1.mp4" style="width: 100%; border-radius: 12px;" loop muted playsinline
                     autoplay></video>
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     Wireframe
                 </p>
@@ -107,11 +107,11 @@
                     비주얼 강점의 서비스를 소개하기 위해 스크롤에 따른 Transition 효과에 집중했으며 간단한 텍스트와 이미지와 영상으로 구성했습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gng2.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     Design
                 </p>
@@ -119,7 +119,7 @@
                     간단한 요구사항으로도 완벽한 플랫폼을 제작한다는 슬로건으로 다양한 제작 경험과 비용적인 메리트의 서비스를 소개합니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gng3.png" class="main-block-img">
             </div>
 
@@ -144,7 +144,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

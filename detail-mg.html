@@ -45,10 +45,10 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-mg1.png" class="main-block-img">
             </div>
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     메이커스게임즈 홈페이지 디자인
                 </p>
@@ -94,11 +94,11 @@
 
                 </div>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-mg2.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     접속환경에 따라 최적화되는 반응형 웹디자인
                 </p>
@@ -106,11 +106,11 @@
                     PC, 태블릿, 모바일 다양한 디바이스에서 최적화되어 이용할 수 있도록, 반응형 웹으로 디자인 되었습니다. 각각 디바이스마다 동일한 인터페이스로 느낄 수 있게 많은 노력을 했습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-mg3.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     컨텐츠에 집중할 수 있는 디자인
                 </p>
@@ -118,7 +118,7 @@
                     고퀄리티의 일러스트, 이미지에 집중할 수 있도록 간결하고 심플한 UI와 세밀한 레이아웃 정렬로 허전한 느낌이 들지 않도록 디자인했습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-mg4.png" class="main-block-img">
             </div>
 
@@ -143,7 +143,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

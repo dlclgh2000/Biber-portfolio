@@ -45,10 +45,10 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm-admin1.png" class="main-block-img">
             </div>
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     지쉐어몰 장터관리자 어드민 페이지 디자인
                 </p>
@@ -94,11 +94,11 @@
 
                 </div>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm-admin2.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     직관적이고 익숙한 UX
                 </p>
@@ -106,7 +106,7 @@
                     일반 사용자에겐 생소한 기능이 많으며 어드민 특성상 자주 접속하는 페이지가 아니기에 직관적이면서 익숙한한 경험을 제공하기 위해 고민을 했습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm-admin3.png" class="main-block-img">
             </div>
 
@@ -131,7 +131,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

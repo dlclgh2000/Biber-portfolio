@@ -45,11 +45,11 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <!-- 메인 오버뷰 이미지 -->
                 <img src="img/detail-podo-retention1.png" class="main-block-img">
             </div>
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     Podo 수강권 연장 유도
                 </p>
@@ -127,12 +127,12 @@
 
                 </div>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-podo-retention2.png" class="main-block-img">
            </div>
 
             <!-- 1. The Challenge -->
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     유입은 비싸고, 이탈은 쉽다
                 </p>
@@ -146,12 +146,12 @@
                 </p>
             </div>
 
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-podo-retention3.png" class="main-block-img">
             </div>
 
             <!-- 2. Strategy: Recap -->
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     학습 리캡으로 '내가 이만큼 했구나' 체감시키기
                 </p>
@@ -162,7 +162,7 @@
                 </p>
             </div>
 
-            <div style="display: flex; width: 100%; margin-bottom: 60px;">
+            <div style="display: flex; width: 100%; margin-bottom: 60px;" data-aos="fade-up">
                 <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
                     <video src="video/video-podo-retention1.mp4" style="width: 100%; border-radius: 12px;" loop muted playsinline
                     autoplay></video>
@@ -175,7 +175,7 @@
             </div>
 
             <!-- 3. Strategy: Differential Discount -->
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     수업 횟수에 따른 차등 할인 설계
                 </p>
@@ -189,12 +189,12 @@
                 </p>
             </div>
 
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-podo-retention4.png" class="main-block-img">
             </div>
 
             <!-- 4. Design Details -->
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     전환을 위한 UX 디테일
                 </p>
@@ -205,7 +205,7 @@
                 </p>
             </div>
 
-            <div style="display: flex; width: 100%; margin-bottom: 60px;">
+            <div style="display: flex; width: 100%; margin-bottom: 60px;" data-aos="fade-up">
                 <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
                     <img src="img/detail-podo-retention5.png" class="main-block-img">
                 </div>
@@ -215,7 +215,7 @@
             </div>
 
             <!-- 5. Impact -->
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     이탈을 연장으로 바꾼 설계
                 </p>
@@ -226,7 +226,7 @@
                 </p>
             </div>
 
-            <div style="display: flex; width: 100%; margin-bottom: 60px;">
+            <div style="display: flex; width: 100%; margin-bottom: 60px;" data-aos="fade-up">
                 <div style="flex: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
                     <img src="img/detail-podo-retention7.png" class="main-block-img">
                 </div>
@@ -254,7 +254,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

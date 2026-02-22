@@ -45,10 +45,10 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-cloudgram1.png" class="main-block-img">
             </div>
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     클라우드그램 웹 디자인 / 퍼블리싱
                 </p>
@@ -94,11 +94,11 @@
 
                 </div>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-cloudgram2.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     접속환경에 따라 최적화되는 반응형 웹디자인
                 </p>
@@ -112,7 +112,7 @@
             <div class="main-block" style="margin-bottom: 8px;">
                 <img src="img/detail-cloudgram4.png" class="main-block-img">
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-cloudgram5.png" class="main-block-img">
             </div>
 
@@ -137,7 +137,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

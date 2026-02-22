@@ -45,10 +45,10 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm1.png" class="main-block-img">
             </div>
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     지쉐어몰 디자인 / 기획
                 </p>
@@ -94,11 +94,11 @@
 
                 </div>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm2.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     Wireframe
                 </p>
@@ -106,11 +106,11 @@
                     최소 모바일 해상도를 고려해 Width 360px 기준으로 제작되었습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm3.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     Color
                 </p>
@@ -118,11 +118,11 @@
                     메인 컬러와 서브 컬러, 그레이스케일 컬러를 사용했습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm4.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     Icon
                 </p>
@@ -130,11 +130,11 @@
                     의류, 가전기기, 유아용품 등을 포함한 총 14개의 카테고리를 가지고 있으며 각각 카테고리를 대표할 수 있는 이미지를 선정했습니다. 일정하게 굵은 라인과 밝은 컬러를 활용한 아이콘 디자인으로 젊고 트랜디한 앱 디자인의 느낌을 살렸습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm5.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     회원가입
                 </p>
@@ -145,11 +145,11 @@
             <div class="main-block" style="margin-bottom: 8px;">
                 <img src="img/detail-gm6.png" class="main-block-img">
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm7.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     상품등록
                 </p>
@@ -157,11 +157,11 @@
                     상품등록 시 사진, 상품명, 가격 외에도 기부금, 거래지 등 입력해야 할 정보가 많으므로 디폴트 값을 설정해둠으로서 유저에게 선택사항으로 맡기어 상품등록에 대한 부담과 시간소요를 최소화했습니다.
                 </p>
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm8.png" class="main-block-img">
             </div>
 
-            <div class="project-intro">
+            <div class="project-intro" data-aos="fade-up">
                 <p class="project-intro-title">
                     그룹장터
                 </p>
@@ -172,7 +172,7 @@
             <div class="main-block" style="margin-bottom: 8px;">
                 <img src="img/detail-gm9.png" class="main-block-img">
             </div>
-            <div class="main-block" style="margin-bottom: 60px;">
+            <div class="main-block" style="margin-bottom: 60px;" data-aos="fade-up">
                 <img src="img/detail-gm10.png" class="main-block-img">
             </div>
 
@@ -197,7 +197,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

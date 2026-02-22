@@ -24,6 +24,13 @@
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     <!-- AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        @media (max-width: 991px) {
+            .about-info-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .about-career-grid { grid-template-columns: 1fr !important; }
+            .about-tool-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+    </style>
 
 </head>
 
@@ -45,23 +52,165 @@
         </div>
         <!-- Contents-->
         <div class="contents-place">
-            <div style="display: flex; width: 100%; margin-bottom: 8px;">
-                <div style="flex-grow: 2; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
-                    <img src="img/detail-about1.png" style="width: 100%; border-radius: 12px;">
+
+            <!-- Info -->
+            <div class="project-intro" style="margin-top: 20px;" data-aos="fade-up">
+                <p class="project-intro-title">Info</p>
+                <p class="project-intro-text">안녕하세요, 이치호입니다.</p>
+            </div>
+            <div style="background-color: #f6f6f8; border-radius: 16px; padding: 40px; margin: 0 4px 40px 4px;" data-aos="fade-up">
+                <div class="about-info-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; row-gap: 32px;">
+                    <div>
+                        <p style="font-size: 13px; font-weight: 700; color: #222; margin: 0 0 8px 0;">Name</p>
+                        <p style="font-size: 15px; font-weight: 400; color: #222; margin: 0;">Chiho Lee</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 13px; font-weight: 700; color: #222; margin: 0 0 8px 0;">Birth date</p>
+                        <p style="font-size: 15px; font-weight: 400; color: #222; margin: 0;">1992. 01. 29</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 13px; font-weight: 700; color: #222; margin: 0 0 8px 0;">Education</p>
+                        <p style="font-size: 15px; font-weight: 400; color: #222; margin: 0;">Inje University</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 13px; font-weight: 700; color: #222; margin: 0 0 8px 0;">Phone</p>
+                        <p style="font-size: 15px; font-weight: 400; color: #222; margin: 0;">010-2646-5941</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 13px; font-weight: 700; color: #222; margin: 0 0 8px 0;">E-mail</p>
+                        <p style="font-size: 15px; font-weight: 400; color: #222; margin: 0;">dlclgh2000@naver.com</p>
+                    </div>
                 </div>
-                <div style="flex-grow: 1; padding-left: 4px; padding-right: 4px; border-radius: 12px;">
-                    <img src="img/detail-about2.png" style="width: 100%; border-radius: 12px;">
-                </div>
-                
             </div>
 
-            <div style="display: block; padding-left: 4px; padding-right: 4px;">
-                <img src="img/detail-about3.png" style="width: 100%; border-radius: 12px;">
+            <!-- Career -->
+            <div class="project-intro" data-aos="fade-up">
+                <p class="project-intro-title">Career</p>
+                <p class="project-intro-text">지금까지 걸어온 길</p>
+            </div>
+            <div class="about-career-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 4px 40px 4px;" data-aos="fade-up">
+                <!-- Day1Company -->
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 32px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <img src="img/logo-day1company.png" style="height: 52px;">
+                        <span style="font-size: 13px; font-weight: 400; color: #999;">2024. 04 ~</span>
+                    </div>
+                    <p style="font-size: 14px; font-weight: 400; color: #555; line-height: 26px; margin: 0;">
+                        Podo Application<br>
+                        Podo Podolingo<br>
+                        Podo AI Lesson Report<br>
+                        Podo Lemon Board<br>
+                        MyLight Application
+                    </p>
+                </div>
+                <!-- LUNASOFT -->
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 32px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <img src="img/logo-lunasoft.png" style="height: 52px;">
+                        <span style="font-size: 13px; font-weight: 400; color: #999;">2022. 01 ~ 2024. 03</span>
+                    </div>
+                    <p style="font-size: 14px; font-weight: 400; color: #555; line-height: 26px; margin: 0;">
+                        Cellook Application<br>
+                        Cellook Service Introduction Video<br>
+                        Gambyeol Market Application<br>
+                        Green&amp;Grey Homepage
+                    </p>
+                </div>
+                <!-- GShare -->
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 32px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <img src="img/logo-gshare-1.png" style="height: 52px;">
+                        <span style="font-size: 13px; font-weight: 400; color: #999;">2019. 06 ~ 2021. 08</span>
+                    </div>
+                    <p style="font-size: 14px; font-weight: 400; color: #555; line-height: 26px; margin: 0;">
+                        Gsharemall Application<br>
+                        Gshare Homepage<br>
+                        Megazone Cloudgram Homepage<br>
+                        Kicpa Application
+                    </p>
+                </div>
+                <!-- PANO² -->
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 32px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <img src="img/logo-gshare.png" style="height: 52px;">
+                        <span style="font-size: 13px; font-weight: 400; color: #999;">2018. 06 ~ 2019. 02</span>
+                    </div>
+                    <p style="font-size: 14px; font-weight: 400; color: #555; line-height: 26px; margin: 0;">
+                        Pangpang User Admin<br>
+                        Makergames Homepage<br>
+                        Re:Load Solution
+                    </p>
+                </div>
+                <!-- oTvHub -->
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 32px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <img src="img/logo-fitcollabo.png" style="height: 52px;">
+                        <span style="font-size: 13px; font-weight: 400; color: #999;">2017. 02 ~ 2018. 03</span>
+                    </div>
+                    <p style="font-size: 14px; font-weight: 400; color: #555; line-height: 26px; margin: 0;">
+                        Home Shopping Now<br>
+                        TV Payment System
+                    </p>
+                </div>
             </div>
 
-            
-
-
+            <!-- Tool -->
+            <div class="project-intro" data-aos="fade-up">
+                <p class="project-intro-title">Tool</p>
+                <p class="project-intro-text">작업에 자주 활용합니다.</p>
+            </div>
+            <div class="about-tool-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 4px 60px 4px;" data-aos="fade-up">
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-figma.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Figma</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Product Design</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/cursor 1.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Cursor</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">AI Development</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/G5mjgmgacAEpjod 1.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Claude Code</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">AI Development</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/React-icon.svg 1.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">React</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Web Publishing</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-html.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Html5</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Web Publishing</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-css.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Css</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Web Publishing</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-lottie.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Lottiefiles</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Product Design</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-photoshop.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Photoshop</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Graphic Design</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-illustrator.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">Illustrator</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Graphic Design</p>
+                </div>
+                <div style="background-color: #f6f6f8; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <img src="img/icon-after-effect.png" style="width: 64px; height: 64px; object-fit: contain;">
+                    <p style="font-size: 15px; font-weight: 700; color: #222; margin: 4px 0 0 0;">After Effect</p>
+                    <p style="font-size: 13px; font-weight: 400; color: #999; margin: 0;">Motion Graphic</p>
+                </div>
+            </div>
 
         </div>
 
@@ -81,7 +230,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 800,
+            offset: 80,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
     </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

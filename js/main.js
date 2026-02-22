@@ -41,76 +41,73 @@ $(document).on('click', function(e) {
     }
 });
 
-// 반응형 Masonry 레이아웃 (모바일 순서 최적화)
+// 반응형 Masonry 레이아웃 (데스크탑 3열, 태블릿 2열, 모바일 1열)
 $(document).ready(function() {
     const $container = $('.flex-masonry');
     if ($container.length === 0) return;
 
-    // 아이템들을 캐싱해둠 (초기 로드 시점의 아이템들)
-    // data-order가 없으면 인덱스로 할당
     let $items = $container.find('.portfolio-item');
-    if ($items.length === 0) {
-        // 만약 portfolio-item 클래스가 아직 없다면 (기존 HTML 구조일 경우 대비 - 하지만 HTML도 같이 바꿀 것이므로 괜찮음)
-        return;
+    if ($items.length === 0) return;
+
+    function getMode() {
+        var w = window.innerWidth;
+        if (w >= 992) return 'desktop';
+        if (w >= 561) return 'tablet';
+        return 'mobile';
     }
 
-    let isDesktop = window.innerWidth >= 960;
-    
-    // 초기 로드시 실행
+    var currentMode = getMode();
+
     layout();
 
     $(window).on('resize', function() {
-        const newIsDesktop = window.innerWidth >= 960;
-        if (newIsDesktop !== isDesktop) {
-            isDesktop = newIsDesktop;
+        var newMode = getMode();
+        if (newMode !== currentMode) {
+            currentMode = newMode;
             layout();
         }
     });
 
+    function getItems() {
+        var items = [];
+        $container.find('.portfolio-item').each(function() {
+            items.push($(this));
+        });
+        items.sort(function(a, b) {
+            return $(a).data('order') - $(b).data('order');
+        });
+        return items;
+    }
+
     function layout() {
-        if (isDesktop) {
-            // PC: 3컬럼으로 분배
-            if ($container.find('.masonry-col').length > 0) return; // 이미 분배됨
+        var items = getItems();
 
-            const col1 = $('<div class="masonry-col" style="flex:1;"></div>');
-            const col2 = $('<div class="masonry-col" style="flex:1;"></div>');
-            const col3 = $('<div class="masonry-col" style="flex:1;"></div>');
+        if (currentMode === 'desktop') {
+            var col1 = $('<div class="masonry-col" style="flex:1;"></div>');
+            var col2 = $('<div class="masonry-col" style="flex:1;"></div>');
+            var col3 = $('<div class="masonry-col" style="flex:1;"></div>');
 
-            // 현재 컨테이너에 있는 아이템들을 모두 가져와서 정렬
-            const currentItems = [];
-            $container.find('.portfolio-item').each(function() {
-                currentItems.push($(this));
-            });
-            
-            // data-order 기준으로 정렬
-            currentItems.sort(function(a, b) {
-                return $(a).data('order') - $(b).data('order');
-            });
-
-            currentItems.forEach(function($item, index) {
-                const remainder = index % 3;
-                if (remainder === 0) col1.append($item);
-                else if (remainder === 1) col2.append($item);
+            items.forEach(function($item, index) {
+                var r = index % 3;
+                if (r === 0) col1.append($item);
+                else if (r === 1) col2.append($item);
                 else col3.append($item);
             });
 
             $container.empty().append(col1, col2, col3);
+        } else if (currentMode === 'tablet') {
+            var col1 = $('<div class="masonry-col" style="flex:1;"></div>');
+            var col2 = $('<div class="masonry-col" style="flex:1;"></div>');
+
+            items.forEach(function($item, index) {
+                if (index % 2 === 0) col1.append($item);
+                else col2.append($item);
+            });
+
+            $container.empty().append(col1, col2);
         } else {
-            // Mobile: 1컬럼으로 병합 (순서대로)
-            if ($container.find('.masonry-col').length === 0) return; // 이미 1컬럼임
-
-            const currentItems = [];
-            $container.find('.portfolio-item').each(function() {
-                currentItems.push($(this));
-            });
-
-            // data-order 기준으로 정렬
-            currentItems.sort(function(a, b) {
-                return $(a).data('order') - $(b).data('order');
-            });
-
             $container.empty();
-            currentItems.forEach(function($item) {
+            items.forEach(function($item) {
                 $container.append($item);
             });
         }

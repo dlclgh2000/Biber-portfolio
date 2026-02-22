@@ -685,6 +685,23 @@ a:active {
     }
 }
 
+@media (max-width: 991px) and (min-width: 561px) {
+    .flex-masonry {
+        display: flex !important;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 560px) {
+    .flex-masonry {
+        display: flex;
+        flex-direction: column;
+    }
+    .swiper-slide img {
+        height: 280px !important;
+    }
+}
+
 @media (min-width: 768px) {
     .portfolio-mt {
         margin-top: 0;
