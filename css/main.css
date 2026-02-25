@@ -697,6 +697,9 @@ a:active {
         display: flex;
         flex-direction: column;
     }
+    .masonry-col {
+        display: contents;
+    }
     .swiper-slide img {
         height: 280px !important;
     }
