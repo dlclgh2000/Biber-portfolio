@@ -488,6 +488,52 @@ a:active {
     border-radius: 12px;
 }
 
+.dark-highlight-section {
+    margin: 0 4px 60px;
+}
+
+.dark-highlight-grid {
+    display: flex;
+    gap: 8px;
+}
+
+.dark-highlight-item {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 12px;
+    padding: 48px 36px;
+}
+
+.dark-highlight-tag {
+    font-size: 15px;
+    font-weight: 700;
+    color: #C8FF00;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.dark-highlight-desc {
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 26px;
+    letter-spacing: -0.4px;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .dark-highlight-section {
+        margin: 0 0 60px;
+    }
+    .dark-highlight-grid {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .dark-highlight-item {
+        padding: 32px 24px;
+    }
+}
+
 .main-block {
     width: 100%;
     display: block;
