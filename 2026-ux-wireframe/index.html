@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Sendbird delight.ai Prototype</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
+                    },
+                    colors: {
+                        sb: {
+                            base: '#fafafa',       // zinc-50 (muted background)
+                            surface: '#ffffff',    // white (cards)
+                            border: '#e4e4e7',     // zinc-200
+                            primary: '#18181b',    // zinc-900 (shadcn default primary = near black)
+                            primaryDark: '#09090b', // zinc-950
+                            text: '#09090b',       // zinc-950 (foreground)
+                            muted: '#71717a',      // zinc-500 (muted-foreground)
+                            hover: '#f4f4f5',      // zinc-100 (accent)
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .skeleton-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .dropdown-enter { animation: dropdownEnter 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes dropdownEnter { from { opacity: 0; transform: translateY(-5px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .modal-enter { animation: modalEnter 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes modalEnter { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body class="bg-sb-base text-sb-text font-sans antialiased h-screen flex flex-col overflow-hidden" onclick="closeAllDropdowns(event)">
+
+<script>
+const state = {
+    view: 'lobby',
+    previousView: null,
+    organization: 'Sendbird Inc.',
+    workspaces: [
+        { id: 'ws-a', name: 'Workspace A', agents: [
+            {id: 'ag-4', name: 'Sales Bot', time: '10m ago', envStatus: {dev: 'v1.4.0', staging: 'v1.3.2', production: 'v1.3.0'}},
+            {id: 'ag-1', name: 'AI Agent 1', time: '2h ago', envStatus: {dev: 'v0.9.1', staging: 'v0.9.0', production: null}},
+            {id: 'ag-7', name: 'Marketing Bot', time: '1d ago', envStatus: {dev: 'v2.0.0', staging: 'v2.0.0', production: 'v1.9.8'}},
+            {id: 'ag-2', name: 'AI Agent 2', time: '3d ago', envStatus: {dev: 'v1.0.0', staging: null, production: null}},
+            {id: 'ag-3', name: 'AI Agent 3', time: '1w ago', envStatus: {dev: 'v1.1.0', staging: 'v1.1.0', production: 'v1.1.0'}},
+            {id: 'ag-5', name: 'Support Bot', time: '1w ago', envStatus: {dev: 'v3.2.0', staging: 'v3.2.0', production: 'v3.2.0'}},
+            {id: 'ag-6', name: 'HR Bot', time: '2w ago', envStatus: {dev: 'v1.0.1', staging: 'v1.0.0', production: 'v1.0.0'}}
+        ] },
+        { id: 'ws-b', name: 'Workspace B', agents: [
+            {id: 'ag-b1', name: 'Global CS Bot', time: '5m ago', envStatus: {dev: 'v2.1.0', staging: 'v2.0.5', production: 'v2.0.0'}},
+            {id: 'ag-b2', name: 'Billing Bot', time: '1h ago', envStatus: {dev: 'v1.0.0', staging: null, production: null}}
+        ] },
+        { id: 'ws-c', name: 'Workspace C', agents: [
+            {id: 'ag-c1', name: 'Internal Wiki Bot', time: 'Just now', envStatus: {dev: 'v0.1.0', staging: null, production: null}}
+        ] },
+        { id: 'ws-d', name: 'Workspace D', agents: [] },
+        { id: 'ws-e', name: 'Workspace E', agents: [] },
+    ],
+    currentWorkspaceId: null,
+    currentAgentId: null,
+    currentEnv: 'development',
+    currentMenu: 'overview',
+    orgSettingsMenu: 'general',
+    wsSettingsMenu: 'general',
+    modal: null,
+    isWorkspaceDropdownOpen: false,
+    isAgentMenuOpen: false
+};
+
+const menus = [
+    { id: 'overview', label: 'Overview', icon: 'ph-squares-four' },
+    { id: 'build', label: 'Build', icon: 'ph-hammer' },
+    { id: 'test', label: 'Test', icon: 'ph-chat-circle-dots' },
+    { id: 'evaluate', label: 'Evaluate', icon: 'ph-chart-line-up' }
+];
+
+const environments = {
+    'development': { id: 'development', label: 'Dev', icon: 'ph-code', nextLabel: 'Staging', badgeColor: 'bg-white text-slate-800 border-slate-200' },
+    'staging': { id: 'staging', label: 'Staging', icon: 'ph-flask', nextLabel: 'Prod', badgeColor: 'bg-amber-50 text-amber-800 border-amber-200' },
+    'production': { id: 'production', label: 'Prod', icon: 'ph-rocket-launch', nextLabel: null, badgeColor: 'bg-green-50 text-green-700 border-green-200 shadow-sm' }
+};
+
+const orgSettingsMenus = [
+    { id: 'general', label: 'General', icon: 'ph-buildings', section: 'organization', desc: '조직 이름, 구독 플랜, 보안 컴플라이언스 등 기본 설정' },
+    { id: 'members', label: 'Members', icon: 'ph-users', section: 'organization', desc: '팀 멤버 관리, 초대, 권한 부여' },
+    { id: 'roles', label: 'Roles', icon: 'ph-shield-check', section: 'organization', desc: '역할 기반 접근 제어(RBAC) 설정' },
+    { id: 'security', label: 'Security', icon: 'ph-lock-key', section: 'organization', desc: '2FA 강제, 로그인 IP 제한, SAML SSO, Support 접근 설정' },
+    { id: 'billing', label: 'Billing', icon: 'ph-credit-card', section: 'organization', desc: '구독 및 결제 관리' },
+    { id: 'profile', label: 'Profile', icon: 'ph-user-circle', section: 'account', desc: '로그인한 멤버의 개인정보 관리' }
+];
+
+const wsSettingsMenus = [
+    { id: 'general', label: 'General', icon: 'ph-gear', desc: '워크스페이스 기본 설정' },
+    { id: 'users', label: 'Users', icon: 'ph-users-three', desc: '사용자 계정 및 권한 관리' },
+    { id: 'shared-assets', label: 'Shared Assets', icon: 'ph-stack', desc: '여러 에이전트가 공유하는 자산 모음' },
+    { id: 'integrations', label: 'Integrations', icon: 'ph-plugs', desc: '외부 서비스 연동' },
+    { id: 'channels', label: 'Channels', icon: 'ph-chats-circle', desc: '채널 공통 설정' }
+];
+
+function closeAllDropdowns(e) {
+    if (!e.target.closest('#workspace-selector-container')) {
+        state.isWorkspaceDropdownOpen = false;
+        const dd = document.getElementById('workspace-dropdown');
+        if (dd) dd.classList.add('hidden');
+    }
+    if (!e.target.closest('#agent-menu-container')) {
+        state.isAgentMenuOpen = false;
+        const adm = document.getElementById('agent-menu-dropdown');
+        if (adm) adm.classList.add('hidden');
+    }
+}
+</script>
+
+<!-- GNB -->
+<header class="h-14 border-b border-sb-border bg-sb-surface flex items-center justify-between px-6 shrink-0 z-50 relative shadow-sm">
+    <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2 cursor-pointer group" onclick="goToLobby()">
+            <img src="logo.png" alt="delight.ai" class="w-7 h-7 group-hover:scale-110 transition-transform">
+            <span class="font-bold text-lg tracking-tight text-sb-text">delight.ai</span>
+        </div>
+        <div class="h-4 w-px bg-sb-border"></div>
+        <span class="text-sm font-semibold text-sb-text">Sendbird Inc.</span>
+    </div>
+    <div class="flex items-center gap-4">
+        <button onclick="openOrgSettings()" class="text-sb-muted hover:text-sb-text transition-colors p-1.5 rounded-md hover:bg-sb-hover" title="Organization Settings">
+            <i class="ph ph-gear text-xl"></i>
+        </button>
+        <div onclick="openOrgSettingsAt('profile')" class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 cursor-pointer border border-sb-border ml-2 flex items-center justify-center text-white text-xs font-bold" title="치호">치호</div>
+    </div>
+</header>
+
+<!-- Main container -->
+<div class="flex-1 flex overflow-hidden relative">
+
+    <!-- VIEW: LOBBY -->
+    <div id="view-lobby" class="flex-1 flex flex-col items-center p-12 bg-sb-base overflow-y-auto w-full z-40 absolute inset-0">
+        <div class="max-w-5xl w-full">
+            <div class="mb-8 flex items-end justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2 tracking-tight text-sb-text">Workspaces</h1>
+                    <p class="text-sb-muted">작업을 시작할 워크스페이스를 선택하거나 새로 생성하세요.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openModal('add-agent')" class="inline-flex items-center gap-2 bg-white border border-sb-border text-sb-text font-semibold rounded-md px-4 py-2 hover:bg-sb-hover transition-colors text-sm">
+                        <i class="ph ph-plus"></i> New Agent
+                    </button>
+                    <button onclick="openModal('add-workspace')" class="inline-flex items-center gap-2 bg-sb-primary text-white font-semibold rounded-md px-4 py-2 hover:bg-sb-primary/90 transition-colors text-sm">
+                        <i class="ph ph-plus"></i> New Workspace
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="lobby-workspaces"></div>
+        </div>
+    </div>
+
+    <!-- VIEW: DASHBOARD SHELL (Sidebar + Main) -->
+    <div id="view-dashboard" class="flex-1 flex h-full hidden w-full">
+        <aside class="w-64 border-r border-sb-border bg-sb-surface flex flex-col shrink-0 z-20 shadow-[2px_0_10px_rgba(0,0,0,0.02)] relative">
+            <div class="px-3 pt-3 pb-1 relative" id="workspace-selector-container">
+                <button onclick="toggleWorkspaceDropdown(event)" class="w-full flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-sb-hover transition-colors">
+                    <div id="ws-avatar" class="w-7 h-7 rounded-md bg-sb-primary text-white text-xs font-bold flex items-center justify-center shrink-0">W</div>
+                    <span id="current-ws-name" class="text-sm font-bold text-sb-text flex-1 truncate text-left">Workspace</span>
+                    <i class="ph ph-caret-down text-sb-muted text-sm shrink-0"></i>
+                </button>
+                <div id="workspace-dropdown" class="hidden absolute top-full left-3 right-3 mt-1 bg-sb-surface border border-sb-border rounded-lg shadow-lg z-50 overflow-hidden">
+                    <div class="max-h-60 overflow-y-auto p-1" id="workspace-dropdown-list"></div>
+                    <div class="p-1 border-t border-sb-border bg-sb-base/50">
+                        <button onclick="openModal('add-workspace')" class="w-full flex items-center gap-2 text-sm font-semibold text-sb-text px-3 py-2 rounded-md hover:bg-sb-hover hover:text-sb-primaryDark transition-colors">
+                            <i class="ph ph-plus text-sb-muted"></i> Create Workspace
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-2 pt-1 pb-2">
+                <button id="all-agents-btn" onclick="goToWorkspaceHub()" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-sb-muted hover:bg-sb-hover hover:text-sb-text">
+                    <i class="ph ph-squares-four text-lg shrink-0"></i>
+                    <span class="truncate flex-1 text-left">All Agents</span>
+                    <span id="all-agents-count" class="text-[10px] font-semibold shrink-0 text-slate-400">0</span>
+                </button>
+            </div>
+
+            <div class="mx-3 border-t border-sb-border"></div>
+
+            <div class="flex-1 overflow-y-auto pt-3 pb-3">
+                <div class="px-5 mb-1.5">
+                    <label class="text-[11px] font-bold text-sb-muted uppercase tracking-wider">Agents</label>
+                </div>
+                <ul id="agent-nav-list" class="space-y-0.5 px-2"></ul>
+            </div>
+
+            <div class="px-3 py-3 border-t border-sb-border bg-sb-surface z-10">
+                <button onclick="openWsSettings()" class="flex items-center gap-2 text-sm text-sb-muted hover:text-sb-text w-full px-3 py-2 rounded-md hover:bg-sb-hover transition-colors font-medium">
+                    <i class="ph ph-sliders-horizontal text-lg"></i> Workspace Settings
+                </button>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col bg-sb-base overflow-hidden relative z-10" id="main-area"></main>
+    </div>
+
+    <!-- VIEW: ORG SETTINGS (full-screen overlay) -->
+    <div id="view-org-settings" class="hidden absolute inset-0 bg-sb-base z-40 flex flex-col">
+        <div class="border-b border-sb-border bg-sb-surface px-6 py-3 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="closeSettings()" class="flex items-center gap-1.5 text-sb-muted hover:text-sb-text text-sm font-medium px-2 py-1 rounded-md hover:bg-sb-hover transition-colors">
+                    <i class="ph ph-arrow-left"></i> Back
+                </button>
+                <div class="h-4 w-px bg-sb-border"></div>
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-sb-text">Organization Settings</span>
+                    <span class="text-sb-muted text-sm">· Sendbird Inc.</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 flex overflow-hidden">
+            <aside class="w-64 border-r border-sb-border bg-sb-surface p-4 overflow-y-auto">
+                <div id="org-settings-menu-list"></div>
+            </aside>
+            <div class="flex-1 overflow-y-auto p-8" id="org-settings-content"></div>
+        </div>
+    </div>
+
+    <!-- VIEW: WS SETTINGS (full-screen overlay) -->
+    <div id="view-ws-settings" class="hidden absolute inset-0 bg-sb-base z-40 flex flex-col">
+        <div class="border-b border-sb-border bg-sb-surface px-6 py-3 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="closeSettings()" class="flex items-center gap-1.5 text-sb-muted hover:text-sb-text text-sm font-medium px-2 py-1 rounded-md hover:bg-sb-hover transition-colors">
+                    <i class="ph ph-arrow-left"></i> Back
+                </button>
+                <div class="h-4 w-px bg-sb-border"></div>
+                <div class="flex items-center gap-2">
+                    <div id="ws-settings-avatar" class="w-5 h-5 rounded bg-sb-primary text-white text-[9px] font-bold flex items-center justify-center">W</div>
+                    <span class="font-bold text-sb-text">Workspace Settings</span>
+                    <span class="text-sb-muted text-sm" id="ws-settings-title">· Workspace</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 flex overflow-hidden">
+            <aside class="w-64 border-r border-sb-border bg-sb-surface p-4 overflow-y-auto">
+                <label class="text-[11px] font-bold text-sb-muted uppercase tracking-wider mb-3 block px-2">Settings</label>
+                <ul class="space-y-1" id="ws-settings-menu-list"></ul>
+            </aside>
+            <div class="flex-1 overflow-y-auto p-8" id="ws-settings-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal backdrop -->
+<div id="modal-backdrop" class="hidden fixed inset-0 bg-slate-900/40 z-[60] flex items-center justify-center p-4" onclick="closeModalFromBackdrop(event)">
+    <div id="modal-card" class="bg-sb-surface rounded-lg shadow-2xl border border-sb-border w-full max-w-md modal-enter" onclick="event.stopPropagation()"></div>
+</div>
+
+<script>
+function init() { renderLobby(); updateView(); }
+
+function goToLobby() {
+    state.view = 'lobby';
+    state.currentWorkspaceId = null;
+    state.currentAgentId = null;
+    updateView();
+}
+
+function goToWorkspaceHub(wsId) {
+    if (wsId) state.currentWorkspaceId = wsId;
+    state.view = 'workspace-hub';
+    state.currentAgentId = null;
+    updateView();
+}
+
+function enterWorkspace(wsId) { goToWorkspaceHub(wsId); }
+
+function enterAgentDirectly(wsId, agentId) {
+    state.currentWorkspaceId = wsId;
+    state.currentAgentId = agentId;
+    state.view = 'agent-dashboard';
+    updateView();
+}
+
+function openOrgSettings() {
+    state.previousView = state.view;
+    state.view = 'org-settings';
+    updateView();
+}
+
+function openOrgSettingsAt(menuId) {
+    state.orgSettingsMenu = menuId;
+    openOrgSettings();
+}
+
+function openWsSettings() {
+    if (!state.currentWorkspaceId) {
+        state.currentWorkspaceId = state.workspaces[0].id;
+    }
+    state.previousView = state.view;
+    state.view = 'ws-settings';
+    updateView();
+}
+
+function openWsSettingsAt(menuId) {
+    state.wsSettingsMenu = menuId;
+    openWsSettings();
+}
+
+function closeSettings() {
+    state.view = state.previousView || (state.currentWorkspaceId ? 'workspace-hub' : 'lobby');
+    state.previousView = null;
+    updateView();
+}
+
+function updateView() {
+    const lobby = document.getElementById('view-lobby');
+    const dashboard = document.getElementById('view-dashboard');
+    const orgSettings = document.getElementById('view-org-settings');
+    const wsSettings = document.getElementById('view-ws-settings');
+
+    lobby.classList.add('hidden');
+    dashboard.classList.add('hidden');
+    orgSettings.classList.add('hidden');
+    wsSettings.classList.add('hidden');
+
+    if (state.view === 'lobby') {
+        lobby.classList.remove('hidden');
+    } else if (state.view === 'org-settings') {
+        orgSettings.classList.remove('hidden');
+        renderOrgSettings();
+    } else if (state.view === 'ws-settings') {
+        wsSettings.classList.remove('hidden');
+        renderWsSettings();
+    } else {
+        dashboard.classList.remove('hidden');
+        renderDashboard();
+    }
+}
+
+function renderLobby() {
+    const container = document.getElementById('lobby-workspaces');
+    container.innerHTML = state.workspaces.map(ws => {
+        const MAX = 3;
+        const display = ws.agents.slice(0, MAX);
+        const hidden = ws.agents.length - MAX;
+        return `
+        <div class="bg-sb-surface border border-sb-border rounded-lg p-0 hover:border-sb-muted/40 transition-colors flex flex-col overflow-hidden h-[250px]">
+            <div onclick="enterWorkspace('${ws.id}')" class="p-5 border-b border-sb-border bg-sb-base cursor-pointer group flex items-center justify-between shrink-0">
+                <div>
+                    <h3 class="text-lg font-bold text-sb-text group-hover:text-sb-primaryDark transition-colors flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-md bg-sb-primary text-white text-xs font-bold flex items-center justify-center shrink-0">${ws.name.charAt(0).toUpperCase()}</div>
+                        ${ws.name}
+                    </h3>
+                    <p class="text-xs text-sb-muted mt-1 font-medium pl-9">${ws.agents.length} Agents</p>
+                </div>
+                <div class="w-8 h-8 rounded bg-sb-surface border border-sb-border flex items-center justify-center text-sb-muted group-hover:text-sb-primaryDark group-hover:border-sb-primary/30 transition-all">
+                    <i class="ph ph-arrow-right"></i>
+                </div>
+            </div>
+            <div class="p-3 flex-1 bg-sb-surface flex flex-col">
+                ${ws.agents.length === 0 ? `
+                    <div class="flex-1 flex flex-col items-center justify-center text-center py-6 text-sb-muted">
+                        <i class="ph ph-robot text-3xl text-slate-300 mb-2"></i>
+                        <div class="text-xs font-medium">No agents yet</div>
+                    </div>
+                ` : `
+                    <ul class="space-y-1 flex-1">
+                        ${display.map(a => `
+                            <li>
+                                <button onclick="event.stopPropagation(); enterAgentDirectly('${ws.id}', '${a.id}')" class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-sb-text hover:bg-sb-hover hover:text-sb-primaryDark transition-colors flex items-center gap-3 border border-transparent hover:border-sb-border group">
+                                    <div class="relative shrink-0">
+                                        <div class="w-6 h-6 rounded bg-sb-hover flex items-center justify-center text-sb-muted"><i class="ph-fill ph-robot text-base"></i></div>
+                                        <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getAgentStage(a).dotColor} ring-2 ring-sb-surface"></span>
+                                    </div>
+                                    <span class="truncate flex-1">${a.name}</span>
+                                    <span class="text-[11px] text-slate-400 font-normal group-hover:text-sb-primary transition-colors">${a.time}</span>
+                                </button>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `}
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function renderDashboard() {
+    if (!state.currentWorkspaceId) return;
+    renderWorkspaceDropdown();
+    renderSidebar();
+    renderMainArea();
+}
+
+function renderMainArea() {
+    const mainArea = document.getElementById('main-area');
+    if (state.view === 'workspace-hub') {
+        mainArea.innerHTML = buildWorkspaceHubHTML();
+    } else if (state.view === 'agent-dashboard') {
+        mainArea.innerHTML = buildAgentDashboardShellHTML();
+        renderMainHeader();
+        renderContent();
+    }
+}
+
+function buildWorkspaceHubHTML() {
+    const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    if (!ws) return '';
+
+    const agentCards = ws.agents.map(a => {
+        const stage = getAgentStage(a);
+        return `
+        <button onclick="enterAgentDirectly('${ws.id}', '${a.id}')" class="text-left bg-sb-surface border border-sb-border rounded-lg p-4 hover:border-sb-muted/40 transition-colors group">
+            <div class="flex items-start justify-between mb-3">
+                <div class="w-10 h-10 rounded-lg bg-sb-hover flex items-center justify-center text-sb-muted">
+                    <i class="ph-fill ph-robot text-xl"></i>
+                </div>
+                <span class="inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${stage.classes}">
+                    <span class="w-1.5 h-1.5 rounded-full ${stage.dotColor}"></span>
+                    ${stage.label}
+                </span>
+            </div>
+            <div class="font-bold text-sb-text mb-1 truncate group-hover:text-sb-primaryDark">${a.name}</div>
+            <div class="text-xs text-sb-muted">Edited ${a.time}</div>
+        </button>`;
+    }).join('');
+
+    return `
+    <div class="flex-1 overflow-y-auto">
+        <div class="bg-sb-surface border-b border-sb-border px-8 py-8">
+            <div class="max-w-6xl flex items-center gap-5">
+                <div class="w-16 h-16 rounded-lg bg-sb-primary flex items-center justify-center text-white text-3xl font-bold shadow-sm shrink-0">${ws.name.charAt(0).toUpperCase()}</div>
+                <div class="flex-1">
+                    <h1 class="text-2xl font-bold text-sb-text tracking-tight">${ws.name}</h1>
+                    <p class="text-sb-muted text-sm mt-1">${ws.agents.length} AI agents</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openModal('add-agent')" class="flex items-center gap-2 bg-sb-text text-white font-semibold rounded-lg px-4 py-2 hover:bg-sb-primary/90 transition-colors shadow-sm text-sm">
+                        <i class="ph ph-plus font-bold"></i> Add Agent
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-8 py-8">
+            <div class="max-w-6xl">
+            <section class="mb-10">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-bold text-sb-muted uppercase tracking-wider flex items-center gap-2">
+                        <i class="ph-fill ph-robot text-sb-primary"></i> AI Agents
+                    </h2>
+                    <span class="text-xs text-sb-muted">${ws.agents.length} total</span>
+                </div>
+                ${ws.agents.length === 0 ? `
+                    <div class="bg-sb-surface border border-dashed border-sb-border rounded-lg py-16 flex flex-col items-center justify-center text-center">
+                        <div class="w-16 h-16 rounded-lg bg-slate-100 flex items-center justify-center mb-4">
+                            <i class="ph ph-robot text-4xl text-slate-300"></i>
+                        </div>
+                        <h3 class="font-bold text-sb-text mb-1">No agents yet</h3>
+                        <p class="text-sm text-sb-muted">우측 상단 <strong class="text-sb-text">Add Agent</strong> 버튼으로 첫 Agent를 만들어보세요.</p>
+                    </div>
+                ` : `
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${agentCards}
+                    </div>
+                `}
+            </section>
+
+            <section>
+                <h2 class="text-sm font-bold text-sb-muted uppercase tracking-wider flex items-center gap-2 mb-4">
+                    <i class="ph-fill ph-activity text-sb-primary"></i> Recent Activity
+                </h2>
+                <div class="bg-sb-surface border border-sb-border rounded-lg p-6 skeleton-pulse">
+                    ${[1,2,3,4,5].map(() => `
+                        <div class="flex items-center gap-4 py-3 border-b border-slate-100 last:border-0">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 shrink-0"></div>
+                            <div class="flex-1 space-y-2">
+                                <div class="h-3 w-3/5 bg-slate-200 rounded"></div>
+                                <div class="h-2 w-1/3 bg-slate-100 rounded"></div>
+                            </div>
+                            <div class="h-3 w-16 bg-slate-100 rounded"></div>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+            </div>
+        </div>
+    </div>`;
+}
+
+function buildAgentDashboardShellHTML() {
+    return `
+        <div class="bg-sb-surface border-b border-sb-border shrink-0 z-10">
+            <div class="px-8 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-1">
+                    <span id="bc-agent" class="text-sb-text font-bold text-base">Agent</span>
+                    <div class="relative" id="agent-menu-container">
+                        <button onclick="toggleAgentMenu(event)" class="p-1 rounded hover:bg-sb-hover text-sb-muted hover:text-sb-text transition-colors" title="Agent actions">
+                            <i class="ph ph-caret-down text-sm"></i>
+                        </button>
+                        <div id="agent-menu-dropdown" class="hidden absolute top-full left-0 mt-1 w-48 bg-sb-surface border border-sb-border rounded-lg shadow-sm z-50 overflow-hidden dropdown-enter">
+                            <div class="p-1">
+                                <button onclick="closeAgentMenu()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-sb-text rounded-md hover:bg-sb-hover transition-colors text-left">
+                                    <i class="ph ph-pencil-simple text-base"></i> Rename
+                                </button>
+                                <button onclick="closeAgentMenu()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-sb-text rounded-md hover:bg-sb-hover transition-colors text-left">
+                                    <i class="ph ph-copy text-base"></i> Duplicate
+                                </button>
+                            </div>
+                            <div class="p-1 border-t border-sb-border">
+                                <button onclick="openArchiveAgentModal()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-sb-text rounded-md hover:bg-amber-50 hover:text-amber-700 transition-colors text-left">
+                                    <i class="ph ph-archive text-base"></i> Archive
+                                </button>
+                                <button onclick="openDeleteAgentModal()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors text-left">
+                                    <i class="ph ph-trash text-base"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center bg-slate-100/80 p-1 rounded-lg border border-slate-200/60" id="env-segmented-control"></div>
+                    <div id="publish-action-container"></div>
+                </div>
+            </div>
+            <div class="px-8 flex items-end mt-1">
+                <div class="flex gap-6" id="agent-menus"></div>
+            </div>
+        </div>
+        <div id="prod-warning" class="hidden bg-red-50 border-b border-red-200 px-8 py-2 flex items-center gap-2 text-red-600 text-sm">
+            <i class="ph-fill ph-warning-circle text-red-500"></i>
+            현재 <strong>Production</strong> 환경입니다. 데이터 수정 시 실제 서비스 중인 사용자에게 즉각 영향을 미칩니다.
+        </div>
+        <div class="flex-1 overflow-y-auto p-8" id="main-content"></div>
+    `;
+}
+
+function toggleWorkspaceDropdown(e) {
+    e.stopPropagation();
+    state.isWorkspaceDropdownOpen = !state.isWorkspaceDropdownOpen;
+    renderWorkspaceDropdown();
+}
+
+function changeWorkspaceFromDropdown(wsId) {
+    state.isWorkspaceDropdownOpen = false;
+    changeWorkspace(wsId);
+}
+
+function renderWorkspaceDropdown() {
+    const currentWs = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    const nameEl = document.getElementById('current-ws-name');
+    if (currentWs && nameEl) nameEl.innerText = currentWs.name;
+    const dropdown = document.getElementById('workspace-dropdown');
+    const listContainer = document.getElementById('workspace-dropdown-list');
+    if (!dropdown || !listContainer) return;
+
+    if (state.isWorkspaceDropdownOpen) {
+        dropdown.classList.remove('hidden');
+        dropdown.classList.add('dropdown-enter');
+        listContainer.innerHTML = state.workspaces.map(ws => {
+            const isSelected = ws.id === state.currentWorkspaceId;
+            return `<button onclick="changeWorkspaceFromDropdown('${ws.id}')" class="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm rounded-md transition-colors ${isSelected ? 'bg-sb-hover font-bold text-sb-primaryDark' : 'text-sb-text font-medium hover:bg-sb-hover'}"><span class="flex items-center gap-2 truncate flex-1 min-w-0"><div class="w-5 h-5 rounded bg-sb-primary text-white text-[9px] font-bold flex items-center justify-center shrink-0">${ws.name.charAt(0).toUpperCase()}</div><span class="truncate">${ws.name}</span></span><span class="flex items-center gap-2 shrink-0"><span class="text-[10px] font-semibold ${isSelected ? 'text-sb-primary/80' : 'text-slate-400'}">${ws.agents.length}</span>${isSelected ? '<i class="ph ph-check text-sb-primary"></i>' : ''}</span></button>`;
+        }).join('');
+    } else {
+        dropdown.classList.add('hidden');
+        dropdown.classList.remove('dropdown-enter');
+    }
+}
+
+function renderSidebar() {
+    const currentWs = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    if (!currentWs) return;
+
+    const avatar = document.getElementById('ws-avatar');
+    if (avatar) avatar.innerText = currentWs.name.charAt(0).toUpperCase();
+
+    const isHub = state.view === 'workspace-hub';
+    const allAgentsBtn = document.getElementById('all-agents-btn');
+    if (allAgentsBtn) {
+        allAgentsBtn.className = `w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isHub ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}`;
+        const icon = allAgentsBtn.querySelector('i');
+        if (icon) icon.className = `${isHub ? 'ph-fill text-sb-primary' : 'ph'} ph-squares-four text-lg shrink-0`;
+    }
+    const countEl = document.getElementById('all-agents-count');
+    if (countEl) {
+        countEl.innerText = currentWs.agents.length;
+        countEl.className = `text-[10px] font-semibold shrink-0 ${isHub ? 'text-sb-primary/80' : 'text-slate-400'}`;
+    }
+
+    const list = document.getElementById('agent-nav-list');
+    if (!list) return;
+    list.innerHTML = currentWs.agents.map(agent => {
+        const isActive = agent.id === state.currentAgentId && state.view === 'agent-dashboard';
+        const stage = getAgentStage(agent);
+        return `<li><button onclick="changeAgent('${agent.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors group ${isActive ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}"><span class="relative shrink-0"><i class="${isActive ? 'ph-fill text-sb-primary' : 'ph'} ph-robot text-lg"></i><span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${stage.dotColor} ring-2 ring-sb-surface"></span></span><span class="truncate flex-1 text-left">${agent.name}</span><span class="text-[10px] whitespace-nowrap shrink-0 ${isActive ? 'text-sb-primary/80' : 'text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity'}">${agent.time}</span></button></li>`;
+    }).join('');
+}
+
+function getAgentStage(agent) {
+    if (agent.envStatus.production) return { label: 'Prod', classes: 'bg-green-50 text-green-700 border-green-200', dotColor: 'bg-green-500' };
+    if (agent.envStatus.staging)    return { label: 'Staging', classes: 'bg-amber-50 text-amber-800 border-amber-200', dotColor: 'bg-amber-500' };
+    if (agent.envStatus.dev)        return { label: 'Dev', classes: 'bg-slate-100 text-slate-600 border-slate-300', dotColor: 'bg-slate-400' };
+    return { label: 'New', classes: 'bg-slate-50 text-slate-400 border-slate-200', dotColor: 'bg-slate-300' };
+}
+
+
+function changeEnv(envId) { state.currentEnv = envId; renderMainArea(); }
+function changeMenu(menuId) { state.currentMenu = menuId; renderMainArea(); }
+
+function renderMainHeader() {
+    const currentWs = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    const currentAgent = currentWs.agents.find(a => a.id === state.currentAgentId);
+    const bcAg = document.getElementById('bc-agent');
+    if (bcAg) bcAg.innerText = currentAgent ? currentAgent.name : 'Select Agent';
+
+    const segmented = document.getElementById('env-segmented-control');
+    let envHtml = '';
+    const envArray = Object.values(environments);
+    envArray.forEach((env, i) => {
+        const isSelected = state.currentEnv === env.id;
+        const base = "px-3 py-1.5 rounded-md text-[13px] font-bold transition-all flex items-center gap-1.5 cursor-pointer select-none";
+        const active = isSelected ? env.badgeColor + " shadow-sm border" : "text-slate-500 hover:text-slate-800 hover:bg-slate-200/50 border border-transparent";
+        envHtml += `<button onclick="changeEnv('${env.id}')" class="${base} ${active}"><i class="${isSelected ? 'ph-fill' : 'ph'} ${env.icon}"></i> ${env.label}</button>`;
+        if (i < envArray.length - 1) envHtml += `<i class="ph ph-caret-right text-slate-300 text-xs px-0.5"></i>`;
+    });
+    segmented.innerHTML = envHtml;
+
+    const curEnv = environments[state.currentEnv];
+    const pub = document.getElementById('publish-action-container');
+    if (curEnv.nextLabel) {
+        pub.innerHTML = `
+            <button class="inline-flex items-center gap-2 bg-sb-primary text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-sb-primary/90 transition-colors">
+                <i class="ph ph-paper-plane-tilt"></i>
+                Publish to ${curEnv.nextLabel}
+            </button>`;
+    } else {
+        pub.innerHTML = `
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-green-50 border border-green-200 text-sm font-semibold text-green-700">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                Live
+            </div>`;
+    }
+
+    const warn = document.getElementById('prod-warning');
+    if (state.currentEnv === 'production') warn.classList.remove('hidden');
+    else warn.classList.add('hidden');
+
+    const menusContainer = document.getElementById('agent-menus');
+    menusContainer.innerHTML = menus.map(m => {
+        const isActive = state.currentMenu === m.id;
+        return `<button onclick="changeMenu('${m.id}')" class="flex items-center gap-2 pb-3 pt-1 text-sm font-bold border-b-2 transition-colors ${isActive ? 'border-sb-primary text-sb-primaryDark' : 'border-transparent text-sb-muted hover:text-sb-text hover:border-sb-border'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button>`;
+    }).join('');
+}
+
+function renderContent() {
+    const c = document.getElementById('main-content');
+    if (!c) return;
+    let html = '';
+    const envLabel = environments[state.currentEnv].label;
+    const envBadge = `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold mb-4 uppercase tracking-wider"><i class="ph-fill ph-database text-xs"></i> ${envLabel} DATA</div>`;
+
+    if (state.currentMenu === 'overview') {
+        html = buildOverviewContent();
+    } else if (state.currentMenu === 'build') {
+        html = `${envBadge}<div class="flex h-full gap-6"><div class="w-64 bg-sb-surface rounded-lg border border-sb-border shadow-sm p-4 flex flex-col gap-3 skeleton-pulse"><div class="h-8 w-full bg-slate-200 rounded mb-4"></div>${[1,2,3,4,5,6].map(() => `<div class="h-12 w-full bg-slate-100 rounded"></div>`).join('')}</div><div class="flex-1 bg-sb-surface rounded-lg border border-sb-border shadow-sm relative overflow-hidden skeleton-pulse"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 20px 20px;"></div><div class="absolute top-20 left-20 w-48 h-24 bg-white rounded-lg border-2 border-slate-300 shadow-sm"></div><div class="absolute top-40 left-80 w-48 h-32 bg-white rounded-lg border-2 border-slate-300 shadow-sm"></div><svg class="absolute inset-0 w-full h-full"><path d="M 240 120 C 300 120, 260 200, 320 200" stroke="#cbd5e1" stroke-width="2" fill="none"/></svg></div></div>`;
+    } else if (state.currentMenu === 'test') {
+        html = `${envBadge}<div class="flex h-full gap-6 justify-center"><div class="w-1/3 max-w-md bg-sb-surface rounded-lg border border-sb-border shadow-sm flex flex-col skeleton-pulse"><div class="p-4 border-b border-sb-border flex items-center justify-between"><div class="h-5 w-1/3 bg-slate-200 rounded"></div><div class="h-5 w-5 bg-slate-200 rounded-full"></div></div><div class="flex-1 p-4 flex flex-col gap-4 bg-slate-50"><div class="self-end w-2/3 h-12 bg-sb-primary/20 rounded-l-xl rounded-tr-xl"></div><div class="self-start w-3/4 h-16 bg-white border border-sb-border shadow-sm rounded-r-xl rounded-tl-xl"></div><div class="self-end w-1/2 h-10 bg-sb-primary/20 rounded-l-xl rounded-tr-xl"></div></div><div class="p-4 border-t border-sb-border bg-white"><div class="h-10 w-full bg-slate-100 rounded-full border border-sb-border"></div></div></div><div class="w-1/4 min-w-[250px] bg-sb-surface rounded-lg border border-sb-border shadow-sm p-4 flex flex-col gap-4 skeleton-pulse"><div class="h-5 w-1/2 bg-slate-200 rounded mb-2"></div><div class="h-20 w-full bg-slate-100 rounded"></div><div class="h-20 w-full bg-slate-100 rounded"></div></div></div>`;
+    } else if (state.currentMenu === 'evaluate') {
+        html = buildEvaluateContent();
+    }
+    c.innerHTML = `<div class="h-full flex flex-col">${html}</div>`;
+}
+
+function buildOverviewContent() {
+    const envLabel = environments[state.currentEnv].label;
+    const envBadge = `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold mb-4 uppercase tracking-wider"><i class="ph-fill ph-database text-xs"></i> ${envLabel} DATA</div>`;
+
+    return `${envBadge}
+    <div class="grid grid-cols-4 gap-4 mb-6">
+        ${[1,2,3,4].map(() => `
+            <div class="h-28 bg-sb-surface rounded-lg border border-sb-border shadow-sm p-4 flex flex-col justify-between skeleton-pulse">
+                <div class="h-4 w-1/3 bg-slate-200 rounded"></div>
+                <div class="h-8 w-1/2 bg-slate-200 rounded"></div>
+            </div>
+        `).join('')}
+    </div>
+    <div class="grid grid-cols-3 gap-6">
+        <div class="col-span-2 bg-sb-surface rounded-lg border border-sb-border shadow-sm p-6 flex flex-col gap-4 skeleton-pulse">
+            <div class="h-5 w-1/4 bg-slate-200 rounded"></div>
+            <div class="flex-1 bg-slate-50 rounded border border-sb-border min-h-[280px]"></div>
+        </div>
+        <div class="bg-sb-surface rounded-lg border border-sb-border shadow-sm p-6 flex flex-col gap-3 skeleton-pulse">
+            <div class="h-5 w-1/3 bg-slate-200 rounded mb-2"></div>
+            ${[1,2,3,4,5].map(() => `<div class="h-10 w-full bg-slate-100 rounded"></div>`).join('')}
+        </div>
+    </div>`;
+}
+
+function buildEvaluateContent() {
+    const envLabel = environments[state.currentEnv].label;
+    const envBadge = `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold mb-4 uppercase tracking-wider"><i class="ph-fill ph-database text-xs"></i> ${envLabel} DATA</div>`;
+
+    return `${envBadge}
+    <div class="bg-sb-surface rounded-lg border border-sb-border shadow-sm overflow-hidden skeleton-pulse flex flex-col h-full">
+        <div class="p-4 border-b border-sb-border flex justify-between items-center bg-slate-50">
+            <div class="h-6 w-1/4 bg-slate-200 rounded"></div>
+            <div class="flex gap-2">
+                <div class="h-8 w-24 bg-slate-200 rounded"></div>
+                <div class="h-8 w-24 bg-slate-200 rounded"></div>
+            </div>
+        </div>
+        <div class="p-4 flex-1">
+            ${[1,2,3,4,5,6,7,8].map(() => `
+                <div class="flex items-center gap-4 py-3 border-b border-slate-100">
+                    <div class="h-4 w-8 bg-slate-200 rounded"></div>
+                    <div class="h-4 w-1/4 bg-slate-200 rounded"></div>
+                    <div class="h-4 w-1/3 bg-slate-100 rounded"></div>
+                    <div class="h-4 w-16 bg-slate-200 rounded ml-auto"></div>
+                </div>
+            `).join('')}
+        </div>
+    </div>`;
+}
+
+function changeWorkspace(wsId) {
+    state.currentWorkspaceId = wsId;
+    if (state.view === 'agent-dashboard') {
+        const ws = state.workspaces.find(w => w.id === wsId);
+        state.currentAgentId = ws.agents.length > 0 ? ws.agents[0].id : null;
+    } else {
+        state.view = 'workspace-hub';
+        state.currentAgentId = null;
+    }
+    updateView();
+}
+
+function changeAgent(agentId) {
+    state.currentAgentId = agentId;
+    state.view = 'agent-dashboard';
+    updateView();
+}
+
+// --- ORG SETTINGS ---
+function renderOrgSettings() {
+    const list = document.getElementById('org-settings-menu-list');
+    const sections = [
+        { id: 'organization', label: 'Organization' },
+        { id: 'account', label: 'You' }
+    ];
+
+    list.innerHTML = sections.map((section, idx) => {
+        const items = orgSettingsMenus.filter(m => m.section === section.id);
+        if (items.length === 0) return '';
+        const itemsHtml = items.map(m => {
+            const isActive = m.id === state.orgSettingsMenu;
+            return `<li><button onclick="selectOrgSettingsMenu('${m.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left ${isActive ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button></li>`;
+        }).join('');
+        return `
+            <div class="${idx > 0 ? 'mt-4 pt-4 border-t border-sb-border' : ''}">
+                <div class="text-[10px] font-bold text-sb-muted uppercase tracking-wider px-3 mb-1.5">${section.label}</div>
+                <ul class="space-y-1">${itemsHtml}</ul>
+            </div>`;
+    }).join('');
+
+    const content = document.getElementById('org-settings-content');
+    const current = orgSettingsMenus.find(m => m.id === state.orgSettingsMenu);
+    content.innerHTML = buildOrgSettingsPage(current);
+}
+
+function selectOrgSettingsMenu(menuId) { state.orgSettingsMenu = menuId; renderOrgSettings(); }
+
+function buildFormFieldSkeleton(label) {
+    return `
+    <div class="bg-sb-surface border border-sb-border rounded-lg p-5">
+        <div class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-3">${label}</div>
+        <div class="h-9 w-full bg-slate-100 border border-slate-200 rounded-md"></div>
+    </div>`;
+}
+
+function buildOrgSettingsPage(menu) {
+    const header = `
+        <div class="max-w-3xl mb-6">
+            <h1 class="text-2xl font-bold text-sb-text tracking-tight mb-1">${menu.label}</h1>
+            <p class="text-sb-muted text-sm">${menu.desc}</p>
+        </div>`;
+
+    let body = '';
+    if (menu.id === 'general') {
+        body = `<div class="max-w-3xl space-y-4 skeleton-pulse">${buildFormFieldSkeleton('Organization Name')}${buildFormFieldSkeleton('Subscription Plan')}${buildFormFieldSkeleton('Region')}${buildFormFieldSkeleton('Compliance Settings')}</div>`;
+    } else if (menu.id === 'members') {
+        body = `
+        <div class="max-w-4xl">
+            <div class="flex items-center justify-between mb-4">
+                <div class="h-9 w-64 bg-slate-100 border border-sb-border rounded-md skeleton-pulse"></div>
+                <div class="h-9 w-32 bg-sb-text/80 rounded-md flex items-center justify-center text-white text-xs font-semibold gap-1"><i class="ph ph-plus"></i> Invite Member</div>
+            </div>
+            <div class="bg-sb-surface border border-sb-border rounded-lg overflow-hidden skeleton-pulse">
+                ${[1,2,3,4,5,6].map(() => `
+                    <div class="flex items-center gap-4 px-4 py-3 border-b border-slate-100 last:border-0">
+                        <div class="w-9 h-9 rounded-full bg-slate-200"></div>
+                        <div class="flex-1 space-y-1.5">
+                            <div class="h-3 w-1/3 bg-slate-200 rounded"></div>
+                            <div class="h-2.5 w-1/2 bg-slate-100 rounded"></div>
+                        </div>
+                        <div class="h-6 w-20 bg-slate-100 rounded"></div>
+                        <div class="h-6 w-6 bg-slate-100 rounded"></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    } else if (menu.id === 'roles') {
+        body = `
+        <div class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 skeleton-pulse">
+            ${['Owner', 'Admin', 'Developer', 'Viewer'].map(role => `
+                <div class="bg-sb-surface border border-sb-border rounded-lg p-5">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="ph-fill ph-shield-check text-sb-primary"></i>
+                        <div class="font-bold text-sb-text">${role}</div>
+                    </div>
+                    <div class="h-2.5 w-3/4 bg-slate-100 rounded mb-4"></div>
+                    <div class="space-y-2">
+                        ${[1,2,3].map(() => `<div class="h-2.5 w-full bg-slate-100 rounded"></div>`).join('')}
+                    </div>
+                </div>
+            `).join('')}
+        </div>`;
+    } else if (menu.id === 'security') {
+        body = `
+        <div class="max-w-3xl space-y-3 skeleton-pulse">
+            ${['Two-Factor Authentication', 'IP Restrictions', 'SAML SSO', 'Support Access'].map(title => `
+                <div class="bg-sb-surface border border-sb-border rounded-lg p-5 flex items-center justify-between">
+                    <div class="flex-1">
+                        <div class="font-semibold text-sb-text mb-1">${title}</div>
+                        <div class="h-2.5 w-3/4 bg-slate-100 rounded"></div>
+                    </div>
+                    <div class="w-10 h-6 bg-slate-200 rounded-full"></div>
+                </div>
+            `).join('')}
+        </div>`;
+    } else if (menu.id === 'billing') {
+        body = `
+        <div class="max-w-4xl space-y-4">
+            <div class="bg-sb-hover border border-sb-border rounded-lg p-6 skeleton-pulse">
+                <div class="text-xs font-bold text-sb-muted uppercase mb-2">Current Plan</div>
+                <div class="h-8 w-40 bg-slate-300 rounded mb-4"></div>
+                <div class="h-2.5 w-1/2 bg-slate-200 rounded"></div>
+            </div>
+            <div class="bg-sb-surface border border-sb-border rounded-lg p-6 skeleton-pulse">
+                <div class="font-bold text-sb-text mb-4">Invoices</div>
+                ${[1,2,3,4].map(() => `
+                    <div class="flex items-center justify-between py-3 border-b border-slate-100 last:border-0">
+                        <div class="h-3 w-48 bg-slate-100 rounded"></div>
+                        <div class="h-3 w-16 bg-slate-100 rounded"></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    } else if (menu.id === 'profile') {
+        body = `
+        <div class="max-w-2xl space-y-4 skeleton-pulse">
+            <div class="bg-sb-surface border border-sb-border rounded-lg p-6 flex items-center gap-5">
+                <div class="w-20 h-20 rounded-full bg-sb-primary"></div>
+                <div class="flex-1 space-y-2">
+                    <div class="h-5 w-40 bg-slate-200 rounded"></div>
+                    <div class="h-3 w-56 bg-slate-100 rounded"></div>
+                </div>
+            </div>
+            ${buildFormFieldSkeleton('Display Name')}
+            ${buildFormFieldSkeleton('Email')}
+            ${buildFormFieldSkeleton('Password')}
+        </div>`;
+    }
+    return header + body;
+}
+
+// --- WS SETTINGS ---
+function renderWsSettings() {
+    const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    if (!ws) { closeSettings(); return; }
+    const titleEl = document.getElementById('ws-settings-title');
+    if (titleEl) titleEl.innerText = '· ' + ws.name;
+    const avatarEl = document.getElementById('ws-settings-avatar');
+    if (avatarEl) avatarEl.innerText = ws.name.charAt(0).toUpperCase();
+
+    const list = document.getElementById('ws-settings-menu-list');
+    list.innerHTML = wsSettingsMenus.map(m => {
+        const isActive = m.id === state.wsSettingsMenu;
+        return `<li><button onclick="selectWsSettingsMenu('${m.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left ${isActive ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button></li>`;
+    }).join('');
+
+    const content = document.getElementById('ws-settings-content');
+    const current = wsSettingsMenus.find(m => m.id === state.wsSettingsMenu);
+    content.innerHTML = buildWsSettingsPage(current);
+}
+
+function selectWsSettingsMenu(menuId) { state.wsSettingsMenu = menuId; renderWsSettings(); }
+
+function buildWsSettingsPage(menu) {
+    const header = `
+        <div class="max-w-3xl mb-6">
+            <h1 class="text-2xl font-bold text-sb-text tracking-tight mb-1">${menu.label}</h1>
+            <p class="text-sb-muted text-sm">${menu.desc}</p>
+        </div>`;
+
+    let body = '';
+    if (menu.id === 'general') {
+        body = `
+        <div class="max-w-3xl space-y-4">
+            <div class="space-y-4 skeleton-pulse">
+                ${buildFormFieldSkeleton('Workspace Name')}
+                ${buildFormFieldSkeleton('Workspace Icon')}
+                ${buildFormFieldSkeleton('Default Language')}
+                ${buildFormFieldSkeleton('Timezone')}
+            </div>
+
+            <div class="pt-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="ph-fill ph-warning-octagon text-red-600"></i>
+                    <h3 class="text-xs font-bold text-red-600 uppercase tracking-wider">Danger Zone</h3>
+                </div>
+                <div class="border border-red-200 rounded-lg divide-y divide-red-100 overflow-hidden bg-white">
+                    <div class="p-4 flex items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="font-bold text-sb-text text-sm mb-1">Archive Workspace</div>
+                            <div class="text-xs text-sb-muted leading-relaxed">모든 Agent를 Unpublish하고 Workspace를 보관함으로 이동합니다. 30일 내 복구 가능.</div>
+                        </div>
+                        <button onclick="openArchiveWorkspaceModal()" class="px-3 py-2 text-xs font-semibold text-amber-800 bg-white border border-amber-300 rounded-md hover:bg-amber-50 transition-colors shrink-0">Archive Workspace</button>
+                    </div>
+                    <div class="p-4 flex items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="font-bold text-sb-text text-sm mb-1">Delete Workspace</div>
+                            <div class="text-xs text-sb-muted leading-relaxed">Workspace와 모든 Agent, 대화 로그, 설정이 영구 삭제됩니다. <strong class="text-red-600">복구 불가능.</strong></div>
+                        </div>
+                        <button onclick="openDeleteWorkspaceModal()" class="px-3 py-2 text-xs font-semibold text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors shrink-0">Delete Workspace</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    } else if (menu.id === 'users') {
+        body = `
+        <div class="max-w-4xl">
+            <div class="flex items-center justify-between mb-4">
+                <div class="h-9 w-64 bg-slate-100 border border-sb-border rounded-md skeleton-pulse"></div>
+                <div class="h-9 w-32 bg-sb-text/80 rounded-md flex items-center justify-center text-white text-xs font-semibold gap-1"><i class="ph ph-plus"></i> Add User</div>
+            </div>
+            <div class="bg-sb-surface border border-sb-border rounded-lg overflow-hidden skeleton-pulse">
+                ${[1,2,3,4].map(() => `
+                    <div class="flex items-center gap-4 px-4 py-3 border-b border-slate-100 last:border-0">
+                        <div class="w-9 h-9 rounded-full bg-slate-200"></div>
+                        <div class="flex-1 space-y-1.5">
+                            <div class="h-3 w-1/3 bg-slate-200 rounded"></div>
+                            <div class="h-2.5 w-1/2 bg-slate-100 rounded"></div>
+                        </div>
+                        <div class="h-6 w-20 bg-slate-100 rounded"></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    } else if (menu.id === 'shared-assets') {
+        body = `
+        <div class="max-w-5xl">
+            <div class="flex gap-2 mb-4 skeleton-pulse">
+                ${['Prompts', 'Knowledge', 'Tools', 'Files'].map(t => `<div class="px-3 py-1.5 bg-slate-100 rounded-md border border-sb-border text-xs font-semibold text-slate-500">${t}</div>`).join('')}
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 skeleton-pulse">
+                ${[1,2,3,4,5,6].map(() => `
+                    <div class="bg-sb-surface border border-sb-border rounded-lg p-5">
+                        <div class="w-10 h-10 rounded-lg bg-slate-200 mb-3"></div>
+                        <div class="h-4 w-2/3 bg-slate-200 rounded mb-2"></div>
+                        <div class="h-2.5 w-full bg-slate-100 rounded mb-1"></div>
+                        <div class="h-2.5 w-3/4 bg-slate-100 rounded"></div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    } else if (menu.id === 'integrations') {
+        body = `
+        <div class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-3 skeleton-pulse">
+            ${['Slack', 'Zendesk', 'Salesforce', 'HubSpot', 'Jira', 'Notion'].map(name => `
+                <div class="bg-sb-surface border border-sb-border rounded-lg p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-lg bg-slate-100"></div>
+                    <div class="flex-1 space-y-2">
+                        <div class="font-bold text-sb-text text-sm">${name}</div>
+                        <div class="h-2.5 w-40 bg-slate-100 rounded"></div>
+                    </div>
+                    <div class="h-8 w-20 bg-slate-100 rounded"></div>
+                </div>
+            `).join('')}
+        </div>`;
+    } else if (menu.id === 'channels') {
+        body = `
+        <div class="max-w-3xl space-y-3 skeleton-pulse">
+            ${['Web Chat', 'Mobile SDK', 'Email', 'API Webhook'].map(name => `
+                <div class="bg-sb-surface border border-sb-border rounded-lg p-5 flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-slate-200"></div>
+                    <div class="flex-1 space-y-2">
+                        <div class="font-bold text-sb-text text-sm">${name}</div>
+                        <div class="h-2.5 w-56 bg-slate-100 rounded"></div>
+                    </div>
+                    <div class="w-10 h-6 bg-slate-200 rounded-full"></div>
+                </div>
+            `).join('')}
+        </div>`;
+    }
+    return header + body;
+}
+
+// --- AGENT CONTEXT MENU ---
+function toggleAgentMenu(e) {
+    e.stopPropagation();
+    state.isAgentMenuOpen = !state.isAgentMenuOpen;
+    const dd = document.getElementById('agent-menu-dropdown');
+    if (!dd) return;
+    if (state.isAgentMenuOpen) dd.classList.remove('hidden');
+    else dd.classList.add('hidden');
+}
+
+function closeAgentMenu() {
+    state.isAgentMenuOpen = false;
+    const dd = document.getElementById('agent-menu-dropdown');
+    if (dd) dd.classList.add('hidden');
+}
+
+function openArchiveAgentModal() {
+    closeAgentMenu();
+    openModal('archive-agent');
+}
+
+function openDeleteAgentModal() {
+    closeAgentMenu();
+    openModal('delete-agent');
+}
+
+function updateDeleteConfirmState(value) {
+    const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    const agent = ws && ws.agents.find(a => a.id === state.currentAgentId);
+    const btn = document.getElementById('delete-confirm-btn');
+    if (btn && agent) {
+        btn.disabled = value !== agent.name;
+    }
+}
+
+function openArchiveWorkspaceModal() { openModal('archive-workspace'); }
+function openDeleteWorkspaceModal() { openModal('delete-workspace'); }
+
+function updateDeleteWorkspaceConfirmState(value) {
+    const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+    const btn = document.getElementById('delete-ws-confirm-btn');
+    if (btn && ws) {
+        btn.disabled = value !== ws.name;
+    }
+}
+
+// --- MODALS ---
+function openModal(type) {
+    state.modal = type;
+    const backdrop = document.getElementById('modal-backdrop');
+    const card = document.getElementById('modal-card');
+    backdrop.classList.remove('hidden');
+    card.innerHTML = buildModalHTML(type);
+}
+
+function closeModal() {
+    state.modal = null;
+    document.getElementById('modal-backdrop').classList.add('hidden');
+}
+
+function closeModalFromBackdrop(e) {
+    if (e.target.id === 'modal-backdrop') closeModal();
+}
+
+function buildModalHTML(type) {
+    if (type === 'add-workspace') {
+        return `
+        <div class="p-6 border-b border-sb-border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-sb-primary/10 flex items-center justify-center text-sb-primary">
+                    <i class="ph-fill ph-folder-notch-plus text-xl"></i>
+                </div>
+                <h2 class="text-lg font-bold text-sb-text">Create Workspace</h2>
+            </div>
+            <p class="text-sb-muted text-sm">팀이나 프로젝트 단위로 에이전트를 분리하세요.</p>
+        </div>
+        <div class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Workspace Name</label>
+                <input type="text" placeholder="e.g. Customer Success" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary">
+            </div>
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Icon</label>
+                <div class="flex gap-2">
+                    ${['ph-folder-notch', 'ph-briefcase', 'ph-rocket', 'ph-lightning', 'ph-globe', 'ph-heart'].map((icon, i) => `
+                        <button class="w-10 h-10 rounded-lg border flex items-center justify-center transition-all ${i === 0 ? 'border-sb-primary bg-sb-primary/10 text-sb-primary' : 'border-sb-border text-sb-muted hover:border-sb-primary hover:bg-sb-primary/5 hover:text-sb-primary'}">
+                            <i class="ph-fill ${icon} text-lg"></i>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Description (optional)</label>
+                <textarea rows="2" placeholder="What is this workspace for?" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary resize-none"></textarea>
+            </div>
+        </div>
+        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-sb-text text-white rounded-md hover:bg-sb-primary/90 transition-colors flex items-center gap-1.5">
+                <i class="ph ph-plus font-bold"></i> Create
+            </button>
+        </div>`;
+    } else if (type === 'archive-workspace') {
+        const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+        if (!ws) return '';
+        const liveAgentCount = ws.agents.filter(a => a.envStatus.production).length;
+        return `
+        <div class="p-6 border-b border-sb-border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
+                    <i class="ph-fill ph-archive text-xl"></i>
+                </div>
+                <h2 class="text-lg font-bold text-sb-text">Archive "${ws.name}"?</h2>
+            </div>
+            <p class="text-sb-muted text-sm">Workspace 내 모든 Agent가 Unpublish되며 30일간 복구 가능합니다.</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="bg-slate-50 border border-sb-border rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                <i class="ph-fill ph-info text-sb-primary text-base mt-0.5 shrink-0"></i>
+                <div class="leading-relaxed">
+                    <div class="text-sb-text font-semibold mb-1">Archive가 하는 일</div>
+                    <ul class="text-sb-muted space-y-0.5">
+                        <li>• ${ws.agents.length}개 Agent 모두 Unpublish (Dev/Staging/Prod)</li>
+                        <li>• 대화 로그, Golden Set, Shared Assets 보존</li>
+                        <li>• 30일 내 Archived Workspaces에서 복구 가능</li>
+                    </ul>
+                </div>
+            </div>
+            ${liveAgentCount > 0 ? `
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                    <i class="ph-fill ph-warning-circle text-amber-600 text-base mt-0.5 shrink-0"></i>
+                    <div class="text-amber-900 leading-relaxed">
+                        <div class="font-bold mb-0.5">현재 Production 라이브 Agent ${liveAgentCount}개</div>
+                        Archive 즉시 모든 라이브 Agent의 유저 대화가 중단됩니다.
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors flex items-center gap-1.5">
+                <i class="ph ph-archive font-bold"></i> Archive Workspace
+            </button>
+        </div>`;
+    } else if (type === 'delete-workspace') {
+        const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+        if (!ws) return '';
+        const liveAgentCount = ws.agents.filter(a => a.envStatus.production).length;
+        return `
+        <div class="p-6 border-b border-sb-border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+                    <i class="ph-fill ph-warning-octagon text-xl"></i>
+                </div>
+                <h2 class="text-lg font-bold text-sb-text">Delete "${ws.name}"?</h2>
+            </div>
+            <p class="text-sb-muted text-sm">영구 삭제됩니다. <strong class="text-red-600">이 작업은 되돌릴 수 없습니다.</strong></p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                <i class="ph-fill ph-x-circle text-red-600 text-base mt-0.5 shrink-0"></i>
+                <div class="text-red-900 leading-relaxed">
+                    <div class="font-bold mb-1">삭제되는 항목</div>
+                    <ul class="space-y-0.5">
+                        <li>• ${ws.agents.length}개 Agent 전체 (모든 환경의 버전 기록)</li>
+                        <li>• 모든 대화 로그, Golden Set, 평가 기록</li>
+                        <li>• Shared Assets, Integrations, Channels 설정</li>
+                        <li>• 사용자 권한 및 Members 정보</li>
+                    </ul>
+                </div>
+            </div>
+            ${liveAgentCount > 0 ? `
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                    <i class="ph-fill ph-warning-circle text-amber-600 text-base mt-0.5 shrink-0"></i>
+                    <div class="text-amber-900 leading-relaxed">
+                        <div class="font-bold mb-1">⚠ Production 라이브 Agent ${liveAgentCount}개</div>
+                        삭제 즉시 모든 유저 대화가 중단됩니다. <button onclick="closeModal(); openArchiveWorkspaceModal();" class="underline font-semibold hover:text-amber-700">Archive 먼저</button> 하는 것을 권장합니다.
+                    </div>
+                </div>
+            ` : ''}
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">확인을 위해 Workspace 이름을 입력하세요</label>
+                <div class="text-xs font-mono text-sb-text bg-slate-50 border border-sb-border px-3 py-1.5 rounded mb-2 select-all">${ws.name}</div>
+                <input type="text" id="delete-ws-confirm-input" oninput="updateDeleteWorkspaceConfirmState(this.value)" placeholder="Workspace 이름 입력" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500" autocomplete="off">
+            </div>
+        </div>
+        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+            <button id="delete-ws-confirm-btn" onclick="closeModal()" disabled class="px-4 py-2 text-sm font-semibold bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-red-400">
+                <i class="ph ph-trash font-bold"></i> Permanently Delete
+            </button>
+        </div>`;
+    } else if (type === 'archive-agent') {
+        const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+        const agent = ws && ws.agents.find(a => a.id === state.currentAgentId);
+        if (!agent) return '';
+        const isLive = !!agent.envStatus.production;
+        return `
+        <div class="p-6 border-b border-sb-border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
+                    <i class="ph-fill ph-archive text-xl"></i>
+                </div>
+                <h2 class="text-lg font-bold text-sb-text">Archive "${agent.name}"?</h2>
+            </div>
+            <p class="text-sb-muted text-sm">즉시 모든 환경에서 Unpublish되며 30일간 복구 가능합니다.</p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="bg-slate-50 border border-sb-border rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                <i class="ph-fill ph-info text-sb-primary text-base mt-0.5 shrink-0"></i>
+                <div class="leading-relaxed">
+                    <div class="text-sb-text font-semibold mb-1">Archive가 하는 일</div>
+                    <ul class="text-sb-muted space-y-0.5">
+                        <li>• 모든 환경(Dev/Staging/Prod)에서 Unpublish</li>
+                        <li>• 대화 로그, 버전 기록, Golden Set 보존</li>
+                        <li>• 30일 내 Archived 탭에서 복구 가능</li>
+                    </ul>
+                </div>
+            </div>
+            ${isLive ? `
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                    <i class="ph-fill ph-warning-circle text-amber-600 text-base mt-0.5 shrink-0"></i>
+                    <div class="text-amber-900 leading-relaxed">
+                        <div class="font-bold mb-0.5">현재 Production 라이브 상태</div>
+                        Archive 즉시 실제 유저 대화가 중단됩니다.
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors flex items-center gap-1.5">
+                <i class="ph ph-archive font-bold"></i> Archive Agent
+            </button>
+        </div>`;
+    } else if (type === 'delete-agent') {
+        const ws = state.workspaces.find(w => w.id === state.currentWorkspaceId);
+        const agent = ws && ws.agents.find(a => a.id === state.currentAgentId);
+        if (!agent) return '';
+        const isLive = !!agent.envStatus.production;
+        return `
+        <div class="p-6 border-b border-sb-border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+                    <i class="ph-fill ph-warning-octagon text-xl"></i>
+                </div>
+                <h2 class="text-lg font-bold text-sb-text">Delete "${agent.name}"?</h2>
+            </div>
+            <p class="text-sb-muted text-sm">영구 삭제됩니다. <strong class="text-red-600">이 작업은 되돌릴 수 없습니다.</strong></p>
+        </div>
+        <div class="p-6 space-y-3">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                <i class="ph-fill ph-x-circle text-red-600 text-base mt-0.5 shrink-0"></i>
+                <div class="text-red-900 leading-relaxed">
+                    <div class="font-bold mb-1">삭제되는 항목</div>
+                    <ul class="space-y-0.5">
+                        <li>• 모든 환경의 버전 기록 (Dev/Staging/Prod)</li>
+                        <li>• 대화 로그 전체</li>
+                        <li>• Golden Set, 평가 기록</li>
+                        <li>• Build 설정 및 Shared Assets 연결</li>
+                    </ul>
+                </div>
+            </div>
+            ${isLive ? `
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                    <i class="ph-fill ph-warning-circle text-amber-600 text-base mt-0.5 shrink-0"></i>
+                    <div class="text-amber-900 leading-relaxed">
+                        <div class="font-bold mb-1">⚠ Production 라이브 중</div>
+                        실제 유저 대화가 즉시 중단됩니다. <button onclick="closeModal(); openArchiveAgentModal();" class="underline font-semibold hover:text-amber-700">Archive 먼저</button> 하는 것을 권장합니다.
+                    </div>
+                </div>
+            ` : ''}
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">확인을 위해 Agent 이름을 입력하세요</label>
+                <div class="text-xs font-mono text-sb-text bg-slate-50 border border-sb-border px-3 py-1.5 rounded mb-2 select-all">${agent.name}</div>
+                <input type="text" id="delete-confirm-input" oninput="updateDeleteConfirmState(this.value)" placeholder="Agent 이름 입력" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500" autocomplete="off">
+            </div>
+        </div>
+        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+            <button id="delete-confirm-btn" onclick="closeModal()" disabled class="px-4 py-2 text-sm font-semibold bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-red-400">
+                <i class="ph ph-trash font-bold"></i> Permanently Delete
+            </button>
+        </div>`;
+    } else if (type === 'add-agent') {
+        const showWsSelector = !state.currentWorkspaceId;
+        const wsOptions = state.workspaces.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
+        return `
+        <div class="p-6 border-b border-sb-border">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-sb-hover flex items-center justify-center text-sb-muted">
+                    <i class="ph-fill ph-robot text-xl"></i>
+                </div>
+                <h2 class="text-lg font-bold text-sb-text">Create AI Agent</h2>
+            </div>
+            <p class="text-sb-muted text-sm">Development 환경에서 시작하여 단계별로 배포됩니다.</p>
+        </div>
+        <div class="p-6 space-y-4">
+            ${showWsSelector ? `
+                <div>
+                    <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Target Workspace</label>
+                    <div class="relative">
+                        <select class="w-full appearance-none px-3 py-2 pr-8 border border-sb-border rounded-md text-sm bg-white focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary">
+                            ${wsOptions}
+                        </select>
+                        <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-sb-muted pointer-events-none"></i>
+                    </div>
+                </div>
+            ` : ''}
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Agent Name</label>
+                <input type="text" placeholder="e.g. Refund Helper" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary">
+            </div>
+            <div>
+                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Template</label>
+                <div class="grid grid-cols-3 gap-2">
+                    ${[
+                        {label: 'Blank', icon: 'ph-plus-square', active: true},
+                        {label: 'Support', icon: 'ph-lifebuoy', active: false},
+                        {label: 'Sales', icon: 'ph-shopping-bag', active: false}
+                    ].map(t => `
+                        <button class="p-3 rounded-lg border transition-all flex flex-col items-center gap-1 ${t.active ? 'border-sb-primary bg-sb-primary/5 text-sb-primary' : 'border-sb-border text-sb-muted hover:border-sb-primary/40 hover:bg-sb-hover'}">
+                            <i class="ph-fill ${t.icon} text-xl"></i>
+                            <span class="text-xs font-semibold">${t.label}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="bg-slate-50 border border-sb-border rounded-lg p-3 flex items-start gap-2.5 text-xs text-sb-muted">
+                <i class="ph-fill ph-info text-sb-primary text-base mt-0.5 shrink-0"></i>
+                <span>생성 즉시 <strong class="text-sb-text">Development</strong> 환경에 배포됩니다. Staging/Production 승격은 Build 완료 후 Publish 버튼으로 진행하세요.</span>
+            </div>
+        </div>
+        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-sb-text text-white rounded-md hover:bg-sb-primary/90 transition-colors flex items-center gap-1.5">
+                <i class="ph ph-plus font-bold"></i> Create Agent
+            </button>
+        </div>`;
+    }
+    return '';
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (state.modal) closeModal();
+        else if (state.view === 'org-settings' || state.view === 'ws-settings') closeSettings();
+    }
+});
+
+init();
+</script>
+
+</body>
+</html>
