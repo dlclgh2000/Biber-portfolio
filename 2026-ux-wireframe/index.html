@@ -6,31 +6,37 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Sendbird delight.ai Prototype</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
-                    },
-                    colors: {
-                        sb: {
-                            base: '#fafafa',       // zinc-50 (muted background)
-                            surface: '#ffffff',    // white (cards)
-                            border: '#e4e4e7',     // zinc-200
-                            primary: '#18181b',    // zinc-900 (shadcn default primary = near black)
-                            primaryDark: '#09090b', // zinc-950
-                            text: '#09090b',       // zinc-950 (foreground)
-                            muted: '#71717a',      // zinc-500 (muted-foreground)
-                            hover: '#f4f4f5',      // zinc-100 (accent)
+        // Pre-define Tailwind config BEFORE the CDN loads so that the first compile pass
+        // picks up custom colors/fontFamily. Without this, http:// contexts (GitHub Pages,
+        // VS Code Live Server) compile classes with default config and custom utilities
+        // like `bg-sb-primary` are silently dropped.
+        window.tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
+                        },
+                        colors: {
+                            sb: {
+                                base: '#fafafa',
+                                surface: '#ffffff',
+                                border: '#e4e4e7',
+                                primary: '#18181b',
+                                primaryDark: '#09090b',
+                                text: '#09090b',
+                                muted: '#71717a',
+                                hover: '#f4f4f5',
+                            }
                         }
                     }
                 }
             }
-        }
+        };
     </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
