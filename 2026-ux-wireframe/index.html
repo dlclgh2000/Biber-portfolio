@@ -6,38 +6,10 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Sendbird delight.ai Prototype</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-    <script>
-        // Pre-define Tailwind config BEFORE the CDN loads so that the first compile pass
-        // picks up custom colors/fontFamily. Without this, http:// contexts (GitHub Pages,
-        // VS Code Live Server) compile classes with default config and custom utilities
-        // like `bg-sb-primary` are silently dropped.
-        window.tailwind = {
-            config: {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
-                        },
-                        colors: {
-                            sb: {
-                                base: '#fafafa',
-                                surface: '#ffffff',
-                                border: '#e4e4e7',
-                                primary: '#18181b',
-                                primaryDark: '#09090b',
-                                text: '#09090b',
-                                muted: '#71717a',
-                                hover: '#f4f4f5',
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
+        html, body { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -50,7 +22,7 @@
         @keyframes modalEnter { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
-<body class="bg-sb-base text-sb-text font-sans antialiased h-screen flex flex-col overflow-hidden" onclick="closeAllDropdowns(event)">
+<body class="bg-zinc-50 text-zinc-950 font-sans antialiased h-screen flex flex-col overflow-hidden" onclick="closeAllDropdowns(event)">
 
 <script>
 const state = {
@@ -133,20 +105,20 @@ function closeAllDropdowns(e) {
 </script>
 
 <!-- GNB -->
-<header class="h-14 border-b border-sb-border bg-sb-surface flex items-center justify-between px-6 shrink-0 z-50 relative shadow-sm">
+<header class="h-14 border-b border-zinc-200 bg-white flex items-center justify-between px-6 shrink-0 z-50 relative shadow-sm">
     <div class="flex items-center gap-6">
         <div class="flex items-center gap-2 cursor-pointer group" onclick="goToLobby()">
             <img src="logo.png" alt="delight.ai" class="w-7 h-7 group-hover:scale-110 transition-transform">
-            <span class="font-bold text-lg tracking-tight text-sb-text">delight.ai</span>
+            <span class="font-bold text-lg tracking-tight text-zinc-950">delight.ai</span>
         </div>
-        <div class="h-4 w-px bg-sb-border"></div>
-        <span class="text-sm font-semibold text-sb-text">Sendbird Inc.</span>
+        <div class="h-4 w-px bg-zinc-200"></div>
+        <span class="text-sm font-semibold text-zinc-950">Sendbird Inc.</span>
     </div>
     <div class="flex items-center gap-4">
-        <button onclick="openOrgSettings()" class="text-sb-muted hover:text-sb-text transition-colors p-1.5 rounded-md hover:bg-sb-hover" title="Organization Settings">
+        <button onclick="openOrgSettings()" class="text-zinc-500 hover:text-zinc-950 transition-colors p-1.5 rounded-md hover:bg-zinc-100" title="Organization Settings">
             <i class="ph ph-gear text-xl"></i>
         </button>
-        <div onclick="openOrgSettingsAt('profile')" class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 cursor-pointer border border-sb-border ml-2 flex items-center justify-center text-white text-xs font-bold" title="치호">치호</div>
+        <div onclick="openOrgSettingsAt('profile')" class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 cursor-pointer border border-zinc-200 ml-2 flex items-center justify-center text-white text-xs font-bold" title="치호">치호</div>
     </div>
 </header>
 
@@ -154,18 +126,18 @@ function closeAllDropdowns(e) {
 <div class="flex-1 flex overflow-hidden relative">
 
     <!-- VIEW: LOBBY -->
-    <div id="view-lobby" class="flex-1 flex flex-col items-center p-12 bg-sb-base overflow-y-auto w-full z-40 absolute inset-0">
+    <div id="view-lobby" class="flex-1 flex flex-col items-center p-12 bg-zinc-50 overflow-y-auto w-full z-40 absolute inset-0">
         <div class="max-w-5xl w-full">
             <div class="mb-8 flex items-end justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold mb-2 tracking-tight text-sb-text">Workspaces</h1>
-                    <p class="text-sb-muted">작업을 시작할 워크스페이스를 선택하거나 새로 생성하세요.</p>
+                    <h1 class="text-3xl font-bold mb-2 tracking-tight text-zinc-950">Workspaces</h1>
+                    <p class="text-zinc-500">작업을 시작할 워크스페이스를 선택하거나 새로 생성하세요.</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="openModal('add-agent')" class="inline-flex items-center gap-2 bg-white border border-sb-border text-sb-text font-semibold rounded-md px-4 py-2 hover:bg-sb-hover transition-colors text-sm">
+                    <button onclick="openModal('add-agent')" class="inline-flex items-center gap-2 bg-white border border-zinc-200 text-zinc-950 font-semibold rounded-md px-4 py-2 hover:bg-zinc-100 transition-colors text-sm">
                         <i class="ph ph-plus"></i> New Agent
                     </button>
-                    <button onclick="openModal('add-workspace')" class="inline-flex items-center gap-2 bg-sb-primary text-white font-semibold rounded-md px-4 py-2 hover:bg-sb-primary/90 transition-colors text-sm">
+                    <button onclick="openModal('add-workspace')" class="inline-flex items-center gap-2 bg-zinc-900 text-white font-semibold rounded-md px-4 py-2 hover:bg-zinc-900/90 transition-colors text-sm">
                         <i class="ph ph-plus"></i> New Workspace
                     </button>
                 </div>
@@ -176,66 +148,66 @@ function closeAllDropdowns(e) {
 
     <!-- VIEW: DASHBOARD SHELL (Sidebar + Main) -->
     <div id="view-dashboard" class="flex-1 flex h-full hidden w-full">
-        <aside class="w-64 border-r border-sb-border bg-sb-surface flex flex-col shrink-0 z-20 shadow-[2px_0_10px_rgba(0,0,0,0.02)] relative">
+        <aside class="w-64 border-r border-zinc-200 bg-white flex flex-col shrink-0 z-20 shadow-[2px_0_10px_rgba(0,0,0,0.02)] relative">
             <div class="px-3 pt-3 pb-1 relative" id="workspace-selector-container">
-                <button onclick="toggleWorkspaceDropdown(event)" class="w-full flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-sb-hover transition-colors">
-                    <div id="ws-avatar" class="w-7 h-7 rounded-md bg-sb-primary text-white text-xs font-bold flex items-center justify-center shrink-0">W</div>
-                    <span id="current-ws-name" class="text-sm font-bold text-sb-text flex-1 truncate text-left">Workspace</span>
-                    <i class="ph ph-caret-down text-sb-muted text-sm shrink-0"></i>
+                <button onclick="toggleWorkspaceDropdown(event)" class="w-full flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-zinc-100 transition-colors">
+                    <div id="ws-avatar" class="w-7 h-7 rounded-md bg-zinc-900 text-white text-xs font-bold flex items-center justify-center shrink-0">W</div>
+                    <span id="current-ws-name" class="text-sm font-bold text-zinc-950 flex-1 truncate text-left">Workspace</span>
+                    <i class="ph ph-caret-down text-zinc-500 text-sm shrink-0"></i>
                 </button>
-                <div id="workspace-dropdown" class="hidden absolute top-full left-3 right-3 mt-1 bg-sb-surface border border-sb-border rounded-lg shadow-lg z-50 overflow-hidden">
+                <div id="workspace-dropdown" class="hidden absolute top-full left-3 right-3 mt-1 bg-white border border-zinc-200 rounded-lg shadow-lg z-50 overflow-hidden">
                     <div class="max-h-60 overflow-y-auto p-1" id="workspace-dropdown-list"></div>
-                    <div class="p-1 border-t border-sb-border bg-sb-base/50">
-                        <button onclick="openModal('add-workspace')" class="w-full flex items-center gap-2 text-sm font-semibold text-sb-text px-3 py-2 rounded-md hover:bg-sb-hover hover:text-sb-primaryDark transition-colors">
-                            <i class="ph ph-plus text-sb-muted"></i> Create Workspace
+                    <div class="p-1 border-t border-zinc-200 bg-zinc-50/50">
+                        <button onclick="openModal('add-workspace')" class="w-full flex items-center gap-2 text-sm font-semibold text-zinc-950 px-3 py-2 rounded-md hover:bg-zinc-100 hover:text-zinc-950 transition-colors">
+                            <i class="ph ph-plus text-zinc-500"></i> Create Workspace
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="px-2 pt-1 pb-2">
-                <button id="all-agents-btn" onclick="goToWorkspaceHub()" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-sb-muted hover:bg-sb-hover hover:text-sb-text">
+                <button id="all-agents-btn" onclick="goToWorkspaceHub()" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950">
                     <i class="ph ph-squares-four text-lg shrink-0"></i>
                     <span class="truncate flex-1 text-left">All Agents</span>
                     <span id="all-agents-count" class="text-[10px] font-semibold shrink-0 text-slate-400">0</span>
                 </button>
             </div>
 
-            <div class="mx-3 border-t border-sb-border"></div>
+            <div class="mx-3 border-t border-zinc-200"></div>
 
             <div class="flex-1 overflow-y-auto pt-3 pb-3">
                 <div class="px-5 mb-1.5">
-                    <label class="text-[11px] font-bold text-sb-muted uppercase tracking-wider">Agents</label>
+                    <label class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Agents</label>
                 </div>
                 <ul id="agent-nav-list" class="space-y-0.5 px-2"></ul>
             </div>
 
-            <div class="px-3 py-3 border-t border-sb-border bg-sb-surface z-10">
-                <button onclick="openWsSettings()" class="flex items-center gap-2 text-sm text-sb-muted hover:text-sb-text w-full px-3 py-2 rounded-md hover:bg-sb-hover transition-colors font-medium">
+            <div class="px-3 py-3 border-t border-zinc-200 bg-white z-10">
+                <button onclick="openWsSettings()" class="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-950 w-full px-3 py-2 rounded-md hover:bg-zinc-100 transition-colors font-medium">
                     <i class="ph ph-sliders-horizontal text-lg"></i> Workspace Settings
                 </button>
             </div>
         </aside>
 
-        <main class="flex-1 flex flex-col bg-sb-base overflow-hidden relative z-10" id="main-area"></main>
+        <main class="flex-1 flex flex-col bg-zinc-50 overflow-hidden relative z-10" id="main-area"></main>
     </div>
 
     <!-- VIEW: ORG SETTINGS (full-screen overlay) -->
-    <div id="view-org-settings" class="hidden absolute inset-0 bg-sb-base z-40 flex flex-col">
-        <div class="border-b border-sb-border bg-sb-surface px-6 py-3 flex items-center justify-between shrink-0">
+    <div id="view-org-settings" class="hidden absolute inset-0 bg-zinc-50 z-40 flex flex-col">
+        <div class="border-b border-zinc-200 bg-white px-6 py-3 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
-                <button onclick="closeSettings()" class="flex items-center gap-1.5 text-sb-muted hover:text-sb-text text-sm font-medium px-2 py-1 rounded-md hover:bg-sb-hover transition-colors">
+                <button onclick="closeSettings()" class="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-950 text-sm font-medium px-2 py-1 rounded-md hover:bg-zinc-100 transition-colors">
                     <i class="ph ph-arrow-left"></i> Back
                 </button>
-                <div class="h-4 w-px bg-sb-border"></div>
+                <div class="h-4 w-px bg-zinc-200"></div>
                 <div class="flex items-center gap-2">
-                    <span class="font-bold text-sb-text">Organization Settings</span>
-                    <span class="text-sb-muted text-sm">· Sendbird Inc.</span>
+                    <span class="font-bold text-zinc-950">Organization Settings</span>
+                    <span class="text-zinc-500 text-sm">· Sendbird Inc.</span>
                 </div>
             </div>
         </div>
         <div class="flex-1 flex overflow-hidden">
-            <aside class="w-64 border-r border-sb-border bg-sb-surface p-4 overflow-y-auto">
+            <aside class="w-64 border-r border-zinc-200 bg-white p-4 overflow-y-auto">
                 <div id="org-settings-menu-list"></div>
             </aside>
             <div class="flex-1 overflow-y-auto p-8" id="org-settings-content"></div>
@@ -243,23 +215,23 @@ function closeAllDropdowns(e) {
     </div>
 
     <!-- VIEW: WS SETTINGS (full-screen overlay) -->
-    <div id="view-ws-settings" class="hidden absolute inset-0 bg-sb-base z-40 flex flex-col">
-        <div class="border-b border-sb-border bg-sb-surface px-6 py-3 flex items-center justify-between shrink-0">
+    <div id="view-ws-settings" class="hidden absolute inset-0 bg-zinc-50 z-40 flex flex-col">
+        <div class="border-b border-zinc-200 bg-white px-6 py-3 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
-                <button onclick="closeSettings()" class="flex items-center gap-1.5 text-sb-muted hover:text-sb-text text-sm font-medium px-2 py-1 rounded-md hover:bg-sb-hover transition-colors">
+                <button onclick="closeSettings()" class="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-950 text-sm font-medium px-2 py-1 rounded-md hover:bg-zinc-100 transition-colors">
                     <i class="ph ph-arrow-left"></i> Back
                 </button>
-                <div class="h-4 w-px bg-sb-border"></div>
+                <div class="h-4 w-px bg-zinc-200"></div>
                 <div class="flex items-center gap-2">
-                    <div id="ws-settings-avatar" class="w-5 h-5 rounded bg-sb-primary text-white text-[9px] font-bold flex items-center justify-center">W</div>
-                    <span class="font-bold text-sb-text">Workspace Settings</span>
-                    <span class="text-sb-muted text-sm" id="ws-settings-title">· Workspace</span>
+                    <div id="ws-settings-avatar" class="w-5 h-5 rounded bg-zinc-900 text-white text-[9px] font-bold flex items-center justify-center">W</div>
+                    <span class="font-bold text-zinc-950">Workspace Settings</span>
+                    <span class="text-zinc-500 text-sm" id="ws-settings-title">· Workspace</span>
                 </div>
             </div>
         </div>
         <div class="flex-1 flex overflow-hidden">
-            <aside class="w-64 border-r border-sb-border bg-sb-surface p-4 overflow-y-auto">
-                <label class="text-[11px] font-bold text-sb-muted uppercase tracking-wider mb-3 block px-2">Settings</label>
+            <aside class="w-64 border-r border-zinc-200 bg-white p-4 overflow-y-auto">
+                <label class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-3 block px-2">Settings</label>
                 <ul class="space-y-1" id="ws-settings-menu-list"></ul>
             </aside>
             <div class="flex-1 overflow-y-auto p-8" id="ws-settings-content"></div>
@@ -269,7 +241,7 @@ function closeAllDropdowns(e) {
 
 <!-- Modal backdrop -->
 <div id="modal-backdrop" class="hidden fixed inset-0 bg-slate-900/40 z-[60] flex items-center justify-center p-4" onclick="closeModalFromBackdrop(event)">
-    <div id="modal-card" class="bg-sb-surface rounded-lg shadow-2xl border border-sb-border w-full max-w-md modal-enter" onclick="event.stopPropagation()"></div>
+    <div id="modal-card" class="bg-white rounded-lg shadow-2xl border border-zinc-200 w-full max-w-md modal-enter" onclick="event.stopPropagation()"></div>
 </div>
 
 <script>
@@ -361,22 +333,22 @@ function renderLobby() {
         const display = ws.agents.slice(0, MAX);
         const hidden = ws.agents.length - MAX;
         return `
-        <div class="bg-sb-surface border border-sb-border rounded-lg p-0 hover:border-sb-muted/40 transition-colors flex flex-col overflow-hidden h-[250px]">
-            <div onclick="enterWorkspace('${ws.id}')" class="p-5 border-b border-sb-border bg-sb-base cursor-pointer group flex items-center justify-between shrink-0">
+        <div class="bg-white border border-zinc-200 rounded-lg p-0 hover:border-zinc-500/40 transition-colors flex flex-col overflow-hidden h-[250px]">
+            <div onclick="enterWorkspace('${ws.id}')" class="p-5 border-b border-zinc-200 bg-zinc-50 cursor-pointer group flex items-center justify-between shrink-0">
                 <div>
-                    <h3 class="text-lg font-bold text-sb-text group-hover:text-sb-primaryDark transition-colors flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-md bg-sb-primary text-white text-xs font-bold flex items-center justify-center shrink-0">${ws.name.charAt(0).toUpperCase()}</div>
+                    <h3 class="text-lg font-bold text-zinc-950 group-hover:text-zinc-950 transition-colors flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-md bg-zinc-900 text-white text-xs font-bold flex items-center justify-center shrink-0">${ws.name.charAt(0).toUpperCase()}</div>
                         ${ws.name}
                     </h3>
-                    <p class="text-xs text-sb-muted mt-1 font-medium pl-9">${ws.agents.length} Agents</p>
+                    <p class="text-xs text-zinc-500 mt-1 font-medium pl-9">${ws.agents.length} Agents</p>
                 </div>
-                <div class="w-8 h-8 rounded bg-sb-surface border border-sb-border flex items-center justify-center text-sb-muted group-hover:text-sb-primaryDark group-hover:border-sb-primary/30 transition-all">
+                <div class="w-8 h-8 rounded bg-white border border-zinc-200 flex items-center justify-center text-zinc-500 group-hover:text-zinc-950 group-hover:border-zinc-900/30 transition-all">
                     <i class="ph ph-arrow-right"></i>
                 </div>
             </div>
-            <div class="p-3 flex-1 bg-sb-surface flex flex-col">
+            <div class="p-3 flex-1 bg-white flex flex-col">
                 ${ws.agents.length === 0 ? `
-                    <div class="flex-1 flex flex-col items-center justify-center text-center py-6 text-sb-muted">
+                    <div class="flex-1 flex flex-col items-center justify-center text-center py-6 text-zinc-500">
                         <i class="ph ph-robot text-3xl text-slate-300 mb-2"></i>
                         <div class="text-xs font-medium">No agents yet</div>
                     </div>
@@ -384,13 +356,13 @@ function renderLobby() {
                     <ul class="space-y-1 flex-1">
                         ${display.map(a => `
                             <li>
-                                <button onclick="event.stopPropagation(); enterAgentDirectly('${ws.id}', '${a.id}')" class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-sb-text hover:bg-sb-hover hover:text-sb-primaryDark transition-colors flex items-center gap-3 border border-transparent hover:border-sb-border group">
+                                <button onclick="event.stopPropagation(); enterAgentDirectly('${ws.id}', '${a.id}')" class="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-zinc-950 hover:bg-zinc-100 hover:text-zinc-950 transition-colors flex items-center gap-3 border border-transparent hover:border-zinc-200 group">
                                     <div class="relative shrink-0">
-                                        <div class="w-6 h-6 rounded bg-sb-hover flex items-center justify-center text-sb-muted"><i class="ph-fill ph-robot text-base"></i></div>
-                                        <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getAgentStage(a).dotColor} ring-2 ring-sb-surface"></span>
+                                        <div class="w-6 h-6 rounded bg-zinc-100 flex items-center justify-center text-zinc-500"><i class="ph-fill ph-robot text-base"></i></div>
+                                        <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${getAgentStage(a).dotColor} ring-2 ring-white"></span>
                                     </div>
                                     <span class="truncate flex-1">${a.name}</span>
-                                    <span class="text-[11px] text-slate-400 font-normal group-hover:text-sb-primary transition-colors">${a.time}</span>
+                                    <span class="text-[11px] text-slate-400 font-normal group-hover:text-zinc-900 transition-colors">${a.time}</span>
                                 </button>
                             </li>
                         `).join('')}
@@ -426,9 +398,9 @@ function buildWorkspaceHubHTML() {
     const agentCards = ws.agents.map(a => {
         const stage = getAgentStage(a);
         return `
-        <button onclick="enterAgentDirectly('${ws.id}', '${a.id}')" class="text-left bg-sb-surface border border-sb-border rounded-lg p-4 hover:border-sb-muted/40 transition-colors group">
+        <button onclick="enterAgentDirectly('${ws.id}', '${a.id}')" class="text-left bg-white border border-zinc-200 rounded-lg p-4 hover:border-zinc-500/40 transition-colors group">
             <div class="flex items-start justify-between mb-3">
-                <div class="w-10 h-10 rounded-lg bg-sb-hover flex items-center justify-center text-sb-muted">
+                <div class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-500">
                     <i class="ph-fill ph-robot text-xl"></i>
                 </div>
                 <span class="inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] font-semibold ${stage.classes}">
@@ -436,22 +408,22 @@ function buildWorkspaceHubHTML() {
                     ${stage.label}
                 </span>
             </div>
-            <div class="font-bold text-sb-text mb-1 truncate group-hover:text-sb-primaryDark">${a.name}</div>
-            <div class="text-xs text-sb-muted">Edited ${a.time}</div>
+            <div class="font-bold text-zinc-950 mb-1 truncate group-hover:text-zinc-950">${a.name}</div>
+            <div class="text-xs text-zinc-500">Edited ${a.time}</div>
         </button>`;
     }).join('');
 
     return `
     <div class="flex-1 overflow-y-auto">
-        <div class="bg-sb-surface border-b border-sb-border px-8 py-8">
+        <div class="bg-white border-b border-zinc-200 px-8 py-8">
             <div class="max-w-6xl flex items-center gap-5">
-                <div class="w-16 h-16 rounded-lg bg-sb-primary flex items-center justify-center text-white text-3xl font-bold shadow-sm shrink-0">${ws.name.charAt(0).toUpperCase()}</div>
+                <div class="w-16 h-16 rounded-lg bg-zinc-900 flex items-center justify-center text-white text-3xl font-bold shadow-sm shrink-0">${ws.name.charAt(0).toUpperCase()}</div>
                 <div class="flex-1">
-                    <h1 class="text-2xl font-bold text-sb-text tracking-tight">${ws.name}</h1>
-                    <p class="text-sb-muted text-sm mt-1">${ws.agents.length} AI agents</p>
+                    <h1 class="text-2xl font-bold text-zinc-950 tracking-tight">${ws.name}</h1>
+                    <p class="text-zinc-500 text-sm mt-1">${ws.agents.length} AI agents</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="openModal('add-agent')" class="flex items-center gap-2 bg-sb-text text-white font-semibold rounded-lg px-4 py-2 hover:bg-sb-primary/90 transition-colors shadow-sm text-sm">
+                    <button onclick="openModal('add-agent')" class="flex items-center gap-2 bg-zinc-950 text-white font-semibold rounded-lg px-4 py-2 hover:bg-zinc-900/90 transition-colors shadow-sm text-sm">
                         <i class="ph ph-plus font-bold"></i> Add Agent
                     </button>
                 </div>
@@ -462,18 +434,18 @@ function buildWorkspaceHubHTML() {
             <div class="max-w-6xl">
             <section class="mb-10">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-bold text-sb-muted uppercase tracking-wider flex items-center gap-2">
-                        <i class="ph-fill ph-robot text-sb-primary"></i> AI Agents
+                    <h2 class="text-sm font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-2">
+                        <i class="ph-fill ph-robot text-zinc-900"></i> AI Agents
                     </h2>
-                    <span class="text-xs text-sb-muted">${ws.agents.length} total</span>
+                    <span class="text-xs text-zinc-500">${ws.agents.length} total</span>
                 </div>
                 ${ws.agents.length === 0 ? `
-                    <div class="bg-sb-surface border border-dashed border-sb-border rounded-lg py-16 flex flex-col items-center justify-center text-center">
+                    <div class="bg-white border border-dashed border-zinc-200 rounded-lg py-16 flex flex-col items-center justify-center text-center">
                         <div class="w-16 h-16 rounded-lg bg-slate-100 flex items-center justify-center mb-4">
                             <i class="ph ph-robot text-4xl text-slate-300"></i>
                         </div>
-                        <h3 class="font-bold text-sb-text mb-1">No agents yet</h3>
-                        <p class="text-sm text-sb-muted">우측 상단 <strong class="text-sb-text">Add Agent</strong> 버튼으로 첫 Agent를 만들어보세요.</p>
+                        <h3 class="font-bold text-zinc-950 mb-1">No agents yet</h3>
+                        <p class="text-sm text-zinc-500">우측 상단 <strong class="text-zinc-950">Add Agent</strong> 버튼으로 첫 Agent를 만들어보세요.</p>
                     </div>
                 ` : `
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -483,10 +455,10 @@ function buildWorkspaceHubHTML() {
             </section>
 
             <section>
-                <h2 class="text-sm font-bold text-sb-muted uppercase tracking-wider flex items-center gap-2 mb-4">
-                    <i class="ph-fill ph-activity text-sb-primary"></i> Recent Activity
+                <h2 class="text-sm font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-2 mb-4">
+                    <i class="ph-fill ph-activity text-zinc-900"></i> Recent Activity
                 </h2>
-                <div class="bg-sb-surface border border-sb-border rounded-lg p-6 skeleton-pulse">
+                <div class="bg-white border border-zinc-200 rounded-lg p-6 skeleton-pulse">
                     ${[1,2,3,4,5].map(() => `
                         <div class="flex items-center gap-4 py-3 border-b border-slate-100 last:border-0">
                             <div class="w-8 h-8 rounded-full bg-slate-200 shrink-0"></div>
@@ -506,25 +478,25 @@ function buildWorkspaceHubHTML() {
 
 function buildAgentDashboardShellHTML() {
     return `
-        <div class="bg-sb-surface border-b border-sb-border shrink-0 z-10">
+        <div class="bg-white border-b border-zinc-200 shrink-0 z-10">
             <div class="px-8 py-3 flex items-center justify-between">
                 <div class="flex items-center gap-1">
-                    <span id="bc-agent" class="text-sb-text font-bold text-base">Agent</span>
+                    <span id="bc-agent" class="text-zinc-950 font-bold text-base">Agent</span>
                     <div class="relative" id="agent-menu-container">
-                        <button onclick="toggleAgentMenu(event)" class="p-1 rounded hover:bg-sb-hover text-sb-muted hover:text-sb-text transition-colors" title="Agent actions">
+                        <button onclick="toggleAgentMenu(event)" class="p-1 rounded hover:bg-zinc-100 text-zinc-500 hover:text-zinc-950 transition-colors" title="Agent actions">
                             <i class="ph ph-caret-down text-sm"></i>
                         </button>
-                        <div id="agent-menu-dropdown" class="hidden absolute top-full left-0 mt-1 w-48 bg-sb-surface border border-sb-border rounded-lg shadow-sm z-50 overflow-hidden dropdown-enter">
+                        <div id="agent-menu-dropdown" class="hidden absolute top-full left-0 mt-1 w-48 bg-white border border-zinc-200 rounded-lg shadow-sm z-50 overflow-hidden dropdown-enter">
                             <div class="p-1">
-                                <button onclick="closeAgentMenu()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-sb-text rounded-md hover:bg-sb-hover transition-colors text-left">
+                                <button onclick="closeAgentMenu()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors text-left">
                                     <i class="ph ph-pencil-simple text-base"></i> Rename
                                 </button>
-                                <button onclick="closeAgentMenu()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-sb-text rounded-md hover:bg-sb-hover transition-colors text-left">
+                                <button onclick="closeAgentMenu()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors text-left">
                                     <i class="ph ph-copy text-base"></i> Duplicate
                                 </button>
                             </div>
-                            <div class="p-1 border-t border-sb-border">
-                                <button onclick="openArchiveAgentModal()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-sb-text rounded-md hover:bg-amber-50 hover:text-amber-700 transition-colors text-left">
+                            <div class="p-1 border-t border-zinc-200">
+                                <button onclick="openArchiveAgentModal()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-zinc-950 rounded-md hover:bg-amber-50 hover:text-amber-700 transition-colors text-left">
                                     <i class="ph ph-archive text-base"></i> Archive
                                 </button>
                                 <button onclick="openDeleteAgentModal()" class="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors text-left">
@@ -575,7 +547,7 @@ function renderWorkspaceDropdown() {
         dropdown.classList.add('dropdown-enter');
         listContainer.innerHTML = state.workspaces.map(ws => {
             const isSelected = ws.id === state.currentWorkspaceId;
-            return `<button onclick="changeWorkspaceFromDropdown('${ws.id}')" class="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm rounded-md transition-colors ${isSelected ? 'bg-sb-hover font-bold text-sb-primaryDark' : 'text-sb-text font-medium hover:bg-sb-hover'}"><span class="flex items-center gap-2 truncate flex-1 min-w-0"><div class="w-5 h-5 rounded bg-sb-primary text-white text-[9px] font-bold flex items-center justify-center shrink-0">${ws.name.charAt(0).toUpperCase()}</div><span class="truncate">${ws.name}</span></span><span class="flex items-center gap-2 shrink-0"><span class="text-[10px] font-semibold ${isSelected ? 'text-sb-primary/80' : 'text-slate-400'}">${ws.agents.length}</span>${isSelected ? '<i class="ph ph-check text-sb-primary"></i>' : ''}</span></button>`;
+            return `<button onclick="changeWorkspaceFromDropdown('${ws.id}')" class="w-full flex items-center justify-between gap-2 px-3 py-2 text-sm rounded-md transition-colors ${isSelected ? 'bg-zinc-100 font-bold text-zinc-950' : 'text-zinc-950 font-medium hover:bg-zinc-100'}"><span class="flex items-center gap-2 truncate flex-1 min-w-0"><div class="w-5 h-5 rounded bg-zinc-900 text-white text-[9px] font-bold flex items-center justify-center shrink-0">${ws.name.charAt(0).toUpperCase()}</div><span class="truncate">${ws.name}</span></span><span class="flex items-center gap-2 shrink-0"><span class="text-[10px] font-semibold ${isSelected ? 'text-zinc-900/80' : 'text-slate-400'}">${ws.agents.length}</span>${isSelected ? '<i class="ph ph-check text-zinc-900"></i>' : ''}</span></button>`;
         }).join('');
     } else {
         dropdown.classList.add('hidden');
@@ -593,14 +565,14 @@ function renderSidebar() {
     const isHub = state.view === 'workspace-hub';
     const allAgentsBtn = document.getElementById('all-agents-btn');
     if (allAgentsBtn) {
-        allAgentsBtn.className = `w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isHub ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}`;
+        allAgentsBtn.className = `w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${isHub ? 'bg-zinc-900/10 text-zinc-950' : 'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950'}`;
         const icon = allAgentsBtn.querySelector('i');
-        if (icon) icon.className = `${isHub ? 'ph-fill text-sb-primary' : 'ph'} ph-squares-four text-lg shrink-0`;
+        if (icon) icon.className = `${isHub ? 'ph-fill text-zinc-900' : 'ph'} ph-squares-four text-lg shrink-0`;
     }
     const countEl = document.getElementById('all-agents-count');
     if (countEl) {
         countEl.innerText = currentWs.agents.length;
-        countEl.className = `text-[10px] font-semibold shrink-0 ${isHub ? 'text-sb-primary/80' : 'text-slate-400'}`;
+        countEl.className = `text-[10px] font-semibold shrink-0 ${isHub ? 'text-zinc-900/80' : 'text-slate-400'}`;
     }
 
     const list = document.getElementById('agent-nav-list');
@@ -608,7 +580,7 @@ function renderSidebar() {
     list.innerHTML = currentWs.agents.map(agent => {
         const isActive = agent.id === state.currentAgentId && state.view === 'agent-dashboard';
         const stage = getAgentStage(agent);
-        return `<li><button onclick="changeAgent('${agent.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors group ${isActive ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}"><span class="relative shrink-0"><i class="${isActive ? 'ph-fill text-sb-primary' : 'ph'} ph-robot text-lg"></i><span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${stage.dotColor} ring-2 ring-sb-surface"></span></span><span class="truncate flex-1 text-left">${agent.name}</span><span class="text-[10px] whitespace-nowrap shrink-0 ${isActive ? 'text-sb-primary/80' : 'text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity'}">${agent.time}</span></button></li>`;
+        return `<li><button onclick="changeAgent('${agent.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors group ${isActive ? 'bg-zinc-900/10 text-zinc-950' : 'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950'}"><span class="relative shrink-0"><i class="${isActive ? 'ph-fill text-zinc-900' : 'ph'} ph-robot text-lg"></i><span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full ${stage.dotColor} ring-2 ring-white"></span></span><span class="truncate flex-1 text-left">${agent.name}</span><span class="text-[10px] whitespace-nowrap shrink-0 ${isActive ? 'text-zinc-900/80' : 'text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity'}">${agent.time}</span></button></li>`;
     }).join('');
 }
 
@@ -645,7 +617,7 @@ function renderMainHeader() {
     const pub = document.getElementById('publish-action-container');
     if (curEnv.nextLabel) {
         pub.innerHTML = `
-            <button class="inline-flex items-center gap-2 bg-sb-primary text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-sb-primary/90 transition-colors">
+            <button class="inline-flex items-center gap-2 bg-zinc-900 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-zinc-900/90 transition-colors">
                 <i class="ph ph-paper-plane-tilt"></i>
                 Publish to ${curEnv.nextLabel}
             </button>`;
@@ -667,7 +639,7 @@ function renderMainHeader() {
     const menusContainer = document.getElementById('agent-menus');
     menusContainer.innerHTML = menus.map(m => {
         const isActive = state.currentMenu === m.id;
-        return `<button onclick="changeMenu('${m.id}')" class="flex items-center gap-2 pb-3 pt-1 text-sm font-bold border-b-2 transition-colors ${isActive ? 'border-sb-primary text-sb-primaryDark' : 'border-transparent text-sb-muted hover:text-sb-text hover:border-sb-border'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button>`;
+        return `<button onclick="changeMenu('${m.id}')" class="flex items-center gap-2 pb-3 pt-1 text-sm font-bold border-b-2 transition-colors ${isActive ? 'border-zinc-900 text-zinc-950' : 'border-transparent text-zinc-500 hover:text-zinc-950 hover:border-zinc-200'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button>`;
     }).join('');
 }
 
@@ -681,9 +653,9 @@ function renderContent() {
     if (state.currentMenu === 'overview') {
         html = buildOverviewContent();
     } else if (state.currentMenu === 'build') {
-        html = `${envBadge}<div class="flex h-full gap-6"><div class="w-64 bg-sb-surface rounded-lg border border-sb-border shadow-sm p-4 flex flex-col gap-3 skeleton-pulse"><div class="h-8 w-full bg-slate-200 rounded mb-4"></div>${[1,2,3,4,5,6].map(() => `<div class="h-12 w-full bg-slate-100 rounded"></div>`).join('')}</div><div class="flex-1 bg-sb-surface rounded-lg border border-sb-border shadow-sm relative overflow-hidden skeleton-pulse"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 20px 20px;"></div><div class="absolute top-20 left-20 w-48 h-24 bg-white rounded-lg border-2 border-slate-300 shadow-sm"></div><div class="absolute top-40 left-80 w-48 h-32 bg-white rounded-lg border-2 border-slate-300 shadow-sm"></div><svg class="absolute inset-0 w-full h-full"><path d="M 240 120 C 300 120, 260 200, 320 200" stroke="#cbd5e1" stroke-width="2" fill="none"/></svg></div></div>`;
+        html = `${envBadge}<div class="flex h-full gap-6"><div class="w-64 bg-white rounded-lg border border-zinc-200 shadow-sm p-4 flex flex-col gap-3 skeleton-pulse"><div class="h-8 w-full bg-slate-200 rounded mb-4"></div>${[1,2,3,4,5,6].map(() => `<div class="h-12 w-full bg-slate-100 rounded"></div>`).join('')}</div><div class="flex-1 bg-white rounded-lg border border-zinc-200 shadow-sm relative overflow-hidden skeleton-pulse"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 20px 20px;"></div><div class="absolute top-20 left-20 w-48 h-24 bg-white rounded-lg border-2 border-slate-300 shadow-sm"></div><div class="absolute top-40 left-80 w-48 h-32 bg-white rounded-lg border-2 border-slate-300 shadow-sm"></div><svg class="absolute inset-0 w-full h-full"><path d="M 240 120 C 300 120, 260 200, 320 200" stroke="#cbd5e1" stroke-width="2" fill="none"/></svg></div></div>`;
     } else if (state.currentMenu === 'test') {
-        html = `${envBadge}<div class="flex h-full gap-6 justify-center"><div class="w-1/3 max-w-md bg-sb-surface rounded-lg border border-sb-border shadow-sm flex flex-col skeleton-pulse"><div class="p-4 border-b border-sb-border flex items-center justify-between"><div class="h-5 w-1/3 bg-slate-200 rounded"></div><div class="h-5 w-5 bg-slate-200 rounded-full"></div></div><div class="flex-1 p-4 flex flex-col gap-4 bg-slate-50"><div class="self-end w-2/3 h-12 bg-sb-primary/20 rounded-l-xl rounded-tr-xl"></div><div class="self-start w-3/4 h-16 bg-white border border-sb-border shadow-sm rounded-r-xl rounded-tl-xl"></div><div class="self-end w-1/2 h-10 bg-sb-primary/20 rounded-l-xl rounded-tr-xl"></div></div><div class="p-4 border-t border-sb-border bg-white"><div class="h-10 w-full bg-slate-100 rounded-full border border-sb-border"></div></div></div><div class="w-1/4 min-w-[250px] bg-sb-surface rounded-lg border border-sb-border shadow-sm p-4 flex flex-col gap-4 skeleton-pulse"><div class="h-5 w-1/2 bg-slate-200 rounded mb-2"></div><div class="h-20 w-full bg-slate-100 rounded"></div><div class="h-20 w-full bg-slate-100 rounded"></div></div></div>`;
+        html = `${envBadge}<div class="flex h-full gap-6 justify-center"><div class="w-1/3 max-w-md bg-white rounded-lg border border-zinc-200 shadow-sm flex flex-col skeleton-pulse"><div class="p-4 border-b border-zinc-200 flex items-center justify-between"><div class="h-5 w-1/3 bg-slate-200 rounded"></div><div class="h-5 w-5 bg-slate-200 rounded-full"></div></div><div class="flex-1 p-4 flex flex-col gap-4 bg-slate-50"><div class="self-end w-2/3 h-12 bg-zinc-900/20 rounded-l-xl rounded-tr-xl"></div><div class="self-start w-3/4 h-16 bg-white border border-zinc-200 shadow-sm rounded-r-xl rounded-tl-xl"></div><div class="self-end w-1/2 h-10 bg-zinc-900/20 rounded-l-xl rounded-tr-xl"></div></div><div class="p-4 border-t border-zinc-200 bg-white"><div class="h-10 w-full bg-slate-100 rounded-full border border-zinc-200"></div></div></div><div class="w-1/4 min-w-[250px] bg-white rounded-lg border border-zinc-200 shadow-sm p-4 flex flex-col gap-4 skeleton-pulse"><div class="h-5 w-1/2 bg-slate-200 rounded mb-2"></div><div class="h-20 w-full bg-slate-100 rounded"></div><div class="h-20 w-full bg-slate-100 rounded"></div></div></div>`;
     } else if (state.currentMenu === 'evaluate') {
         html = buildEvaluateContent();
     }
@@ -697,18 +669,18 @@ function buildOverviewContent() {
     return `${envBadge}
     <div class="grid grid-cols-4 gap-4 mb-6">
         ${[1,2,3,4].map(() => `
-            <div class="h-28 bg-sb-surface rounded-lg border border-sb-border shadow-sm p-4 flex flex-col justify-between skeleton-pulse">
+            <div class="h-28 bg-white rounded-lg border border-zinc-200 shadow-sm p-4 flex flex-col justify-between skeleton-pulse">
                 <div class="h-4 w-1/3 bg-slate-200 rounded"></div>
                 <div class="h-8 w-1/2 bg-slate-200 rounded"></div>
             </div>
         `).join('')}
     </div>
     <div class="grid grid-cols-3 gap-6">
-        <div class="col-span-2 bg-sb-surface rounded-lg border border-sb-border shadow-sm p-6 flex flex-col gap-4 skeleton-pulse">
+        <div class="col-span-2 bg-white rounded-lg border border-zinc-200 shadow-sm p-6 flex flex-col gap-4 skeleton-pulse">
             <div class="h-5 w-1/4 bg-slate-200 rounded"></div>
-            <div class="flex-1 bg-slate-50 rounded border border-sb-border min-h-[280px]"></div>
+            <div class="flex-1 bg-slate-50 rounded border border-zinc-200 min-h-[280px]"></div>
         </div>
-        <div class="bg-sb-surface rounded-lg border border-sb-border shadow-sm p-6 flex flex-col gap-3 skeleton-pulse">
+        <div class="bg-white rounded-lg border border-zinc-200 shadow-sm p-6 flex flex-col gap-3 skeleton-pulse">
             <div class="h-5 w-1/3 bg-slate-200 rounded mb-2"></div>
             ${[1,2,3,4,5].map(() => `<div class="h-10 w-full bg-slate-100 rounded"></div>`).join('')}
         </div>
@@ -720,8 +692,8 @@ function buildEvaluateContent() {
     const envBadge = `<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold mb-4 uppercase tracking-wider"><i class="ph-fill ph-database text-xs"></i> ${envLabel} DATA</div>`;
 
     return `${envBadge}
-    <div class="bg-sb-surface rounded-lg border border-sb-border shadow-sm overflow-hidden skeleton-pulse flex flex-col h-full">
-        <div class="p-4 border-b border-sb-border flex justify-between items-center bg-slate-50">
+    <div class="bg-white rounded-lg border border-zinc-200 shadow-sm overflow-hidden skeleton-pulse flex flex-col h-full">
+        <div class="p-4 border-b border-zinc-200 flex justify-between items-center bg-slate-50">
             <div class="h-6 w-1/4 bg-slate-200 rounded"></div>
             <div class="flex gap-2">
                 <div class="h-8 w-24 bg-slate-200 rounded"></div>
@@ -772,11 +744,11 @@ function renderOrgSettings() {
         if (items.length === 0) return '';
         const itemsHtml = items.map(m => {
             const isActive = m.id === state.orgSettingsMenu;
-            return `<li><button onclick="selectOrgSettingsMenu('${m.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left ${isActive ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button></li>`;
+            return `<li><button onclick="selectOrgSettingsMenu('${m.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left ${isActive ? 'bg-zinc-900/10 text-zinc-950' : 'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button></li>`;
         }).join('');
         return `
-            <div class="${idx > 0 ? 'mt-4 pt-4 border-t border-sb-border' : ''}">
-                <div class="text-[10px] font-bold text-sb-muted uppercase tracking-wider px-3 mb-1.5">${section.label}</div>
+            <div class="${idx > 0 ? 'mt-4 pt-4 border-t border-zinc-200' : ''}">
+                <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider px-3 mb-1.5">${section.label}</div>
                 <ul class="space-y-1">${itemsHtml}</ul>
             </div>`;
     }).join('');
@@ -790,8 +762,8 @@ function selectOrgSettingsMenu(menuId) { state.orgSettingsMenu = menuId; renderO
 
 function buildFormFieldSkeleton(label) {
     return `
-    <div class="bg-sb-surface border border-sb-border rounded-lg p-5">
-        <div class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-3">${label}</div>
+    <div class="bg-white border border-zinc-200 rounded-lg p-5">
+        <div class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">${label}</div>
         <div class="h-9 w-full bg-slate-100 border border-slate-200 rounded-md"></div>
     </div>`;
 }
@@ -799,8 +771,8 @@ function buildFormFieldSkeleton(label) {
 function buildOrgSettingsPage(menu) {
     const header = `
         <div class="max-w-3xl mb-6">
-            <h1 class="text-2xl font-bold text-sb-text tracking-tight mb-1">${menu.label}</h1>
-            <p class="text-sb-muted text-sm">${menu.desc}</p>
+            <h1 class="text-2xl font-bold text-zinc-950 tracking-tight mb-1">${menu.label}</h1>
+            <p class="text-zinc-500 text-sm">${menu.desc}</p>
         </div>`;
 
     let body = '';
@@ -810,10 +782,10 @@ function buildOrgSettingsPage(menu) {
         body = `
         <div class="max-w-4xl">
             <div class="flex items-center justify-between mb-4">
-                <div class="h-9 w-64 bg-slate-100 border border-sb-border rounded-md skeleton-pulse"></div>
-                <div class="h-9 w-32 bg-sb-text/80 rounded-md flex items-center justify-center text-white text-xs font-semibold gap-1"><i class="ph ph-plus"></i> Invite Member</div>
+                <div class="h-9 w-64 bg-slate-100 border border-zinc-200 rounded-md skeleton-pulse"></div>
+                <div class="h-9 w-32 bg-zinc-950/80 rounded-md flex items-center justify-center text-white text-xs font-semibold gap-1"><i class="ph ph-plus"></i> Invite Member</div>
             </div>
-            <div class="bg-sb-surface border border-sb-border rounded-lg overflow-hidden skeleton-pulse">
+            <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden skeleton-pulse">
                 ${[1,2,3,4,5,6].map(() => `
                     <div class="flex items-center gap-4 px-4 py-3 border-b border-slate-100 last:border-0">
                         <div class="w-9 h-9 rounded-full bg-slate-200"></div>
@@ -831,10 +803,10 @@ function buildOrgSettingsPage(menu) {
         body = `
         <div class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 skeleton-pulse">
             ${['Owner', 'Admin', 'Developer', 'Viewer'].map(role => `
-                <div class="bg-sb-surface border border-sb-border rounded-lg p-5">
+                <div class="bg-white border border-zinc-200 rounded-lg p-5">
                     <div class="flex items-center gap-2 mb-3">
-                        <i class="ph-fill ph-shield-check text-sb-primary"></i>
-                        <div class="font-bold text-sb-text">${role}</div>
+                        <i class="ph-fill ph-shield-check text-zinc-900"></i>
+                        <div class="font-bold text-zinc-950">${role}</div>
                     </div>
                     <div class="h-2.5 w-3/4 bg-slate-100 rounded mb-4"></div>
                     <div class="space-y-2">
@@ -847,9 +819,9 @@ function buildOrgSettingsPage(menu) {
         body = `
         <div class="max-w-3xl space-y-3 skeleton-pulse">
             ${['Two-Factor Authentication', 'IP Restrictions', 'SAML SSO', 'Support Access'].map(title => `
-                <div class="bg-sb-surface border border-sb-border rounded-lg p-5 flex items-center justify-between">
+                <div class="bg-white border border-zinc-200 rounded-lg p-5 flex items-center justify-between">
                     <div class="flex-1">
-                        <div class="font-semibold text-sb-text mb-1">${title}</div>
+                        <div class="font-semibold text-zinc-950 mb-1">${title}</div>
                         <div class="h-2.5 w-3/4 bg-slate-100 rounded"></div>
                     </div>
                     <div class="w-10 h-6 bg-slate-200 rounded-full"></div>
@@ -859,13 +831,13 @@ function buildOrgSettingsPage(menu) {
     } else if (menu.id === 'billing') {
         body = `
         <div class="max-w-4xl space-y-4">
-            <div class="bg-sb-hover border border-sb-border rounded-lg p-6 skeleton-pulse">
-                <div class="text-xs font-bold text-sb-muted uppercase mb-2">Current Plan</div>
+            <div class="bg-zinc-100 border border-zinc-200 rounded-lg p-6 skeleton-pulse">
+                <div class="text-xs font-bold text-zinc-500 uppercase mb-2">Current Plan</div>
                 <div class="h-8 w-40 bg-slate-300 rounded mb-4"></div>
                 <div class="h-2.5 w-1/2 bg-slate-200 rounded"></div>
             </div>
-            <div class="bg-sb-surface border border-sb-border rounded-lg p-6 skeleton-pulse">
-                <div class="font-bold text-sb-text mb-4">Invoices</div>
+            <div class="bg-white border border-zinc-200 rounded-lg p-6 skeleton-pulse">
+                <div class="font-bold text-zinc-950 mb-4">Invoices</div>
                 ${[1,2,3,4].map(() => `
                     <div class="flex items-center justify-between py-3 border-b border-slate-100 last:border-0">
                         <div class="h-3 w-48 bg-slate-100 rounded"></div>
@@ -877,8 +849,8 @@ function buildOrgSettingsPage(menu) {
     } else if (menu.id === 'profile') {
         body = `
         <div class="max-w-2xl space-y-4 skeleton-pulse">
-            <div class="bg-sb-surface border border-sb-border rounded-lg p-6 flex items-center gap-5">
-                <div class="w-20 h-20 rounded-full bg-sb-primary"></div>
+            <div class="bg-white border border-zinc-200 rounded-lg p-6 flex items-center gap-5">
+                <div class="w-20 h-20 rounded-full bg-zinc-900"></div>
                 <div class="flex-1 space-y-2">
                     <div class="h-5 w-40 bg-slate-200 rounded"></div>
                     <div class="h-3 w-56 bg-slate-100 rounded"></div>
@@ -904,7 +876,7 @@ function renderWsSettings() {
     const list = document.getElementById('ws-settings-menu-list');
     list.innerHTML = wsSettingsMenus.map(m => {
         const isActive = m.id === state.wsSettingsMenu;
-        return `<li><button onclick="selectWsSettingsMenu('${m.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left ${isActive ? 'bg-sb-primary/10 text-sb-primaryDark' : 'text-sb-muted hover:bg-sb-hover hover:text-sb-text'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button></li>`;
+        return `<li><button onclick="selectWsSettingsMenu('${m.id}')" class="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left ${isActive ? 'bg-zinc-900/10 text-zinc-950' : 'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950'}"><i class="${isActive ? 'ph-fill' : 'ph'} ${m.icon} text-lg"></i>${m.label}</button></li>`;
     }).join('');
 
     const content = document.getElementById('ws-settings-content');
@@ -917,8 +889,8 @@ function selectWsSettingsMenu(menuId) { state.wsSettingsMenu = menuId; renderWsS
 function buildWsSettingsPage(menu) {
     const header = `
         <div class="max-w-3xl mb-6">
-            <h1 class="text-2xl font-bold text-sb-text tracking-tight mb-1">${menu.label}</h1>
-            <p class="text-sb-muted text-sm">${menu.desc}</p>
+            <h1 class="text-2xl font-bold text-zinc-950 tracking-tight mb-1">${menu.label}</h1>
+            <p class="text-zinc-500 text-sm">${menu.desc}</p>
         </div>`;
 
     let body = '';
@@ -940,15 +912,15 @@ function buildWsSettingsPage(menu) {
                 <div class="border border-red-200 rounded-lg divide-y divide-red-100 overflow-hidden bg-white">
                     <div class="p-4 flex items-center justify-between gap-4">
                         <div class="flex-1">
-                            <div class="font-bold text-sb-text text-sm mb-1">Archive Workspace</div>
-                            <div class="text-xs text-sb-muted leading-relaxed">모든 Agent를 Unpublish하고 Workspace를 보관함으로 이동합니다. 30일 내 복구 가능.</div>
+                            <div class="font-bold text-zinc-950 text-sm mb-1">Archive Workspace</div>
+                            <div class="text-xs text-zinc-500 leading-relaxed">모든 Agent를 Unpublish하고 Workspace를 보관함으로 이동합니다. 30일 내 복구 가능.</div>
                         </div>
                         <button onclick="openArchiveWorkspaceModal()" class="px-3 py-2 text-xs font-semibold text-amber-800 bg-white border border-amber-300 rounded-md hover:bg-amber-50 transition-colors shrink-0">Archive Workspace</button>
                     </div>
                     <div class="p-4 flex items-center justify-between gap-4">
                         <div class="flex-1">
-                            <div class="font-bold text-sb-text text-sm mb-1">Delete Workspace</div>
-                            <div class="text-xs text-sb-muted leading-relaxed">Workspace와 모든 Agent, 대화 로그, 설정이 영구 삭제됩니다. <strong class="text-red-600">복구 불가능.</strong></div>
+                            <div class="font-bold text-zinc-950 text-sm mb-1">Delete Workspace</div>
+                            <div class="text-xs text-zinc-500 leading-relaxed">Workspace와 모든 Agent, 대화 로그, 설정이 영구 삭제됩니다. <strong class="text-red-600">복구 불가능.</strong></div>
                         </div>
                         <button onclick="openDeleteWorkspaceModal()" class="px-3 py-2 text-xs font-semibold text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors shrink-0">Delete Workspace</button>
                     </div>
@@ -959,10 +931,10 @@ function buildWsSettingsPage(menu) {
         body = `
         <div class="max-w-4xl">
             <div class="flex items-center justify-between mb-4">
-                <div class="h-9 w-64 bg-slate-100 border border-sb-border rounded-md skeleton-pulse"></div>
-                <div class="h-9 w-32 bg-sb-text/80 rounded-md flex items-center justify-center text-white text-xs font-semibold gap-1"><i class="ph ph-plus"></i> Add User</div>
+                <div class="h-9 w-64 bg-slate-100 border border-zinc-200 rounded-md skeleton-pulse"></div>
+                <div class="h-9 w-32 bg-zinc-950/80 rounded-md flex items-center justify-center text-white text-xs font-semibold gap-1"><i class="ph ph-plus"></i> Add User</div>
             </div>
-            <div class="bg-sb-surface border border-sb-border rounded-lg overflow-hidden skeleton-pulse">
+            <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden skeleton-pulse">
                 ${[1,2,3,4].map(() => `
                     <div class="flex items-center gap-4 px-4 py-3 border-b border-slate-100 last:border-0">
                         <div class="w-9 h-9 rounded-full bg-slate-200"></div>
@@ -979,11 +951,11 @@ function buildWsSettingsPage(menu) {
         body = `
         <div class="max-w-5xl">
             <div class="flex gap-2 mb-4 skeleton-pulse">
-                ${['Prompts', 'Knowledge', 'Tools', 'Files'].map(t => `<div class="px-3 py-1.5 bg-slate-100 rounded-md border border-sb-border text-xs font-semibold text-slate-500">${t}</div>`).join('')}
+                ${['Prompts', 'Knowledge', 'Tools', 'Files'].map(t => `<div class="px-3 py-1.5 bg-slate-100 rounded-md border border-zinc-200 text-xs font-semibold text-slate-500">${t}</div>`).join('')}
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 skeleton-pulse">
                 ${[1,2,3,4,5,6].map(() => `
-                    <div class="bg-sb-surface border border-sb-border rounded-lg p-5">
+                    <div class="bg-white border border-zinc-200 rounded-lg p-5">
                         <div class="w-10 h-10 rounded-lg bg-slate-200 mb-3"></div>
                         <div class="h-4 w-2/3 bg-slate-200 rounded mb-2"></div>
                         <div class="h-2.5 w-full bg-slate-100 rounded mb-1"></div>
@@ -996,10 +968,10 @@ function buildWsSettingsPage(menu) {
         body = `
         <div class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-3 skeleton-pulse">
             ${['Slack', 'Zendesk', 'Salesforce', 'HubSpot', 'Jira', 'Notion'].map(name => `
-                <div class="bg-sb-surface border border-sb-border rounded-lg p-5 flex items-center gap-4">
+                <div class="bg-white border border-zinc-200 rounded-lg p-5 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-lg bg-slate-100"></div>
                     <div class="flex-1 space-y-2">
-                        <div class="font-bold text-sb-text text-sm">${name}</div>
+                        <div class="font-bold text-zinc-950 text-sm">${name}</div>
                         <div class="h-2.5 w-40 bg-slate-100 rounded"></div>
                     </div>
                     <div class="h-8 w-20 bg-slate-100 rounded"></div>
@@ -1010,10 +982,10 @@ function buildWsSettingsPage(menu) {
         body = `
         <div class="max-w-3xl space-y-3 skeleton-pulse">
             ${['Web Chat', 'Mobile SDK', 'Email', 'API Webhook'].map(name => `
-                <div class="bg-sb-surface border border-sb-border rounded-lg p-5 flex items-center gap-4">
+                <div class="bg-white border border-zinc-200 rounded-lg p-5 flex items-center gap-4">
                     <div class="w-10 h-10 rounded-lg bg-slate-200"></div>
                     <div class="flex-1 space-y-2">
-                        <div class="font-bold text-sb-text text-sm">${name}</div>
+                        <div class="font-bold text-zinc-950 text-sm">${name}</div>
                         <div class="h-2.5 w-56 bg-slate-100 rounded"></div>
                     </div>
                     <div class="w-10 h-6 bg-slate-200 rounded-full"></div>
@@ -1091,38 +1063,38 @@ function closeModalFromBackdrop(e) {
 function buildModalHTML(type) {
     if (type === 'add-workspace') {
         return `
-        <div class="p-6 border-b border-sb-border">
+        <div class="p-6 border-b border-zinc-200">
             <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-lg bg-sb-primary/10 flex items-center justify-center text-sb-primary">
+                <div class="w-10 h-10 rounded-lg bg-zinc-900/10 flex items-center justify-center text-zinc-900">
                     <i class="ph-fill ph-folder-notch-plus text-xl"></i>
                 </div>
-                <h2 class="text-lg font-bold text-sb-text">Create Workspace</h2>
+                <h2 class="text-lg font-bold text-zinc-950">Create Workspace</h2>
             </div>
-            <p class="text-sb-muted text-sm">팀이나 프로젝트 단위로 에이전트를 분리하세요.</p>
+            <p class="text-zinc-500 text-sm">팀이나 프로젝트 단위로 에이전트를 분리하세요.</p>
         </div>
         <div class="p-6 space-y-4">
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Workspace Name</label>
-                <input type="text" placeholder="e.g. Customer Success" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary">
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Workspace Name</label>
+                <input type="text" placeholder="e.g. Customer Success" class="w-full px-3 py-2 border border-zinc-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900">
             </div>
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Icon</label>
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Icon</label>
                 <div class="flex gap-2">
                     ${['ph-folder-notch', 'ph-briefcase', 'ph-rocket', 'ph-lightning', 'ph-globe', 'ph-heart'].map((icon, i) => `
-                        <button class="w-10 h-10 rounded-lg border flex items-center justify-center transition-all ${i === 0 ? 'border-sb-primary bg-sb-primary/10 text-sb-primary' : 'border-sb-border text-sb-muted hover:border-sb-primary hover:bg-sb-primary/5 hover:text-sb-primary'}">
+                        <button class="w-10 h-10 rounded-lg border flex items-center justify-center transition-all ${i === 0 ? 'border-zinc-900 bg-zinc-900/10 text-zinc-900' : 'border-zinc-200 text-zinc-500 hover:border-zinc-900 hover:bg-zinc-900/5 hover:text-zinc-900'}">
                             <i class="ph-fill ${icon} text-lg"></i>
                         </button>
                     `).join('')}
                 </div>
             </div>
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Description (optional)</label>
-                <textarea rows="2" placeholder="What is this workspace for?" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary resize-none"></textarea>
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Description (optional)</label>
+                <textarea rows="2" placeholder="What is this workspace for?" class="w-full px-3 py-2 border border-zinc-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 resize-none"></textarea>
             </div>
         </div>
-        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-sb-text text-white rounded-md hover:bg-sb-primary/90 transition-colors flex items-center gap-1.5">
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-zinc-500 hover:text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors">Cancel</button>
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-zinc-950 text-white rounded-md hover:bg-zinc-900/90 transition-colors flex items-center gap-1.5">
                 <i class="ph ph-plus font-bold"></i> Create
             </button>
         </div>`;
@@ -1131,21 +1103,21 @@ function buildModalHTML(type) {
         if (!ws) return '';
         const liveAgentCount = ws.agents.filter(a => a.envStatus.production).length;
         return `
-        <div class="p-6 border-b border-sb-border">
+        <div class="p-6 border-b border-zinc-200">
             <div class="flex items-center gap-3 mb-2">
                 <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
                     <i class="ph-fill ph-archive text-xl"></i>
                 </div>
-                <h2 class="text-lg font-bold text-sb-text">Archive "${ws.name}"?</h2>
+                <h2 class="text-lg font-bold text-zinc-950">Archive "${ws.name}"?</h2>
             </div>
-            <p class="text-sb-muted text-sm">Workspace 내 모든 Agent가 Unpublish되며 30일간 복구 가능합니다.</p>
+            <p class="text-zinc-500 text-sm">Workspace 내 모든 Agent가 Unpublish되며 30일간 복구 가능합니다.</p>
         </div>
         <div class="p-6 space-y-3">
-            <div class="bg-slate-50 border border-sb-border rounded-lg p-3 flex items-start gap-2.5 text-xs">
-                <i class="ph-fill ph-info text-sb-primary text-base mt-0.5 shrink-0"></i>
+            <div class="bg-slate-50 border border-zinc-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                <i class="ph-fill ph-info text-zinc-900 text-base mt-0.5 shrink-0"></i>
                 <div class="leading-relaxed">
-                    <div class="text-sb-text font-semibold mb-1">Archive가 하는 일</div>
-                    <ul class="text-sb-muted space-y-0.5">
+                    <div class="text-zinc-950 font-semibold mb-1">Archive가 하는 일</div>
+                    <ul class="text-zinc-500 space-y-0.5">
                         <li>• ${ws.agents.length}개 Agent 모두 Unpublish (Dev/Staging/Prod)</li>
                         <li>• 대화 로그, Golden Set, Shared Assets 보존</li>
                         <li>• 30일 내 Archived Workspaces에서 복구 가능</li>
@@ -1162,8 +1134,8 @@ function buildModalHTML(type) {
                 </div>
             ` : ''}
         </div>
-        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-zinc-500 hover:text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors">Cancel</button>
             <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors flex items-center gap-1.5">
                 <i class="ph ph-archive font-bold"></i> Archive Workspace
             </button>
@@ -1173,14 +1145,14 @@ function buildModalHTML(type) {
         if (!ws) return '';
         const liveAgentCount = ws.agents.filter(a => a.envStatus.production).length;
         return `
-        <div class="p-6 border-b border-sb-border">
+        <div class="p-6 border-b border-zinc-200">
             <div class="flex items-center gap-3 mb-2">
                 <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
                     <i class="ph-fill ph-warning-octagon text-xl"></i>
                 </div>
-                <h2 class="text-lg font-bold text-sb-text">Delete "${ws.name}"?</h2>
+                <h2 class="text-lg font-bold text-zinc-950">Delete "${ws.name}"?</h2>
             </div>
-            <p class="text-sb-muted text-sm">영구 삭제됩니다. <strong class="text-red-600">이 작업은 되돌릴 수 없습니다.</strong></p>
+            <p class="text-zinc-500 text-sm">영구 삭제됩니다. <strong class="text-red-600">이 작업은 되돌릴 수 없습니다.</strong></p>
         </div>
         <div class="p-6 space-y-3">
             <div class="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
@@ -1205,13 +1177,13 @@ function buildModalHTML(type) {
                 </div>
             ` : ''}
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">확인을 위해 Workspace 이름을 입력하세요</label>
-                <div class="text-xs font-mono text-sb-text bg-slate-50 border border-sb-border px-3 py-1.5 rounded mb-2 select-all">${ws.name}</div>
-                <input type="text" id="delete-ws-confirm-input" oninput="updateDeleteWorkspaceConfirmState(this.value)" placeholder="Workspace 이름 입력" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500" autocomplete="off">
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">확인을 위해 Workspace 이름을 입력하세요</label>
+                <div class="text-xs font-mono text-zinc-950 bg-slate-50 border border-zinc-200 px-3 py-1.5 rounded mb-2 select-all">${ws.name}</div>
+                <input type="text" id="delete-ws-confirm-input" oninput="updateDeleteWorkspaceConfirmState(this.value)" placeholder="Workspace 이름 입력" class="w-full px-3 py-2 border border-zinc-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500" autocomplete="off">
             </div>
         </div>
-        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-zinc-500 hover:text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors">Cancel</button>
             <button id="delete-ws-confirm-btn" onclick="closeModal()" disabled class="px-4 py-2 text-sm font-semibold bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-red-400">
                 <i class="ph ph-trash font-bold"></i> Permanently Delete
             </button>
@@ -1222,21 +1194,21 @@ function buildModalHTML(type) {
         if (!agent) return '';
         const isLive = !!agent.envStatus.production;
         return `
-        <div class="p-6 border-b border-sb-border">
+        <div class="p-6 border-b border-zinc-200">
             <div class="flex items-center gap-3 mb-2">
                 <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
                     <i class="ph-fill ph-archive text-xl"></i>
                 </div>
-                <h2 class="text-lg font-bold text-sb-text">Archive "${agent.name}"?</h2>
+                <h2 class="text-lg font-bold text-zinc-950">Archive "${agent.name}"?</h2>
             </div>
-            <p class="text-sb-muted text-sm">즉시 모든 환경에서 Unpublish되며 30일간 복구 가능합니다.</p>
+            <p class="text-zinc-500 text-sm">즉시 모든 환경에서 Unpublish되며 30일간 복구 가능합니다.</p>
         </div>
         <div class="p-6 space-y-3">
-            <div class="bg-slate-50 border border-sb-border rounded-lg p-3 flex items-start gap-2.5 text-xs">
-                <i class="ph-fill ph-info text-sb-primary text-base mt-0.5 shrink-0"></i>
+            <div class="bg-slate-50 border border-zinc-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
+                <i class="ph-fill ph-info text-zinc-900 text-base mt-0.5 shrink-0"></i>
                 <div class="leading-relaxed">
-                    <div class="text-sb-text font-semibold mb-1">Archive가 하는 일</div>
-                    <ul class="text-sb-muted space-y-0.5">
+                    <div class="text-zinc-950 font-semibold mb-1">Archive가 하는 일</div>
+                    <ul class="text-zinc-500 space-y-0.5">
                         <li>• 모든 환경(Dev/Staging/Prod)에서 Unpublish</li>
                         <li>• 대화 로그, 버전 기록, Golden Set 보존</li>
                         <li>• 30일 내 Archived 탭에서 복구 가능</li>
@@ -1253,8 +1225,8 @@ function buildModalHTML(type) {
                 </div>
             ` : ''}
         </div>
-        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-zinc-500 hover:text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors">Cancel</button>
             <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors flex items-center gap-1.5">
                 <i class="ph ph-archive font-bold"></i> Archive Agent
             </button>
@@ -1265,14 +1237,14 @@ function buildModalHTML(type) {
         if (!agent) return '';
         const isLive = !!agent.envStatus.production;
         return `
-        <div class="p-6 border-b border-sb-border">
+        <div class="p-6 border-b border-zinc-200">
             <div class="flex items-center gap-3 mb-2">
                 <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
                     <i class="ph-fill ph-warning-octagon text-xl"></i>
                 </div>
-                <h2 class="text-lg font-bold text-sb-text">Delete "${agent.name}"?</h2>
+                <h2 class="text-lg font-bold text-zinc-950">Delete "${agent.name}"?</h2>
             </div>
-            <p class="text-sb-muted text-sm">영구 삭제됩니다. <strong class="text-red-600">이 작업은 되돌릴 수 없습니다.</strong></p>
+            <p class="text-zinc-500 text-sm">영구 삭제됩니다. <strong class="text-red-600">이 작업은 되돌릴 수 없습니다.</strong></p>
         </div>
         <div class="p-6 space-y-3">
             <div class="bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-2.5 text-xs">
@@ -1297,13 +1269,13 @@ function buildModalHTML(type) {
                 </div>
             ` : ''}
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">확인을 위해 Agent 이름을 입력하세요</label>
-                <div class="text-xs font-mono text-sb-text bg-slate-50 border border-sb-border px-3 py-1.5 rounded mb-2 select-all">${agent.name}</div>
-                <input type="text" id="delete-confirm-input" oninput="updateDeleteConfirmState(this.value)" placeholder="Agent 이름 입력" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500" autocomplete="off">
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">확인을 위해 Agent 이름을 입력하세요</label>
+                <div class="text-xs font-mono text-zinc-950 bg-slate-50 border border-zinc-200 px-3 py-1.5 rounded mb-2 select-all">${agent.name}</div>
+                <input type="text" id="delete-confirm-input" oninput="updateDeleteConfirmState(this.value)" placeholder="Agent 이름 입력" class="w-full px-3 py-2 border border-zinc-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500" autocomplete="off">
             </div>
         </div>
-        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-zinc-500 hover:text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors">Cancel</button>
             <button id="delete-confirm-btn" onclick="closeModal()" disabled class="px-4 py-2 text-sm font-semibold bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors flex items-center gap-1.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-red-400">
                 <i class="ph ph-trash font-bold"></i> Permanently Delete
             </button>
@@ -1312,54 +1284,54 @@ function buildModalHTML(type) {
         const showWsSelector = !state.currentWorkspaceId;
         const wsOptions = state.workspaces.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
         return `
-        <div class="p-6 border-b border-sb-border">
+        <div class="p-6 border-b border-zinc-200">
             <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-lg bg-sb-hover flex items-center justify-center text-sb-muted">
+                <div class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-500">
                     <i class="ph-fill ph-robot text-xl"></i>
                 </div>
-                <h2 class="text-lg font-bold text-sb-text">Create AI Agent</h2>
+                <h2 class="text-lg font-bold text-zinc-950">Create AI Agent</h2>
             </div>
-            <p class="text-sb-muted text-sm">Development 환경에서 시작하여 단계별로 배포됩니다.</p>
+            <p class="text-zinc-500 text-sm">Development 환경에서 시작하여 단계별로 배포됩니다.</p>
         </div>
         <div class="p-6 space-y-4">
             ${showWsSelector ? `
                 <div>
-                    <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Target Workspace</label>
+                    <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Target Workspace</label>
                     <div class="relative">
-                        <select class="w-full appearance-none px-3 py-2 pr-8 border border-sb-border rounded-md text-sm bg-white focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary">
+                        <select class="w-full appearance-none px-3 py-2 pr-8 border border-zinc-200 rounded-md text-sm bg-white focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900">
                             ${wsOptions}
                         </select>
-                        <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-sb-muted pointer-events-none"></i>
+                        <i class="ph ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 pointer-events-none"></i>
                     </div>
                 </div>
             ` : ''}
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Agent Name</label>
-                <input type="text" placeholder="e.g. Refund Helper" class="w-full px-3 py-2 border border-sb-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-sb-primary focus:border-sb-primary">
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Agent Name</label>
+                <input type="text" placeholder="e.g. Refund Helper" class="w-full px-3 py-2 border border-zinc-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900">
             </div>
             <div>
-                <label class="text-xs font-bold text-sb-muted uppercase tracking-wider mb-2 block">Template</label>
+                <label class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Template</label>
                 <div class="grid grid-cols-3 gap-2">
                     ${[
                         {label: 'Blank', icon: 'ph-plus-square', active: true},
                         {label: 'Support', icon: 'ph-lifebuoy', active: false},
                         {label: 'Sales', icon: 'ph-shopping-bag', active: false}
                     ].map(t => `
-                        <button class="p-3 rounded-lg border transition-all flex flex-col items-center gap-1 ${t.active ? 'border-sb-primary bg-sb-primary/5 text-sb-primary' : 'border-sb-border text-sb-muted hover:border-sb-primary/40 hover:bg-sb-hover'}">
+                        <button class="p-3 rounded-lg border transition-all flex flex-col items-center gap-1 ${t.active ? 'border-zinc-900 bg-zinc-900/5 text-zinc-900' : 'border-zinc-200 text-zinc-500 hover:border-zinc-900/40 hover:bg-zinc-100'}">
                             <i class="ph-fill ${t.icon} text-xl"></i>
                             <span class="text-xs font-semibold">${t.label}</span>
                         </button>
                     `).join('')}
                 </div>
             </div>
-            <div class="bg-slate-50 border border-sb-border rounded-lg p-3 flex items-start gap-2.5 text-xs text-sb-muted">
-                <i class="ph-fill ph-info text-sb-primary text-base mt-0.5 shrink-0"></i>
-                <span>생성 즉시 <strong class="text-sb-text">Development</strong> 환경에 배포됩니다. Staging/Production 승격은 Build 완료 후 Publish 버튼으로 진행하세요.</span>
+            <div class="bg-slate-50 border border-zinc-200 rounded-lg p-3 flex items-start gap-2.5 text-xs text-zinc-500">
+                <i class="ph-fill ph-info text-zinc-900 text-base mt-0.5 shrink-0"></i>
+                <span>생성 즉시 <strong class="text-zinc-950">Development</strong> 환경에 배포됩니다. Staging/Production 승격은 Build 완료 후 Publish 버튼으로 진행하세요.</span>
             </div>
         </div>
-        <div class="p-4 border-t border-sb-border bg-sb-base/50 flex items-center justify-end gap-2 rounded-b-xl">
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-sb-muted hover:text-sb-text rounded-md hover:bg-sb-hover transition-colors">Cancel</button>
-            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-sb-text text-white rounded-md hover:bg-sb-primary/90 transition-colors flex items-center gap-1.5">
+        <div class="p-4 border-t border-zinc-200 bg-zinc-50/50 flex items-center justify-end gap-2 rounded-b-xl">
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-zinc-500 hover:text-zinc-950 rounded-md hover:bg-zinc-100 transition-colors">Cancel</button>
+            <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold bg-zinc-950 text-white rounded-md hover:bg-zinc-900/90 transition-colors flex items-center gap-1.5">
                 <i class="ph ph-plus font-bold"></i> Create Agent
             </button>
         </div>`;
